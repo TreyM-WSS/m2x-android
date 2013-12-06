@@ -130,6 +130,11 @@ public class Feed {
 		this.updated = updated;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Feed %s: %s (%s)", type, name, id);
+	}
+	
 	public static Feed feedFromJSONObject(JSONObject obj) {
 		Feed f = new Feed();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);

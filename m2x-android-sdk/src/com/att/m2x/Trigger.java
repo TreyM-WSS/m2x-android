@@ -21,69 +21,91 @@ public class Trigger {
 	private String status;
 	private Date created;
 	private Date updated;
+	
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getStream() {
 		return stream;
 	}
+	
 	public void setStream(String stream) {
 		this.stream = stream;
 	}
+	
 	public String getCondition() {
 		return condition;
 	}
+	
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
+	
 	public double getValue() {
 		return value;
 	}
+	
 	public void setValue(double value) {
 		this.value = value;
 	}
+	
 	public String getUnit() {
 		return unit;
 	}
+	
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+	
 	public String getCallbackUrl() {
 		return callbackUrl;
 	}
+	
 	public void setCallbackUrl(String callbackUrl) {
 		this.callbackUrl = callbackUrl;
 	}
+	
 	public String getUrl() {
 		return url;
 	}
+	
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
 	public String getStatus() {
 		return status;
 	}
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 	public Date getCreated() {
 		return created;
 	}
+	
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+	
 	public Date getUpdated() {
 		return updated;
 	}
+	
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}

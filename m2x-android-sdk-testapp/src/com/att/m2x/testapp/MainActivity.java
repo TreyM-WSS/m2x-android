@@ -1,7 +1,6 @@
 package com.att.m2x.testapp;
 
 import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -15,21 +14,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        Log.d("test", "Getting all available feeds");
-        M2X m2x = M2X.getInstance();
-        m2x.setMasterKey("8181c16a0097325041a0c5a55f4fee1d");
-        m2x.getAllFeeds(new ResponseListener() {
-        	
-        	public void onSuccess(ArrayList<Object> items) {
-        		Log.d("test", String.format("Obtained %d feeds", items.size()));
-        	}
-        	
-        	public void onError(String errorMessage) {
-        		Log.d("test", "Failed to obtain feeds: ".concat(errorMessage));
-        	}
-        	
-        });
+        M2X.getInstance().setMasterKey("8181c16a0097325041a0c5a55f4fee1d");
         
+        this.loadFeeds();
     }
 
     @Override
@@ -39,4 +26,20 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    private void loadFeeds() {
+    	M2X.getInstance().getFeeds(null, new M2X.FeedResponseListener() {
+        	
+        	public void onSuccess(ArrayList<Feed> feeds) {
+        		Log.d("M2X-TestApp", String.format("Obtained %d feeds", feeds.size()));
+        		for (Feed feed : feeds) {
+        			Log.d("M2X-TestApp", feed.toString());
+        		}
+        	}
+        	
+        	public void onError(String errorMessage) {
+        		Log.d("M2X-TestApp", "Failed to obtain feeds: ".concat(errorMessage));
+        	}
+        	
+        });    	
+    }
 }
