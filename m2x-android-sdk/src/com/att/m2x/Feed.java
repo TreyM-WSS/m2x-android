@@ -22,6 +22,7 @@ public class Feed {
 	private String key;
 	private Location location;
 	private ArrayList<Stream> streams;
+	private ArrayList<Trigger> triggers;
 	private Date created;
 	private Date updated;
 			
@@ -103,6 +104,14 @@ public class Feed {
 
 	public void setStreams(ArrayList<Stream> streams) {
 		this.streams = streams;
+	}
+
+	public ArrayList<Trigger> getTriggers() {
+		return triggers;
+	}
+
+	public void setTriggers(ArrayList<Trigger> triggers) {
+		this.triggers = triggers;
 	}
 
 	public Date getCreated() {
@@ -188,6 +197,17 @@ public class Feed {
 			}
 		} catch (JSONException e1) {
 			f.streams = null;
+		}
+
+		try {
+			JSONArray items = obj.getJSONArray("triggers");
+			f.triggers = new ArrayList<Trigger>();
+			for (int i = 0; i < items.length(); i++) {
+				Trigger trigger = Trigger.triggerFromJSONObject(items.getJSONObject(i));
+				f.triggers.add(trigger);
+			}
+		} catch (JSONException e1) {
+			f.triggers = null;
 		}
 
 		try {
