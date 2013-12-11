@@ -1,14 +1,12 @@
 package com.att.m2x;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.att.helpers.JSONHelper;
 
 public class Feed {
 
@@ -23,9 +21,25 @@ public class Feed {
 	private Location location;
 	private ArrayList<Stream> streams;
 	private ArrayList<Trigger> triggers;
+	private ArrayList<String> tags;
 	private Date created;
 	private Date updated;
-			
+
+	private static final String ID = "id";
+	private static final String NAME = "name";
+	private static final String DESCRIPTION = "description";
+	private static final String VISIBILITY = "visibility";
+	private static final String STATUS = "status";
+	private static final String TYPE = "type";
+	private static final String URL = "url";
+	private static final String KEY = "key";
+	private static final String LOCATION = "location";
+	private static final String STREAMS = "streams";
+	private static final String TRIGGERS = "triggers";
+	private static final String TAGS = "tags";
+	private static final String CREATED = "created";
+	private static final String UPDATED = "updated";
+	
 	public String getId() {
 		return id;
 	}
@@ -89,7 +103,7 @@ public class Feed {
 	public void setKey(String key) {
 		this.key = key;
 	}
-	
+
 	public Location getLocation() {
 		return location;
 	}
@@ -113,6 +127,14 @@ public class Feed {
 	public void setTriggers(ArrayList<Trigger> triggers) {
 		this.triggers = triggers;
 	}
+	
+	public ArrayList<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(ArrayList<String> tags) {
+		this.tags = tags;
+	}
 
 	public Date getCreated() {
 		return created;
@@ -134,104 +156,65 @@ public class Feed {
 	public String toString() {
 		return String.format("Feed %s: %s (%s)", type, name, id);
 	}
-	
+
 	public static Feed feedFromJSONObject(JSONObject obj) {
+		
 		Feed f = new Feed();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+		f.id = JSONHelper.stringValue(obj, ID, "");
+		f.name = JSONHelper.stringValue(obj, NAME, "");
+		f.description = JSONHelper.stringValue(obj, DESCRIPTION, "");
+		f.visibility = JSONHelper.stringValue(obj, VISIBILITY, "");
+		f.status = JSONHelper.stringValue(obj, STATUS, "");
+		f.type = JSONHelper.stringValue(obj, TYPE, "");
+		f.url = JSONHelper.stringValue(obj, URL, "");
+		f.key = JSONHelper.stringValue(obj, KEY, "");
 		
 		try {
-			f.id = obj.getString("id");
+			f.location = Location.locationFromJSONObject(obj.getJSONObject(LOCATION));
 		} catch (JSONException e) {
-			f.id = null;
+		}			
+		
+		if (obj.has(STREAMS)) {
+			try {
+				JSONArray items = obj.getJSONArray(STREAMS);
+				f.streams = new ArrayList<Stream>();
+				for (int i = 0; i < items.length(); i++) {
+					Stream stream = Stream.streamFromJSONObject(items.getJSONObject(i));
+					f.streams.add(stream);
+				}
+			} catch (JSONException e1) {
+				f.streams = null;
+			}
 		}
 
-		try {
-			f.name = obj.getString("name");
-		} catch (JSONException e) {
-			f.name = null;
+		if (obj.has(TRIGGERS)) {
+			try {
+				JSONArray items = obj.getJSONArray(TRIGGERS);
+				f.triggers = new ArrayList<Trigger>();
+				for (int i = 0; i < items.length(); i++) {
+					Trigger trigger = Trigger.triggerFromJSONObject(items.getJSONObject(i));
+					f.triggers.add(trigger);
+				}
+			} catch (JSONException e1) {
+				f.triggers = null;
+			}			
 		}
 
-		try {
-			f.description = obj.getString("description");
-		} catch (JSONException e) {
-			f.description = null;
-		}
-
-		try {
-			f.visibility = obj.getString("visibility");
-		} catch (JSONException e) {
-			f.visibility = null;
-		}
-
-		try {
-			f.status = obj.getString("status");
-		} catch (JSONException e) {
-			f.status = null;
-		}
-
-		try {
-			f.type = obj.getString("type");
-		} catch (JSONException e) {
-			f.type = null;
-		}
-
-		try {
-			f.url = obj.getString("url");
-		} catch (JSONException e) {
-			f.url = null;
-		}
-
-		try {
-			f.key = obj.getString("key");
-		} catch (JSONException e) {
-			f.key = null;
-		}
-
-		try {
-			f.location = Location.locationFromJSONObject(obj.getJSONObject("location"));
-		} catch (JSONException e) {
-			f.location = null;
+		if (obj.has(TAGS)) {
+			try {
+				JSONArray items = obj.getJSONArray(TAGS);
+				f.tags = new ArrayList<String>();
+				for (int i = 0; i < items.length(); i++) {
+					f.tags.add(items.getJSONObject(i).toString());
+				}
+			} catch (JSONException e1) {
+				f.tags = null;
+			}			
 		}
 		
-		try {
-			JSONArray items = obj.getJSONArray("streams");
-			f.streams = new ArrayList<Stream>();
-			for (int i = 0; i < items.length(); i++) {
-				Stream stream = Stream.streamFromJSONObject(items.getJSONObject(i));
-				f.streams.add(stream);
-			}
-		} catch (JSONException e1) {
-			f.streams = null;
-		}
-
-		try {
-			JSONArray items = obj.getJSONArray("triggers");
-			f.triggers = new ArrayList<Trigger>();
-			for (int i = 0; i < items.length(); i++) {
-				Trigger trigger = Trigger.triggerFromJSONObject(items.getJSONObject(i));
-				f.triggers.add(trigger);
-			}
-		} catch (JSONException e1) {
-			f.triggers = null;
-		}
-
-		try {
-			f.created = sdf.parse(obj.getString("created"));
-		} catch (JSONException e) {
-			f.created = null;
-		} catch (ParseException e) {
-			f.created = null;
-		}
-
-		try {
-			f.updated = sdf.parse(obj.getString("updated"));
-		} catch (JSONException e) {
-			f.updated = null;
-		} catch (ParseException e) {
-			f.updated = null;
-		}
-
+		f.created = JSONHelper.dateValue(obj, CREATED, null);
+		f.updated = JSONHelper.dateValue(obj, UPDATED, null);
 		return f;
 	}
-	
+
 }

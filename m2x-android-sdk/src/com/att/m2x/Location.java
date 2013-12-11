@@ -1,12 +1,13 @@
 package com.att.m2x;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.att.helpers.*;
 
 public class Location {
 	
@@ -15,6 +16,14 @@ public class Location {
 	private double longitude;
 	private double elevation;
 	private Date timestamp;
+	private ArrayList<Waypoint> waypoints;
+	
+	private static final String NAME = "name";
+	private static final String LATITUDE = "latitude";
+	private static final String LONGITUDE = "longitude";
+	private static final String ELEVATION = "elevation";
+	private static final String TIMESTAMP = "timestamp";
+	private static final String WAYPOINTS = "waypoints";
 	
 	public String getName() {
 		return name;
@@ -56,44 +65,37 @@ public class Location {
 		this.timestamp = timestamp;
 	}
 	
+	public ArrayList<Waypoint> getWaypoints() {
+		return waypoints;
+	}
+
+	public void setWaypoints(ArrayList<Waypoint> waypoints) {
+		this.waypoints = waypoints;
+	}
+
 	public static Location locationFromJSONObject(JSONObject obj) {
 
-		Location i = new Location();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+		Location l = new Location();
+		l.name = JSONHelper.stringValue(obj, NAME, "");
+		l.latitude = JSONHelper.doubleValue(obj, LATITUDE, 0);
+		l.longitude = JSONHelper.doubleValue(obj, LONGITUDE, 0);
+		l.elevation = JSONHelper.doubleValue(obj, ELEVATION, 0);
+		l.timestamp = JSONHelper.dateValue(obj, TIMESTAMP, null);
 		
-		try {
-			i.name = obj.getString("name");
-		} catch (JSONException e) {
-			i.name = null;
+		if (obj.has(WAYPOINTS)) {
+			try {
+				JSONArray items = obj.getJSONArray(WAYPOINTS);
+				l.waypoints = new ArrayList<Waypoint>();
+				for (int i = 0; i < items.length(); i++) {
+					Waypoint waypoint = Waypoint.waypointFromJSONObject(items.getJSONObject(i));
+					l.waypoints.add(waypoint);
+				}
+			} catch (JSONException e1) {
+				l.waypoints = null;
+			}
 		}
 		
-		try {
-			i.latitude = obj.getDouble("latitude");
-		} catch (JSONException e) {
-			i.latitude = 0;
-		}
-
-		try {
-			i.longitude = obj.getDouble("longitude");
-		} catch (JSONException e) {
-			i.longitude = 0;
-		}
-
-		try {
-			i.elevation = obj.getDouble("elevation");
-		} catch (JSONException e) {
-			i.elevation = 0;
-		}
-
-		try {
-			i.timestamp = sdf.parse(obj.getString("timestamp"));
-		} catch (JSONException e) {
-			i.timestamp = null;
-		} catch (ParseException e) {
-			i.timestamp = null;
-		}
-
-		return i;
+		return l;
 	}
 	
 }

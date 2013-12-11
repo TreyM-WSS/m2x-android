@@ -1,12 +1,11 @@
 package com.att.m2x;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.att.helpers.JSONHelper;
 
 public class Stream {
 
@@ -20,6 +19,18 @@ public class Stream {
 	private String url;
 	private Date created;
 	private Date updated;
+	
+	private static final String ID = "id";
+	private static final String NAME = "name";
+	private static final String VALUE = "value";
+	private static final String LATESTVALUEAT = "latest_value_at";
+	private static final String MIN = "min";
+	private static final String MAX = "max";
+	private static final String UNIT = "unit";
+	private static final String URL = "url";
+	private static final String CREATED = "created";
+	private static final String UPDATED = "updated";
+	
 	
 	public String getId() {
 		return id;
@@ -104,74 +115,21 @@ public class Stream {
 	public static Stream streamFromJSONObject(JSONObject obj) {
 		
 		Stream s = new Stream();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-
-		try {
-			s.id = obj.getString("id");
-		} catch (JSONException e) {
-			s.id = null;
-		}
-
-		try {
-			s.name = obj.getString("name");
-		} catch (JSONException e) {
-			s.name = null;
-		}
+		s.id = JSONHelper.stringValue(obj, ID, "");
+		s.name = JSONHelper.stringValue(obj, NAME, "");
+		s.value = JSONHelper.doubleValue(obj, VALUE, 0);
+		s.latestValueAt = JSONHelper.dateValue(obj, LATESTVALUEAT, null);
+		s.min = JSONHelper.doubleValue(obj, MIN, 0);
+		s.max = JSONHelper.doubleValue(obj, MAX, 0);		
 		
 		try {
-			s.value = obj.getDouble("value");
+			s.unit = Unit.unitFromJSONObject(obj.getJSONObject(UNIT));
 		} catch (JSONException e) {
-			s.value = 0;
 		}
 		
-		try {
-			s.latestValueAt = sdf.parse(obj.getString("latest_value_at"));
-		} catch (JSONException e) {
-			s.latestValueAt = null;
-		} catch (ParseException e) {
-			s.latestValueAt = null;
-		}
-
-		try {
-			s.min = obj.getDouble("min");
-		} catch (JSONException e) {
-			s.min = 0;
-		}
-
-		try {
-			s.max = obj.getDouble("max");
-		} catch (JSONException e) {
-			s.max = 0;
-		}
-		
-		try {
-			s.unit = Unit.unitFromJSONObject(obj.getJSONObject("unit"));
-		} catch (JSONException e) {
-			s.unit = null;
-		}
-		
-		try {
-			s.url = obj.getString("url");
-		} catch (JSONException e) {
-			s.url = null;
-		}
-
-		try {
-			s.created = sdf.parse(obj.getString("created"));
-		} catch (JSONException e) {
-			s.created = null;
-		} catch (ParseException e) {
-			s.created = null;
-		}
-
-		try {
-			s.updated = sdf.parse(obj.getString("updated"));
-		} catch (JSONException e) {
-			s.updated = null;
-		} catch (ParseException e) {
-			s.updated = null;
-		}
-
+		s.url = JSONHelper.stringValue(obj, URL, "");
+		s.created = JSONHelper.dateValue(obj, CREATED, null);
+		s.updated = JSONHelper.dateValue(obj, UPDATED, null);
 		return s;
 	}
 	

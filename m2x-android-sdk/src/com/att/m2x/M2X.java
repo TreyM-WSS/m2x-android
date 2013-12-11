@@ -50,7 +50,7 @@ public final class M2X {
 	public void setBaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
 	}
-	
+
 	public void getFeeds(HashMap<String, String> params, final FeedResponseListener callback) {
 		String url = this.baseUrl.concat("/feeds");
 		

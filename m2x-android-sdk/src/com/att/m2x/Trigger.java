@@ -1,12 +1,9 @@
 package com.att.m2x;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.att.helpers.JSONHelper;
 
 public class Trigger {
 
@@ -21,6 +18,18 @@ public class Trigger {
 	private String status;
 	private Date created;
 	private Date updated;
+	
+	private static final String ID = "id";
+	private static final String NAME = "name";
+	private static final String STREAM = "stream";
+	private static final String CONDITION = "condition";
+	private static final String VALUE = "value";
+	private static final String UNIT = "unit";
+	private static final String CALLBACK_URL = "callback_url";
+	private static final String URL = "url";
+	private static final String STATUS = "status";
+	private static final String CREATED = "created";
+	private static final String UPDATED = "updated";
 	
 	public String getId() {
 		return id;
@@ -111,79 +120,19 @@ public class Trigger {
 	}
 	
 	public static Trigger triggerFromJSONObject(JSONObject obj) {
+		
 		Trigger t = new Trigger();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-		
-		try {
-			t.id = obj.getString("id");
-		} catch (JSONException e) {
-			t.id = null;
-		}
-
-		try {
-			t.name = obj.getString("name");
-		} catch (JSONException e) {
-			t.name = null;
-		}
-
-		try {
-			t.stream = obj.getString("stream");
-		} catch (JSONException e) {
-			t.stream = null;
-		}
-
-		try {
-			t.condition = obj.getString("condition");
-		} catch (JSONException e) {
-			t.condition = null;
-		}
-
-		try {
-			t.value = obj.getDouble("value");
-		} catch (JSONException e) {
-			t.value = 0;
-		}
-
-		try {
-			t.unit = obj.getString("unit");
-		} catch (JSONException e) {
-			t.unit = null;
-		}
-
-		try {
-			t.callbackUrl = obj.getString("callback_url");
-		} catch (JSONException e) {
-			t.callbackUrl = null;
-		}
-
-		try {
-			t.url = obj.getString("url");
-		} catch (JSONException e) {
-			t.url = null;
-		}
-
-		try {
-			t.status = obj.getString("status");
-		} catch (JSONException e) {
-			t.status = null;
-		}
-
-		try {
-			t.created = sdf.parse(obj.getString("created"));
-		} catch (JSONException e) {
-			t.created = null;
-		} catch (ParseException e) {
-			t.created = null;
-		}
-
-		try {
-			t.updated = sdf.parse(obj.getString("updated"));
-		} catch (JSONException e) {
-			t.updated = null;
-		} catch (ParseException e) {
-			t.updated = null;
-		}
-		
+		t.id = JSONHelper.stringValue(obj, ID, "");
+		t.name = JSONHelper.stringValue(obj, NAME, "");
+		t.stream = JSONHelper.stringValue(obj, STREAM, "");
+		t.condition = JSONHelper.stringValue(obj, CONDITION, "");
+		t.value = JSONHelper.doubleValue(obj, VALUE, 0);
+		t.unit = JSONHelper.stringValue(obj, UNIT, "");
+		t.callbackUrl = JSONHelper.stringValue(obj, CALLBACK_URL, "");
+		t.url = JSONHelper.stringValue(obj, URL, "");
+		t.status = JSONHelper.stringValue(obj, STATUS, "");
+		t.created = JSONHelper.dateValue(obj, CREATED, null);
+		t.updated = JSONHelper.dateValue(obj, UPDATED, null);
 		return t;
 	}
 }

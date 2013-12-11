@@ -1,13 +1,17 @@
 package com.att.m2x;
 
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.att.helpers.JSONHelper;
 
 public class Unit {
 
 	private String label;
 	private String symbol;
 	
+	private static final String LABEL = "label";
+	private static final String SYMBOL = "symbol";
+
 	public String getLabel() {
 		return label;
 	}
@@ -27,19 +31,8 @@ public class Unit {
 	public static Unit unitFromJSONObject(JSONObject obj) {
 		
 		Unit u = new Unit();
-
-		try {
-			u.label = obj.getString("label");
-		} catch (JSONException e) {
-			u.label = null;
-		}
-
-		try {
-			u.symbol = obj.getString("symbol");
-		} catch (JSONException e) {
-			u.symbol = null;
-		}
-
+		u.label = JSONHelper.stringValue(obj, LABEL, "");
+		u.symbol = JSONHelper.stringValue(obj, SYMBOL, "");
 		return u;
 		
 	}
