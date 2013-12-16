@@ -19,7 +19,8 @@ public class MainActivity extends Activity {
         M2X.getInstance().setMasterKey("8181c16a0097325041a0c5a55f4fee1d");
         
 //        this.loadFeeds();
-        this.loadFeed();  
+//        this.loadFeed();
+        this.loadLocation();
         
     }
 
@@ -28,6 +29,23 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    private void loadLocation() { 
+    	
+    	Location.getLocation(this, "7fde9db5578f3ba4b3a70a15893a9f04", "bb15f48d8e53131faa47efe04cff734e", new Location.LocationListener()  {
+			
+			@Override
+			public void onSuccess(Location location)  {
+				Log.d("M2X-TestApp", "Found location: ".concat(location.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d("M2X-TestApp", "Failed to get location: ".concat(errorMessage));
+			}
+		});
+
     }
     
     private void loadFeed() { 
@@ -55,7 +73,6 @@ public class MainActivity extends Activity {
         		Log.d(LOG_TAG, String.format("Obtained %d feeds", feeds.size()));
         		for (Feed feed : feeds) {
         			Log.d(LOG_TAG, feed.toString());
-        			Log.d(LOG_TAG, "Feed key: ".concat(feed.getKey()));
         		}    			
     		}
     		

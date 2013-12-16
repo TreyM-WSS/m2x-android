@@ -1,6 +1,7 @@
 package com.att.m2x.model;
 
 import java.util.Date;
+import java.util.Locale;
 
 public abstract class Feed {
 
@@ -95,9 +96,11 @@ public abstract class Feed {
 		this.updated = updated;
 	}
 
-	@Override
 	public String toString() {
-		return String.format("Feed %s: %s (%s)", type, name, id);
+		return String.format(Locale.US, "M2X Feed - %s %s (type: %s)", 
+				this.getId(), 
+				this.getName(), 
+				this.getType() ); 
 	}
 		
 }

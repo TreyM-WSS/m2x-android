@@ -1,13 +1,18 @@
 package com.att.m2x;
 
 import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.content.Context;
 import com.att.m2x.helpers.*;
 
 public final class Location extends com.att.m2x.model.Location {
+
+	public interface LocationListener {
+		public void onSuccess(Location location);
+		public void onError(String errorMessage);
+	}
 
 	private static final String NAME = "name";
 	private static final String LATITUDE = "latitude";
@@ -43,6 +48,29 @@ public final class Location extends com.att.m2x.model.Location {
 		}		
 	}
 	
+	public static void getLocation(Context context, String feedKey, String feedId, final LocationListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/" + feedId + "/location";
+		
+		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+									
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+
+				Location location = new Location(object);
+				callback.onSuccess(location);				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String body) {
+				callback.onError(body);
+			}
+			
+		});
+		
+	}
+	
 	public ArrayList<Waypoint> getWaypoints() {
 		return waypoints;
 	}
@@ -50,5 +78,5 @@ public final class Location extends com.att.m2x.model.Location {
 	public void setWaypoints(ArrayList<Waypoint> waypoints) {
 		this.waypoints = waypoints;
 	}
-	
+
 }

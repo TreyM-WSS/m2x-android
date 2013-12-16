@@ -1,6 +1,7 @@
 package com.att.m2x.model;
 
 import java.util.Date;
+import java.util.Locale;
 
 public class Location {
 	
@@ -49,5 +50,12 @@ public class Location {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-	
+
+	public String toString() {
+		return String.format(Locale.US, "M2X Location - %s (coordinate: %.5f, %.5f) ", 
+				this.getName(), 
+				this.getLatitude(), 
+				this.getLongitude() ); 
+	}
+
 }
