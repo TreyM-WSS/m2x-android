@@ -1,29 +1,22 @@
 package com.att.m2x;
 
+import org.json.*;
+import android.content.Context;
+import com.att.m2x.helpers.JSONHelper;
 import java.util.ArrayList;
-import java.util.Date;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.HashMap;
 
-import com.att.helpers.JSONHelper;
+public final class Feed extends com.att.m2x.model.Feed {
 
-public class Feed {
+	public interface FeedListener {
+		public void onSuccess(Feed feed);
+		public void onError(String errorMessage);
+	}
 
-	private String id;
-	private String name;
-	private String description;
-	private String visibility;
-	private String status;
-	private String type;
-	private String url;
-	private String key;
-	private Location location;
-	private ArrayList<Stream> streams;
-	private ArrayList<Trigger> triggers;
-	private ArrayList<String> tags;
-	private Date created;
-	private Date updated;
+	public interface FeedsListener {
+		public void onSuccess(ArrayList<Feed> feeds);
+		public void onError(String errorMessage);
+	}
 
 	private static final String ID = "id";
 	private static final String NAME = "name";
@@ -39,71 +32,133 @@ public class Feed {
 	private static final String TAGS = "tags";
 	private static final String CREATED = "created";
 	private static final String UPDATED = "updated";
+
+	private Location location;
+	private ArrayList<Stream> streams;
+	private ArrayList<Trigger> triggers;
+	private ArrayList<String> tags;
 	
-	public String getId() {
-		return id;
+	public Feed() {
+		
 	}
+	
+	public Feed(JSONObject obj) {
+		
+		this.setId(JSONHelper.stringValue(obj, ID, ""));
+		this.setName(JSONHelper.stringValue(obj, NAME, ""));
+		this.setDescription(JSONHelper.stringValue(obj, DESCRIPTION, ""));
+		this.setVisibility(JSONHelper.stringValue(obj, VISIBILITY, ""));
+		this.setStatus(JSONHelper.stringValue(obj, STATUS, ""));
+		this.setType(JSONHelper.stringValue(obj, TYPE, ""));
+		this.setUrl(JSONHelper.stringValue(obj, URL, ""));
+		this.setKey(JSONHelper.stringValue(obj, KEY, ""));
+	
+		try {
+			Location location = new Location(obj.getJSONObject(LOCATION));
+			this.setLocation(location);
+		} catch (JSONException e) {
+		}			
+	
+		if (obj.has(STREAMS)) {
+			try {
+				JSONArray items = obj.getJSONArray(STREAMS);
+				ArrayList<Stream> streams = new ArrayList<Stream>();
+				for (int i = 0; i < items.length(); i++) {
+					Stream stream = new Stream(items.getJSONObject(i));
+					streams.add(stream);
+				}
+				this.setStreams(streams);
+			} catch (JSONException e1) {
+				this.setStreams(null);
+			}
+		}
 
-	public void setId(String id) {
-		this.id = id;
+		if (obj.has(TRIGGERS)) {
+			try {
+				JSONArray items = obj.getJSONArray(STREAMS);
+				ArrayList<Trigger> triggers = new ArrayList<Trigger>();
+				for (int i = 0; i < items.length(); i++) {
+					Trigger trigger = new Trigger(items.getJSONObject(i));
+					triggers.add(trigger);
+				}
+				this.setTriggers(triggers);
+			} catch (JSONException e1) {
+				this.setTriggers(null);
+			}
+		}
+
+		if (obj.has(TAGS)) {
+			try {
+				JSONArray items = obj.getJSONArray(TAGS);
+				ArrayList<String> tags = new ArrayList<String>();
+				for (int i = 0; i < items.length(); i++) {
+					tags.add(items.getJSONObject(i).toString());
+				}
+				this.setTags(tags);
+			} catch (JSONException e1) {
+				this.setTags(null);
+			}			
+		}
+		
+		this.setCreated(JSONHelper.dateValue(obj, CREATED, null));
+		this.setUpdated(JSONHelper.dateValue(obj, UPDATED, null));
+	}	
+	
+	public static void getFeeds(Context context, HashMap<String, String> params, final FeedsListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds";
+		
+		client.get(context, null, path, params, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+
+				ArrayList<Feed> array = new ArrayList<Feed>();
+				try {
+					JSONArray feeds = object.getJSONArray("feeds");
+					for (int i = 0; i < feeds.length(); i++) {
+						Feed feed = new Feed(feeds.getJSONObject(i));
+						array.add(feed);
+					}
+				} catch (JSONException e) {
+					Log.d("Failed to parse json objects");
+				}
+				callback.onSuccess(array);
+				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String body) {
+				callback.onError(body);
+			}
+			
+		});
+	}	
+
+	public static void getFeed(Context context, String feedKey, String feedId, final FeedListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/".concat(feedId);
+		
+		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+									
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+
+				Feed feed = new Feed(object);
+				callback.onSuccess(feed);				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String body) {
+				callback.onError(body);
+			}
+			
+		});
+		
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getVisibility() {
-		return visibility;
-	}
-
-	public void setVisibility(String visibility) {
-		this.visibility = visibility;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
+		
 	public Location getLocation() {
 		return location;
 	}
@@ -111,7 +166,7 @@ public class Feed {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-
+	
 	public ArrayList<Stream> getStreams() {
 		return streams;
 	}
@@ -127,7 +182,7 @@ public class Feed {
 	public void setTriggers(ArrayList<Trigger> triggers) {
 		this.triggers = triggers;
 	}
-	
+
 	public ArrayList<String> getTags() {
 		return tags;
 	}
@@ -135,86 +190,5 @@ public class Feed {
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Feed %s: %s (%s)", type, name, id);
-	}
-
-	public static Feed feedFromJSONObject(JSONObject obj) {
-		
-		Feed f = new Feed();
-		f.id = JSONHelper.stringValue(obj, ID, "");
-		f.name = JSONHelper.stringValue(obj, NAME, "");
-		f.description = JSONHelper.stringValue(obj, DESCRIPTION, "");
-		f.visibility = JSONHelper.stringValue(obj, VISIBILITY, "");
-		f.status = JSONHelper.stringValue(obj, STATUS, "");
-		f.type = JSONHelper.stringValue(obj, TYPE, "");
-		f.url = JSONHelper.stringValue(obj, URL, "");
-		f.key = JSONHelper.stringValue(obj, KEY, "");
-		
-		try {
-			f.location = Location.locationFromJSONObject(obj.getJSONObject(LOCATION));
-		} catch (JSONException e) {
-		}			
-		
-		if (obj.has(STREAMS)) {
-			try {
-				JSONArray items = obj.getJSONArray(STREAMS);
-				f.streams = new ArrayList<Stream>();
-				for (int i = 0; i < items.length(); i++) {
-					Stream stream = Stream.streamFromJSONObject(items.getJSONObject(i));
-					f.streams.add(stream);
-				}
-			} catch (JSONException e1) {
-				f.streams = null;
-			}
-		}
-
-		if (obj.has(TRIGGERS)) {
-			try {
-				JSONArray items = obj.getJSONArray(TRIGGERS);
-				f.triggers = new ArrayList<Trigger>();
-				for (int i = 0; i < items.length(); i++) {
-					Trigger trigger = Trigger.triggerFromJSONObject(items.getJSONObject(i));
-					f.triggers.add(trigger);
-				}
-			} catch (JSONException e1) {
-				f.triggers = null;
-			}			
-		}
-
-		if (obj.has(TAGS)) {
-			try {
-				JSONArray items = obj.getJSONArray(TAGS);
-				f.tags = new ArrayList<String>();
-				for (int i = 0; i < items.length(); i++) {
-					f.tags.add(items.getJSONObject(i).toString());
-				}
-			} catch (JSONException e1) {
-				f.tags = null;
-			}			
-		}
-		
-		f.created = JSONHelper.dateValue(obj, CREATED, null);
-		f.updated = JSONHelper.dateValue(obj, UPDATED, null);
-		return f;
-	}
-
+	
 }

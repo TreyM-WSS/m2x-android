@@ -1,4 +1,4 @@
-package com.att.helpers;
+package com.att.m2x.helpers;
 
 import java.util.Date;
 import org.json.JSONException;
