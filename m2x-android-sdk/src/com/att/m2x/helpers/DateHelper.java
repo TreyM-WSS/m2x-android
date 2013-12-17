@@ -6,9 +6,11 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateHelper {
+	
+	private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
 	public static Date stringToDate(String dateString) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.US);
 		Date value = null;
 		try {
 			value = sdf.parse(dateString);
@@ -17,5 +19,11 @@ public class DateHelper {
 		}
 		return value;
 	}
-	
+
+	public static String dateToString(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.US);
+		String value = (date != null) ? sdf.format(date) : null;
+		return value;
+	}
+
 }

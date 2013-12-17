@@ -10,6 +10,10 @@ import com.att.m2x.*;
 public class MainActivity extends Activity {
 
 	private static String LOG_TAG = "M2X-TestApp"; 
+
+	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
+	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e"; 
+
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +24,8 @@ public class MainActivity extends Activity {
         
 //        this.loadFeeds();
 //        this.loadFeed();
-        this.loadLocation();
-        
+//        this.loadLocation();
+        this.updateLocation(37.331928, -122.03064, 10);
     }
 
     @Override
@@ -31,18 +35,36 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    private void updateLocation(double latitude, double longitude, double elevation) {
+    	Location loc = new Location();
+    	loc.setLatitude(latitude);
+    	loc.setLongitude(longitude);
+    	loc.setElevation(elevation);
+    	loc.update(this, TEST_FEED_KEY, TEST_FEED_ID, new Location.UpdateListener() {
+
+    		public void onSuccess() {
+				Log.d(LOG_TAG, "Update successful!");
+    		}
+    		
+    		public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Update failed :(");    			
+    		}
+
+    	});
+    }
+    
     private void loadLocation() { 
     	
-    	Location.getLocation(this, "7fde9db5578f3ba4b3a70a15893a9f04", "bb15f48d8e53131faa47efe04cff734e", new Location.LocationListener()  {
+    	Location.getLocation(this, TEST_FEED_KEY, TEST_FEED_ID, new Location.LocationListener()  {
 			
 			@Override
 			public void onSuccess(Location location)  {
-				Log.d("M2X-TestApp", "Found location: ".concat(location.toString()));
+				Log.d(LOG_TAG, "Found location: ".concat(location.toString()));
 			}
 			
 			@Override
 			public void onError(String errorMessage) {
-				Log.d("M2X-TestApp", "Failed to get location: ".concat(errorMessage));
+				Log.d(LOG_TAG, "Failed to get location: ".concat(errorMessage));
 			}
 		});
 
@@ -54,12 +76,12 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onSuccess(Feed feed) {
-				Log.d("M2X-TestApp", "Found feed: ".concat(feed.toString()));
+				Log.d(LOG_TAG, "Found feed: ".concat(feed.toString()));
 			}
 			
 			@Override
 			public void onError(String errorMessage) {
-				Log.d("M2X-TestApp", "Failed to get feed: ".concat(errorMessage));
+				Log.d(LOG_TAG, "Failed to get feed: ".concat(errorMessage));
 			}
 		});
 

@@ -1,8 +1,10 @@
 package com.att.m2x;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import org.apache.http.*;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.json.JSONObject;
 import android.content.Context;
@@ -14,7 +16,7 @@ public class M2XHttpClient {
 	
 	public interface Handler {
 		public void onSuccess(int statusCode, JSONObject object);
-		public void onFailure(int statusCode, String body);		
+		public void onFailure(int statusCode, String message);		
 	}
 	
 	private final static String M2X_AUTH_HEADER = "X-M2X-KEY";
@@ -28,26 +30,16 @@ public class M2XHttpClient {
 		client = new AsyncHttpClient(); 
 	}
 
-	public String getMasterKey() {
-		return masterKey;
-	}
-
-	public void setMasterKey(String masterKey) {
-		this.masterKey = masterKey;
-	}
-
-	public void get(Context context, String key, String path, HashMap<String, String> params, final Handler handler) {
+	public void get(Context context, 
+			String key, 
+			String path, 
+			HashMap<String, String> params, 
+			final Handler handler) {
 		
 		String url = M2X.getInstance().getBaseUrl().concat(path);
 
 		// create RequestParams for values provided in params
-		RequestParams requestParams = null;
-		if (params != null) {
-			requestParams = new RequestParams();
-			for(Entry<String, String> entry : params.entrySet()) {
-			    requestParams.put(entry.getKey(), entry.getValue());
-			}
-		};
+		RequestParams requestParams = this.requestParamsFromHashMap(params);
 
 		// determine which API key we're going to use
 		String keyValue = (key != null) ? key : masterKey;
@@ -62,13 +54,77 @@ public class M2XHttpClient {
 				handler.onSuccess(statusCode, response);
             }
 						
+			@Override
 			public void onFailure(int statusCode, java.lang.Throwable e, org.json.JSONObject errorResponse) {
 				
 				String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
 				handler.onFailure(statusCode, message);
 			}
+			
 		});
 				
+	}
+	
+	public void put(Context context, 
+			String key, 
+			String path,
+			JSONObject data,
+			final Handler handler) {
+		
+		String url = M2X.getInstance().getBaseUrl().concat(path);
+
+		// determine which API key we're going to use
+		String keyValue = (key != null) ? key : masterKey;
+		Header[] headers = { new BasicHeader(M2X_AUTH_HEADER, keyValue) };
+
+		HttpEntity body;
+		try {
+			
+			String jsonString = data.toString();
+			body = new StringEntity(jsonString);
+			
+			client.put(context, url, headers, body, "application/json", new JsonHttpResponseHandler() {
+				
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						String responseBody) {
+					
+					handler.onSuccess(statusCode, null);
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Throwable e,
+						JSONObject errorResponse) {
+
+					String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+					handler.onFailure(statusCode, message);
+				}
+				
+			});
+			
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+				
+	}
+
+	public String getMasterKey() {
+		return masterKey;
+	}
+
+	public void setMasterKey(String masterKey) {
+		this.masterKey = masterKey;
+	}
+	
+	private RequestParams requestParamsFromHashMap(HashMap<String, String> map) {
+		RequestParams requestParams = null;
+		if (map != null) {
+			requestParams = new RequestParams();
+			for(Entry<String, String> entry : map.entrySet()) {
+			    requestParams.put(entry.getKey(), entry.getValue());
+			}
+		};
+		return requestParams;
 	}
 	
 }
