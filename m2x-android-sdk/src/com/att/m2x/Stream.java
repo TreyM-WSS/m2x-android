@@ -226,6 +226,31 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 		}
 
 	}
+
+	public void delete(Context context, String feedKey, String feedId, final BasicListener callback) {
+
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String cleanStreamName =  this.getName().replace(" ", "_");
+		String path = "/feeds/" + feedId + "/streams/" + cleanStreamName;
+
+		client.delete(context, 
+				feedKey,
+				path, 
+				new M2XHttpClient.Handler() {
+
+					@Override
+					public void onSuccess(int statusCode, JSONObject object) {
+						callback.onSuccess();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String message) {						
+						callback.onError(message);
+					}
+			
+		});
+		
+	}
 	
 	public JSONObject toJSONObject() {
 		

@@ -33,8 +33,9 @@ public class MainActivity extends Activity {
 //        this.loadLocation();
 //        this.updateLocation();
 //        this.loadStreams();
-//        this.createStream();
-        this.loadStream();
+
+        this.createStream();
+//        this.loadStream();
         
     }
 
@@ -113,8 +114,25 @@ public class MainActivity extends Activity {
     	
     }
     
+    private void deleteStream(Stream stream) {
+    	
+    	stream.delete(this, TEST_FEED_KEY, TEST_FEED_ID, new Stream.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Stream deleted successfully!");
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Stream deletion failed :( ".concat(errorMessage));
+			}
+		});
+    	
+    }
+    
     private void createStream() {
-    	Stream stream = new Stream();
+    	final Stream stream = new Stream();
     	stream.setName("Test stream");
     	
     	Unit unit = new Unit();
@@ -127,6 +145,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onSuccess() {
 				Log.d(LOG_TAG, "Stream added successfully!");
+				deleteStream(stream); 
 			}
 
 			@Override

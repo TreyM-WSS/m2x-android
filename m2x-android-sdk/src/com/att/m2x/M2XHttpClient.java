@@ -179,6 +179,49 @@ public class M2XHttpClient {
 		
 	}
 	
+	public void delete(Context context, 
+			String key, 
+			String path,
+			final Handler handler) {
+		
+		String url = M2X.getInstance().getBaseUrl().concat(path);
+
+		// determine which API key we're going to use
+		String keyValue = (key != null) ? key : masterKey;
+		Header[] headers = { new BasicHeader(M2X_AUTH_HEADER, keyValue) };
+
+		client.delete(context, url, headers, null, new JsonHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseBody) {
+				
+				handler.onSuccess(statusCode, null);
+			}
+							
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					Throwable e, JSONObject errorResponse) {
+
+				String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+				handler.onFailure(statusCode, message);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseBody, Throwable e) {
+
+				if (statusCode == 500) {
+					handler.onFailure(statusCode, SERVER_ERROR);						
+				} else {
+					super.onFailure(statusCode, headers, responseBody, e);						
+				}					
+				
+			}
+			
+		});				
+	}
+	
 	public String getMasterKey() {
 		return masterKey;
 	}

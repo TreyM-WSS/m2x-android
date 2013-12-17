@@ -1,9 +1,6 @@
 package com.att.m2x;
 
-import java.util.Locale;
-
 import org.json.JSONObject;
-
 import com.att.m2x.helpers.JSONHelper;
 
 public class StreamValue extends com.att.m2x.model.StreamValue implements Serializable {
