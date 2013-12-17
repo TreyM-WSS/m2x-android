@@ -1,14 +1,16 @@
 package com.att.m2x.testapp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-
+import java.util.Random;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import com.att.m2x.*;
+import com.att.m2x.Stream.BasicListener;
 import com.att.m2x.Stream.ValuesListener;
 
 public class MainActivity extends Activity {
@@ -63,6 +65,35 @@ public class MainActivity extends Activity {
     	});
     }
     
+    private void addRandomValuesToStream(final Stream stream) {
+    	
+    	Random randomGenerator = new Random(); 
+    	ArrayList<StreamValue> readings = new ArrayList<StreamValue>();
+    	for (int i = 0 ; i < 5 ; i++) {
+    		double reading = randomGenerator.nextDouble() * 100;
+    		StreamValue value = new StreamValue();
+    		value.setValue(reading);
+    		value.setDate(new Date());
+    		readings.add(value);
+    	}
+    	
+    	stream.setValues(this, TEST_FEED_KEY, TEST_FEED_ID, readings, new Stream.BasicListener() {
+
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Successfully added random values to stream");				
+				loadStreamValues(stream);
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to add random values to stream: ".concat(errorMessage));
+			}
+    		
+    	});
+    	
+    }
+    
     private void loadStream() {
 
     	Stream.getStream(this, TEST_FEED_KEY, TEST_FEED_ID, TEST_STREAM_NAME, new Stream.StreamListener() {
@@ -70,7 +101,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onSuccess(Stream stream) {
 				Log.d(LOG_TAG, "Found stream: ".concat(stream.toString()));
-				loadStreamValues(stream);
+				addRandomValuesToStream(stream);
 			}
 
 			@Override
@@ -106,7 +137,7 @@ public class MainActivity extends Activity {
     	});
     	
     }
-    
+        
     private void loadStreams() {
     	
     	Stream.getStreams(this, TEST_FEED_KEY, TEST_FEED_ID, new Stream.StreamsListener() {

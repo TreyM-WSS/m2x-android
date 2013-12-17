@@ -31,6 +31,11 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 		public void onError(String errorMessage);
 	}
  
+	public interface BasicListener {
+		public void onSuccess();
+		public void onError(String errorMessage);		
+	}
+	
 	private static final String ID = "id";
 	private static final String NAME = "name";
 	private static final String VALUE = "value";
@@ -41,7 +46,7 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 	private static final String URL = "url";
 	private static final String CREATED = "created";
 	private static final String UPDATED = "updated";
-	private static final String PAGE_KEY = "values";
+	private static final String VALUES_KEY = "values";
 
 	public Stream() {
 		
@@ -163,7 +168,7 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 
 				ArrayList<StreamValue> array = new ArrayList<StreamValue>();
 				try {
-					JSONArray values = object.getJSONArray(PAGE_KEY);
+					JSONArray values = object.getJSONArray(VALUES_KEY);
 					for (int i = 0; i < values.length(); i++) {
 						StreamValue value = new StreamValue(values.getJSONObject(i));
 						array.add(value);
@@ -181,6 +186,45 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 			
 		});
 		
+	}
+
+	public void setValues(Context context, String feedKey, String feedId, ArrayList<StreamValue> values, final BasicListener callback) {
+
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String cleanStreamName =  this.getName().replace(" ", "_");
+		String path = "/feeds/" + feedId + "/streams/" + cleanStreamName + "/values";
+		
+		try {
+			
+			JSONObject content = new JSONObject();
+			JSONArray array = new JSONArray();
+			for (StreamValue value : values) {
+				array.put(value.toJSONObject());
+			}
+			content.put(VALUES_KEY, array);
+			
+			client.post(context, 
+					feedKey,
+					path, 
+					content,
+					new M2XHttpClient.Handler() {
+
+						@Override
+						public void onSuccess(int statusCode, JSONObject object) {
+							callback.onSuccess();
+						}
+
+						@Override
+						public void onFailure(int statusCode, String message) {						
+							callback.onError(message);
+						}
+				
+			});
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	public JSONObject toJSONObject() {

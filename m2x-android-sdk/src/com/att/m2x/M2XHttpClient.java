@@ -20,6 +20,7 @@ public class M2XHttpClient {
 	}
 	
 	private final static String M2X_AUTH_HEADER = "X-M2X-KEY";
+	private final static String USER_AGENT = "M2X Android API Client version " + M2X.VERSION;
 	private final static String MESSAGE_ERROR_FIELD = "message";
 	private final static String UNDEFINED_ERROR = "Undefined error";
 	private final static String SERVER_ERROR = "Internal Server Error";
@@ -28,7 +29,8 @@ public class M2XHttpClient {
 	private String masterKey;
 	
 	public M2XHttpClient() {
-		client = new AsyncHttpClient(); 
+		client = new AsyncHttpClient();
+		client.setUserAgent(USER_AGENT);
 	}
 
 	public void get(Context context, 
@@ -122,6 +124,61 @@ public class M2XHttpClient {
 				
 	}
 
+	public void post(Context context, 
+			String key, 
+			String path,
+			JSONObject data,
+			final Handler handler) {
+
+		String url = M2X.getInstance().getBaseUrl().concat(path);
+
+		// determine which API key we're going to use
+		String keyValue = (key != null) ? key : masterKey;
+		Header[] headers = { new BasicHeader(M2X_AUTH_HEADER, keyValue) };
+
+		HttpEntity body;
+		try {
+			
+			String jsonString = data.toString();
+			body = new StringEntity(jsonString);
+			
+			client.post(context, url, headers, body, "application/json", new JsonHttpResponseHandler() {
+
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						String responseBody) {
+					
+					handler.onSuccess(statusCode, null);
+				}
+								
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						Throwable e, JSONObject errorResponse) {
+
+					String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+					handler.onFailure(statusCode, message);
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						String responseBody, Throwable e) {
+
+					if (statusCode == 500) {
+						handler.onFailure(statusCode, SERVER_ERROR);						
+					} else {
+						super.onFailure(statusCode, headers, responseBody, e);						
+					}					
+					
+				}
+				
+			});
+			
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		
+	}
+	
 	public String getMasterKey() {
 		return masterKey;
 	}
