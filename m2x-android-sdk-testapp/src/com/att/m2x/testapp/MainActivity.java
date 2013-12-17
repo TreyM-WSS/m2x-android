@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
     		}
     		
     		public void onError(String errorMessage) {
-				Log.d(LOG_TAG, "Update failed :(");    			
+				Log.d(LOG_TAG, "Update failed :( ".concat(errorMessage));    			
     		}
 
     	});

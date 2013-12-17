@@ -22,6 +22,7 @@ public class M2XHttpClient {
 	private final static String M2X_AUTH_HEADER = "X-M2X-KEY";
 	private final static String MESSAGE_ERROR_FIELD = "message";
 	private final static String UNDEFINED_ERROR = "Undefined error";
+	private final static String SERVER_ERROR = "Internal Server Error";
 
 	private AsyncHttpClient client;
 	private String masterKey;
@@ -91,13 +92,25 @@ public class M2XHttpClient {
 					
 					handler.onSuccess(statusCode, null);
 				}
-				
+								
 				@Override
-				public void onFailure(int statusCode, Throwable e,
-						JSONObject errorResponse) {
+				public void onFailure(int statusCode, Header[] headers,
+						Throwable e, JSONObject errorResponse) {
 
 					String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
 					handler.onFailure(statusCode, message);
+				}
+				
+				@Override
+				public void onFailure(int statusCode, Header[] headers,
+						String responseBody, Throwable e) {
+
+					if (statusCode == 500) {
+						handler.onFailure(statusCode, SERVER_ERROR);						
+					} else {
+						super.onFailure(statusCode, headers, responseBody, e);						
+					}					
+					
 				}
 				
 			});
