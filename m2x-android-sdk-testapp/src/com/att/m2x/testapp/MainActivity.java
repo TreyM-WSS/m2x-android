@@ -25,7 +25,8 @@ public class MainActivity extends Activity {
 //        this.loadFeeds();
 //        this.loadFeed();
 //        this.loadLocation();
-        this.updateLocation(37.331928, -122.03064, 10);
+//        this.updateLocation();
+        this.loadStreams();
     }
 
     @Override
@@ -34,12 +35,35 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    private void loadStreams() {
+    	
+    	Stream.getStreams(this, TEST_FEED_KEY, TEST_FEED_ID, new Stream.StreamsListener() {
+
+			@Override
+			public void onSuccess(ArrayList<Stream> streams) {
+        		Log.d(LOG_TAG, String.format("Obtained %d streams", streams.size()));
+        		for (Stream stream : streams) {
+        			Log.d(LOG_TAG, stream.toString());
+        		}    							
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+
+        		Log.d(LOG_TAG, "Failed to obtain streams: ".concat(errorMessage));				
+			}
+    		
+    	});
+    	
+    }
     
-    private void updateLocation(double latitude, double longitude, double elevation) {
+    private void updateLocation() {
     	Location loc = new Location();
-    	loc.setLatitude(latitude);
-    	loc.setLongitude(longitude);
-    	loc.setElevation(elevation);
+    	loc.setName("AT&T Corporate HQ");
+    	loc.setLatitude(32.779846);
+    	loc.setLongitude(-96.799179);
+    	loc.setElevation(10);
     	loc.update(this, TEST_FEED_KEY, TEST_FEED_ID, new Location.UpdateListener() {
 
     		public void onSuccess() {

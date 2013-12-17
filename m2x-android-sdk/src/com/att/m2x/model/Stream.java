@@ -1,6 +1,7 @@
 package com.att.m2x.model;
 
 import java.util.Date;
+import java.util.Locale;
 
 public class Stream {
 
@@ -95,5 +96,13 @@ public class Stream {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-		
+
+	public String toString() {
+		return String.format(Locale.US, "M2X Stream - %s (min: %f, max: %f, last value: %f)", 
+				this.getName(), 
+				this.getMin(), 
+				this.getMax(),
+				this.getValue() ); 
+	}
+	
 }
