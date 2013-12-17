@@ -3,11 +3,9 @@ package com.att.m2x.testapp;
 import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import com.att.m2x.*;
-import com.att.m2x.Stream.UpdateListener;
 
 public class MainActivity extends Activity {
 
@@ -16,7 +14,6 @@ public class MainActivity extends Activity {
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
 	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e"; 
 
-	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +26,9 @@ public class MainActivity extends Activity {
 //        this.loadLocation();
 //        this.updateLocation();
 //        this.loadStreams();
-        this.testStream();
+//        this.createStream();
+        this.loadStream();
+        
     }
 
     @Override
@@ -39,7 +38,25 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    private void testStream() {
+    private void loadStream() {
+
+    	Stream.getStream(this, TEST_FEED_KEY, TEST_FEED_ID, "temperature", new Stream.StreamListener() {
+
+			@Override
+			public void onSuccess(Stream stream) {
+				Log.d(LOG_TAG, "Found stream: ".concat(stream.toString()));
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to get stream: ".concat(errorMessage));
+			}
+    		
+    	});
+    	
+    }
+    
+    private void createStream() {
     	Stream stream = new Stream();
     	stream.setName("Test stream");
     	
