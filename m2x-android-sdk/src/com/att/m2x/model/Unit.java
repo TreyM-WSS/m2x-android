@@ -1,5 +1,7 @@
 package com.att.m2x.model;
 
+import java.util.Locale;
+
 public class Unit {
 
 	private String label;
@@ -20,5 +22,11 @@ public class Unit {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	
+
+	public String toString() {
+		return String.format(Locale.US, "M2X Stream - %s (symbol: %s)", 
+				this.getLabel(), 
+				this.getSymbol() ); 
+	}
+
 }

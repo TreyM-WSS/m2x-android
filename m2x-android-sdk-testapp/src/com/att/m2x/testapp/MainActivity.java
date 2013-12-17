@@ -3,9 +3,11 @@ package com.att.m2x.testapp;
 import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import com.att.m2x.*;
+import com.att.m2x.Stream.UpdateListener;
 
 public class MainActivity extends Activity {
 
@@ -26,7 +28,8 @@ public class MainActivity extends Activity {
 //        this.loadFeed();
 //        this.loadLocation();
 //        this.updateLocation();
-        this.loadStreams();
+//        this.loadStreams();
+        this.testStream();
     }
 
     @Override
@@ -36,6 +39,31 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    private void testStream() {
+    	Stream stream = new Stream();
+    	stream.setName("Test stream");
+    	
+    	Unit unit = new Unit();
+    	unit.setLabel("Kilos");
+    	unit.setSymbol("Kg"); 
+    	stream.setUnit(unit);
+    	
+    	stream.update(this, TEST_FEED_KEY, TEST_FEED_ID, new Stream.UpdateListener() {
+
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Stream added successfully!");
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Stream creation failed :( ".concat(errorMessage));				
+			}
+    		
+    	});
+    	
+    }
+    
     private void loadStreams() {
     	
     	Stream.getStreams(this, TEST_FEED_KEY, TEST_FEED_ID, new Stream.StreamsListener() {
@@ -46,6 +74,7 @@ public class MainActivity extends Activity {
         		for (Stream stream : streams) {
         			Log.d(LOG_TAG, stream.toString());
         		}    							
+        		
 			}
 
 			@Override
@@ -67,11 +96,11 @@ public class MainActivity extends Activity {
     	loc.update(this, TEST_FEED_KEY, TEST_FEED_ID, new Location.UpdateListener() {
 
     		public void onSuccess() {
-				Log.d(LOG_TAG, "Update successful!");
+				Log.d(LOG_TAG, "Location update successful!");
     		}
     		
     		public void onError(String errorMessage) {
-				Log.d(LOG_TAG, "Update failed :( ".concat(errorMessage));    			
+				Log.d(LOG_TAG, "Location update failed :( ".concat(errorMessage));    			
     		}
 
     	});

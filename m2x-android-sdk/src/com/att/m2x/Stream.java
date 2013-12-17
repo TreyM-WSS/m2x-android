@@ -1,7 +1,6 @@
 package com.att.m2x;
 
 import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +11,11 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 
 	public interface StreamsListener {
 		public void onSuccess(ArrayList<Stream> streams);
+		public void onError(String errorMessage);
+	}
+
+	public interface UpdateListener {
+		public void onSuccess();
 		public void onError(String errorMessage);
 	}
 
@@ -81,18 +85,47 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 		
 	}
 	
+	public void update(Context context, String feedKey, String feedId, final UpdateListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String cleanName =  this.getName().replace(" ", "_");
+		String path = "/feeds/" + feedId + "/streams/" + cleanName;
+		
+		JSONObject content = this.toJSONObject();
+		
+		client.put(context, 
+				feedKey,
+				path, 
+				content,
+				new M2XHttpClient.Handler() {
+
+					@Override
+					public void onSuccess(int statusCode, JSONObject object) {
+						callback.onSuccess();
+					}
+
+					@Override
+					public void onFailure(int statusCode, String message) {						
+						callback.onError(message);
+					}
+			
+		});
+		
+	}
+	
 	public JSONObject toJSONObject() {
+		
 		JSONObject obj = new JSONObject();
-		JSONHelper.put(obj, ID, this.getId());
+//		JSONHelper.put(obj, ID, this.getId());
 		JSONHelper.put(obj, NAME, this.getName());
-		JSONHelper.put(obj, VALUE, this.getValue());
-		JSONHelper.put(obj, LATESTVALUEAT, this.getLatestValueAt());
-		JSONHelper.put(obj, MIN, this.getMin());
-		JSONHelper.put(obj, MAX, this.getMax());
-		JSONHelper.put(obj, UNIT, this.getUnit());
-		JSONHelper.put(obj, URL, this.getUrl());
-		JSONHelper.put(obj, CREATED, this.getCreated());
-		JSONHelper.put(obj, UPDATED, this.getUpdated());
+//		JSONHelper.put(obj, VALUE, this.getValue());
+//		JSONHelper.put(obj, LATESTVALUEAT, this.getLatestValueAt());
+//		JSONHelper.put(obj, MIN, this.getMin());
+//		JSONHelper.put(obj, MAX, this.getMax());
+		JSONHelper.put(obj, UNIT, ((Unit) this.getUnit()).toJSONObject() );
+//		JSONHelper.put(obj, URL, this.getUrl());
+//		JSONHelper.put(obj, CREATED, this.getCreated());
+//		JSONHelper.put(obj, UPDATED, this.getUpdated());
 		return obj;
 	}
 	

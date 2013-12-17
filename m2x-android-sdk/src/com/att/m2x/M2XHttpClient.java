@@ -37,8 +37,9 @@ public class M2XHttpClient {
 			HashMap<String, String> params, 
 			final Handler handler) {
 		
-		String url = M2X.getInstance().getBaseUrl().concat(path);
-
+		String baseUrl = M2X.getInstance().getBaseUrl();
+		String url = baseUrl + path;
+		
 		// create RequestParams for values provided in params
 		RequestParams requestParams = this.requestParamsFromHashMap(params);
 
