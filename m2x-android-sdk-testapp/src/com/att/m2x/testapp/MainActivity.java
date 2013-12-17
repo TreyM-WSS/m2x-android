@@ -1,18 +1,23 @@
 package com.att.m2x.testapp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import com.att.m2x.*;
+import com.att.m2x.Stream.ValuesListener;
 
 public class MainActivity extends Activity {
 
 	private static String LOG_TAG = "M2X-TestApp"; 
 
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
-	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e"; 
+	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e";
+	private static String TEST_STREAM_NAME = "temperature";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +43,34 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    private void loadStreamValues(Stream stream) {
+    	
+    	stream.getValues(this, TEST_FEED_KEY, TEST_FEED_ID, null, new Stream.ValuesListener() {
+
+			@Override
+			public void onSuccess(ArrayList<StreamValue> values) {
+        		Log.d(LOG_TAG, String.format("Found %d stream values", values.size()));
+        		for (StreamValue streamValue : values) {
+        			Log.d(LOG_TAG, streamValue.toString());
+        		}    							
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to get stream values: ".concat(errorMessage));
+			}
+    		
+    	});
+    }
+    
     private void loadStream() {
 
-    	Stream.getStream(this, TEST_FEED_KEY, TEST_FEED_ID, "temperature", new Stream.StreamListener() {
+    	Stream.getStream(this, TEST_FEED_KEY, TEST_FEED_ID, TEST_STREAM_NAME, new Stream.StreamListener() {
 
 			@Override
 			public void onSuccess(Stream stream) {
 				Log.d(LOG_TAG, "Found stream: ".concat(stream.toString()));
+				loadStreamValues(stream);
 			}
 
 			@Override
@@ -176,4 +202,5 @@ public class MainActivity extends Activity {
     	});
     	
     }
+
 }

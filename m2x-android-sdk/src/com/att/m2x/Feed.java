@@ -32,6 +32,7 @@ public final class Feed extends com.att.m2x.model.Feed {
 	private static final String TAGS = "tags";
 	private static final String CREATED = "created";
 	private static final String UPDATED = "updated";
+	private static final String PAGE_KEY = "feeds";
 
 	private Location location;
 	private ArrayList<Stream> streams;
@@ -116,13 +117,13 @@ public final class Feed extends com.att.m2x.model.Feed {
 
 				ArrayList<Feed> array = new ArrayList<Feed>();
 				try {
-					JSONArray feeds = object.getJSONArray("feeds");
+					JSONArray feeds = object.getJSONArray(PAGE_KEY);
 					for (int i = 0; i < feeds.length(); i++) {
 						Feed feed = new Feed(feeds.getJSONObject(i));
 						array.add(feed);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse json objects");
+					Log.d("Failed to parse Feed JSON objects");
 				}
 				callback.onSuccess(array);
 				

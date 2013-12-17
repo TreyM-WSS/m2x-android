@@ -1,6 +1,8 @@
 package com.att.m2x;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +26,11 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 		public void onError(String errorMessage);
 	}
 
+	public interface ValuesListener {
+		public void onSuccess(ArrayList<StreamValue> values);
+		public void onError(String errorMessage);
+	}
+ 
 	private static final String ID = "id";
 	private static final String NAME = "name";
 	private static final String VALUE = "value";
@@ -34,6 +41,7 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 	private static final String URL = "url";
 	private static final String CREATED = "created";
 	private static final String UPDATED = "updated";
+	private static final String PAGE_KEY = "values";
 
 	public Stream() {
 		
@@ -141,20 +149,45 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 		});
 		
 	}
+		
+	public void getValues(Context context, String feedKey, String feedId, HashMap<String, String> params, final ValuesListener callback) {
+
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String cleanStreamName = this.getName().replace(" ", "_");
+		String path = "/feeds/" + feedId + "/streams/" + cleanStreamName + "/values";
+		
+		client.get(context, feedKey, path, params, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+
+				ArrayList<StreamValue> array = new ArrayList<StreamValue>();
+				try {
+					JSONArray values = object.getJSONArray(PAGE_KEY);
+					for (int i = 0; i < values.length(); i++) {
+						StreamValue value = new StreamValue(values.getJSONObject(i));
+						array.add(value);
+					}
+				} catch (JSONException e) {
+					Log.d("Failed to parse StreamValue JSON objects");
+				}
+				callback.onSuccess(array);
+			}
+
+			@Override
+			public void onFailure(int statusCode, String body) {
+				callback.onError(body);
+			}
+			
+		});
+		
+	}
 	
 	public JSONObject toJSONObject() {
 		
 		JSONObject obj = new JSONObject();
-//		JSONHelper.put(obj, ID, this.getId());
 		JSONHelper.put(obj, NAME, this.getName());
-//		JSONHelper.put(obj, VALUE, this.getValue());
-//		JSONHelper.put(obj, LATESTVALUEAT, this.getLatestValueAt());
-//		JSONHelper.put(obj, MIN, this.getMin());
-//		JSONHelper.put(obj, MAX, this.getMax());
 		JSONHelper.put(obj, UNIT, ((Unit) this.getUnit()).toJSONObject() );
-//		JSONHelper.put(obj, URL, this.getUrl());
-//		JSONHelper.put(obj, CREATED, this.getCreated());
-//		JSONHelper.put(obj, UPDATED, this.getUpdated());
 		return obj;
 	}
 	
