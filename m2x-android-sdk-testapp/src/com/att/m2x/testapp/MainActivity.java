@@ -29,12 +29,11 @@ public class MainActivity extends Activity {
         M2X.getInstance().setMasterKey("8181c16a0097325041a0c5a55f4fee1d");
         
 //        this.loadFeeds();
-//        this.loadFeed();
+        this.loadFeed();
 //        this.loadLocation();
 //        this.updateLocation();
 //        this.loadStreams();
-
-        this.createStream();
+//        this.createStream();
 //        this.loadStream();
         
     }
@@ -64,6 +63,44 @@ public class MainActivity extends Activity {
 			}
     		
     	});
+    }
+    
+    private void addMultipleRandomValuesToFeed(final Feed feed) {
+
+    	// we're going to add two random values to each stream using a single request.
+		HashMap<Stream, ArrayList<StreamValue>> data = new HashMap<Stream, ArrayList<StreamValue>>(); 
+		
+		for (Stream stream : feed.getStreams()) {
+			// generate random value
+	    	Random randomGenerator = new Random(); 
+	    	
+    		ArrayList<StreamValue> values = new ArrayList<StreamValue>();
+	    	for (int i=0;i<2;i++) {
+	    		double reading = randomGenerator.nextDouble() * 100;
+	    		StreamValue value = new StreamValue();
+	    		value.setValue(reading);
+	    		value.setDate(new Date());
+	    		values.add(value);	    		
+	    	}
+    		
+    		data.put(stream, values);
+		}
+    	
+		feed.setValuesForMultipleStreams(this, TEST_FEED_KEY, data,  new Feed.BasicListener() {
+
+			@Override
+			public void onSuccess() {
+
+				Log.d(LOG_TAG, "Successfully added random values to all streams in ".concat(feed.getName()));
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+				
+				Log.d(LOG_TAG, "Failed to add random values to all streams in ".concat(feed.getName()));
+			}
+			
+		});
     }
     
     private void addRandomValuesToStream(final Stream stream) {
@@ -218,11 +255,12 @@ public class MainActivity extends Activity {
     
     private void loadFeed() { 
     	
-    	Feed.getFeed(this, "7fde9db5578f3ba4b3a70a15893a9f04", "bb15f48d8e53131faa47efe04cff734e", new Feed.FeedListener()  {
+    	Feed.getFeed(this, TEST_FEED_KEY, TEST_FEED_ID, new Feed.FeedListener()  {
 			
 			@Override
 			public void onSuccess(Feed feed) {
 				Log.d(LOG_TAG, "Found feed: ".concat(feed.toString()));
+				addMultipleRandomValuesToFeed(feed);
 			}
 			
 			@Override

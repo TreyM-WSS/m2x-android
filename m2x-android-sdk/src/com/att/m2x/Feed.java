@@ -1,10 +1,12 @@
 package com.att.m2x;
 
 import org.json.*;
+
 import android.content.Context;
 import com.att.m2x.helpers.JSONHelper;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public final class Feed extends com.att.m2x.model.Feed {
 
@@ -18,6 +20,11 @@ public final class Feed extends com.att.m2x.model.Feed {
 		public void onError(String errorMessage);
 	}
 
+	public interface BasicListener {
+		public void onSuccess();
+		public void onError(String errorMessage);		
+	}
+	
 	private static final String ID = "id";
 	private static final String NAME = "name";
 	private static final String DESCRIPTION = "description";
@@ -159,7 +166,54 @@ public final class Feed extends com.att.m2x.model.Feed {
 		});
 		
 	}
+	
+	public void setValuesForMultipleStreams(Context context, String feedKey, HashMap<Stream,ArrayList<StreamValue>> values, final BasicListener callback) {
 		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/" + this.getId();
+		
+		try {
+			
+			JSONObject content = new JSONObject();
+			JSONObject items = new JSONObject();			
+			
+			for(Entry<Stream, ArrayList<StreamValue>> entry : values.entrySet()) {
+				Stream stream = entry.getKey();
+				ArrayList<StreamValue> data = entry.getValue();
+
+				JSONArray array = new JSONArray();			
+				for (StreamValue value : data) {
+					array.put(value.toJSONObject());
+				}
+
+				items.put(stream.getName(), array);
+			}
+			content.put("values", items);
+			
+			client.post(context, 
+					feedKey,
+					path, 
+					content,
+					new M2XHttpClient.Handler() {
+
+						@Override
+						public void onSuccess(int statusCode, JSONObject object) {
+							callback.onSuccess();
+						}
+
+						@Override
+						public void onFailure(int statusCode, String message) {						
+							callback.onError(message);
+						}
+				
+			});
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public Location getLocation() {
 		return location;
 	}
