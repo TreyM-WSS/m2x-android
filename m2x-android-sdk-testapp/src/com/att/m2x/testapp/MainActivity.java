@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
 	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e";
+	private static String TEST_TRIGGER_ID = "34";
 	private static String TEST_STREAM_NAME = "temperature";
 
     @Override
@@ -36,9 +37,9 @@ public class MainActivity extends Activity {
 //        this.loadStreams();
 //        this.createStream();
 //        this.loadStream();
+        this.loadTrigger();
 //        this.loadTriggers();
-        this.createTrigger();
-        
+//        this.createTrigger();
     }
 
     @Override
@@ -46,6 +47,23 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    private void loadTrigger() {
+    	
+    	Trigger.getTrigger(this, TEST_FEED_KEY, TEST_FEED_ID, TEST_TRIGGER_ID, new Trigger.TriggerListener() {
+			
+			@Override
+			public void onSuccess(Trigger trigger) {
+				Log.d(LOG_TAG, "Found trigger: ".concat(trigger.toString()));				
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to get trigger: ".concat(errorMessage));				
+			}
+		});
+    	
     }
 
     private void createTrigger() {

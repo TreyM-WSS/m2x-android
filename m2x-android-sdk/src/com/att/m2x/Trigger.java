@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+
+import com.att.m2x.Stream.StreamListener;
 import com.att.m2x.helpers.JSONHelper;
 
 public final class Trigger extends com.att.m2x.model.Trigger implements Serializable {
@@ -84,6 +86,28 @@ public final class Trigger extends com.att.m2x.model.Trigger implements Serializ
 		
 	}
 
+	public static void getTrigger(Context context, String feedKey, String feedId, String triggerId, final TriggerListener callback) {
+
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/" + feedId + "/triggers/" + triggerId;
+		
+		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				Trigger trigger = new Trigger(object);
+				callback.onSuccess(trigger);				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
+	}
+	
 	public void create(Context context, String feedKey, String feedId, final TriggerListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
