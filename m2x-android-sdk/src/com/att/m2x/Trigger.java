@@ -8,11 +8,16 @@ import org.json.JSONObject;
 import android.content.Context;
 import com.att.m2x.helpers.JSONHelper;
 
-public final class Trigger extends com.att.m2x.model.Trigger {
+public final class Trigger extends com.att.m2x.model.Trigger implements Serializable {
 
 	public interface TriggersListener {
 		public void onSuccess(ArrayList<Trigger> triggers);
 		public void onError(String errorMessage);
+	}
+
+	public interface TriggerListener {
+		public void onSuccess(Trigger trigger);
+		public void onError(String errorMessage);		
 	}
 
 	private static final String ID = "id";
@@ -77,6 +82,42 @@ public final class Trigger extends com.att.m2x.model.Trigger {
 			
 		});
 		
+	}
+
+	public void create(Context context, String feedKey, String feedId, final TriggerListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/" + feedId + "/triggers";
+		JSONObject content = this.toJSONObject();
+		client.post(context, feedKey, path, content, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				Trigger trigger = new Trigger(object);
+				callback.onSuccess(trigger);				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
+	}
+	
+	public JSONObject toJSONObject() {
+		
+		JSONObject obj = new JSONObject();		
+		JSONHelper.put(obj, NAME, this.getName());
+		JSONHelper.put(obj, STREAM, this.getStream());
+		JSONHelper.put(obj, CONDITION, this.getCondition());
+		JSONHelper.put(obj, VALUE, this.getValue());
+		JSONHelper.put(obj, UNIT, this.getUnit());
+		JSONHelper.put(obj, CALLBACK_URL, this.getCallbackUrl());
+		JSONHelper.put(obj, URL, this.getUrl());
+		JSONHelper.put(obj, STATUS, this.getStatus());
+		return obj;
 	}
 
 }

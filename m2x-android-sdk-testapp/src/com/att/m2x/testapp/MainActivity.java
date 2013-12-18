@@ -3,6 +3,7 @@ package com.att.m2x.testapp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Random;
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,7 +36,8 @@ public class MainActivity extends Activity {
 //        this.loadStreams();
 //        this.createStream();
 //        this.loadStream();
-        this.loadTriggers();
+//        this.loadTriggers();
+        this.createTrigger();
         
     }
 
@@ -46,6 +48,33 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    private void createTrigger() {
+    	
+    	final Trigger trigger = new Trigger();
+    	trigger.setStream("temperature");
+    	trigger.setCondition(">");
+    	trigger.setValue(10);
+    	trigger.setCallbackUrl("http://www.example.com");
+    	trigger.setStatus("enabled");
+    	trigger.setName("Test trigger");
+    	
+    	trigger.create(this, TEST_FEED_KEY, TEST_FEED_ID, new Trigger.TriggerListener() {
+
+			@Override
+			public void onSuccess(Trigger trigger) {
+				Log.d(LOG_TAG, String.format(Locale.US, "Trigger created successfully with id %s", trigger.getId()));
+
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to create trigger " + trigger.getName());				
+			}
+    		
+    	});
+    	
+    }
+    
     private void loadTriggers() {
     	
     	Trigger.getTriggers(this, TEST_FEED_KEY, TEST_FEED_ID, new Trigger.TriggersListener() {
@@ -61,7 +90,6 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onError(String errorMessage) {
-
         		Log.d(LOG_TAG, "Failed to obtain triggers: ".concat(errorMessage));				
 			}
     		
@@ -201,7 +229,7 @@ public class MainActivity extends Activity {
     	unit.setSymbol("Kg"); 
     	stream.setUnit(unit);
     	
-    	stream.update(this, TEST_FEED_KEY, TEST_FEED_ID, new Stream.UpdateListener() {
+    	stream.update(this, TEST_FEED_KEY, TEST_FEED_ID, new Stream.BasicListener() {
 
 			@Override
 			public void onSuccess() {

@@ -21,11 +21,6 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 		public void onError(String errorMessage);
 	}
 
-	public interface UpdateListener {
-		public void onSuccess();
-		public void onError(String errorMessage);
-	}
-
 	public interface ValuesListener {
 		public void onSuccess(ArrayList<StreamValue> values);
 		public void onError(String errorMessage);
@@ -127,7 +122,7 @@ public final class Stream extends com.att.m2x.model.Stream implements Serializab
 
 	}
 	
-	public void update(Context context, String feedKey, String feedId, final UpdateListener callback) {
+	public void update(Context context, String feedKey, String feedId, final BasicListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String cleanName =  this.getName().replace(" ", "_");

@@ -148,7 +148,17 @@ public class M2XHttpClient {
 				public void onSuccess(int statusCode, Header[] headers,
 						String responseBody) {
 					
-					handler.onSuccess(statusCode, null);
+					if (statusCode == 201) {
+						super.onSuccess(statusCode, headers, responseBody);
+					} else {
+						handler.onSuccess(statusCode, null);
+					}					
+				}
+				
+				@Override
+				public void onSuccess(int statusCode, JSONObject response) {
+
+					handler.onSuccess(statusCode, response);
 				}
 								
 				@Override
