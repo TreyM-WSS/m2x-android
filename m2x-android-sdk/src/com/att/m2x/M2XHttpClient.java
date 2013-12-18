@@ -84,9 +84,7 @@ public class M2XHttpClient {
 		HttpEntity body;
 		try {
 			
-			String jsonString = data.toString();
-			body = new StringEntity(jsonString);
-			
+			body = new StringEntity(data.toString());				
 			client.put(context, url, headers, body, "application/json", new JsonHttpResponseHandler() {
 				
 				@Override
@@ -136,11 +134,12 @@ public class M2XHttpClient {
 		String keyValue = (key != null) ? key : masterKey;
 		Header[] headers = { new BasicHeader(M2X_AUTH_HEADER, keyValue) };
 
-		HttpEntity body;
+		HttpEntity body = null;
 		try {
 			
-			String jsonString = data.toString();
-			body = new StringEntity(jsonString);
+			if (data != null) { 
+				body = new StringEntity(data.toString());				
+			}
 			
 			client.post(context, url, headers, body, "application/json", new JsonHttpResponseHandler() {
 

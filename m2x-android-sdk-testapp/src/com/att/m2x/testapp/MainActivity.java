@@ -49,6 +49,22 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    private void testTrigger(final Trigger trigger) {
+    	trigger.test(this, TEST_FEED_KEY, TEST_FEED_ID, new Trigger.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Successfully tested trigger: ".concat(trigger.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to test trigger: ".concat(trigger.toString()));
+			}
+		});
+    	
+    }
+    
     private void updateTrigger(final Trigger trigger) {
     	
     	Random randomGenerator = new Random(); 
@@ -59,7 +75,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onSuccess() {
 				Log.d(LOG_TAG, "Updated trigger successfully! ".concat(trigger.toString()));
-				
+				testTrigger(trigger);
 			}
 			
 			@Override

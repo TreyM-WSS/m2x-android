@@ -23,8 +23,8 @@ public final class Trigger extends com.att.m2x.model.Trigger implements Serializ
 	public interface BasicListener {
 		public void onSuccess();
 		public void onError(String errorMessage);		
-	}
-
+	}	
+	
 	private static final String ID = "id";
 	private static final String NAME = "name";
 	private static final String STREAM = "stream";
@@ -140,6 +140,27 @@ public final class Trigger extends com.att.m2x.model.Trigger implements Serializ
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
+	}
+	
+	public void test(Context context, String feedKey, String feedId, final BasicListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/" + feedId + "/triggers/" + this.getId() + "/test";
+		client.post(context, feedKey, path, null, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				// drops result info brought back by testing function
 				callback.onSuccess();				
 			}
 
