@@ -29,10 +29,10 @@ To start using this SDK you will probably need to set up your Master Key. The Ma
 	M2X.getInstance().setMasterKey("Master Key goes here");
 ```
 
-API Client Examples:
+API Client Examples
 -----
 
-## Notes: 
+### Notes
 1. All these examples use the Master Key, so make sure that you have set it.
 2. All examples assume that you are performing API calls directly from an activity.
 3. Many API calls include an optional feedKey argument. If this value is null the API client will perform the request using the Master Key. If the value is not null, then it will be used instead of the Master Key.
@@ -269,22 +269,121 @@ myFeed.setValuesForMultipleStreams(this, null, data,  new Feed.BasicListener() {
 The following code deletes the *temperature* data stream belonging to myFeed.
 
 ```
-temperature.delete(this, null, myFeed.getId(), new Stream.BasicListener() {
-public void onSuccess() {
-}
+temperature.delete(this, null, myFeed.getId(), new Stream.BasicListener(){
+	public void onSuccess() {
+	}
 			
-public void onError(String errorMessage) {
-}
+	public void onError(String errorMessage) {
+	}
 });
 ```
 
 ## Triggers
 ### List all triggers in a feed
+
+
+The following code obtains all the triggers of myFeed.
+
+```
+Trigger.getTriggers(this, null, myFeed.getId(), new Trigger.TriggersListener() {
+	public void onSuccess(ArrayList<Trigger> triggers) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
 ### Get individual trigger
+
+The following code demonstrates how to obtain an individual trigger from its ID.
+
+```
+Trigger.getTrigger(this, null, myFeed.getId(), "Trigger ID goes here", new Trigger.TriggerListener() {
+	public void onSuccess(Trigger trigger) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
 ### Create trigger
+
+The following code creates a new alarm for the *temperature* stream belonging to *myFeed*. If temperature rises above 100 degrees, a request will be made to the provided callback URL.
+
+```
+Trigger alarm = new Trigger();
+alarm.setStream(temperature.getName());
+alarm.setCondition(">");
+alarm.setValue(100);
+alarm.setCallbackUrl("http://my.server/?tempAlarm");
+alarm.setStatus("enabled");
+alarm.setName("Temperature Alarm");
+    	
+alarm.create(this, null, myFeed.getId(), new Trigger.TriggerListener() {
+	public void onSuccess(Trigger trigger) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
 ### Update trigger
+
+This example updates the temperature alarm from the previous example, lowering the temperature to 80 degrees
+
+```
+alarm.setValue(80);
+alarm.update(this, null, myFeed.getId(), new Trigger.BasicListener() 
+{
+	public void onSuccess() {
+	}
+	
+	public void onError(String errorMessage) {
+	}});
+```
+
 ### Test trigger
+
+The following code shows how to test the *alarm* trigger, causing M2X to make a post to the provided callback URL.
+
+```
+alarm.test(this, null, myFeed.getId(), new Trigger.BasicListener() 
+{
+	public void onSuccess() {
+	}
+	
+	public void onError(String errorMessage) {
+	}});
+```
+
 ### Delete trigger
+
+The following example deletes the *alarm* trigger for the *temperature* stream belonging to *myFeed*.
+
+```
+alarm.delete(this, null, myFeed.getId(), new Trigger.BasicListener() {
+	public void onSuccess() {
+	}
+			
+	public void onError(String errorMessage) {
+	}
+});
+```
 
 ## Request log
 ### Get request log entries
+
+The following code demonstrates how to obtain up to 100 http request log entries related to *myFeed*.
+
+```
+RequestLogEntry.getEntries(this, null, myFeed.getId(), new RequestLogEntry.Listener() {
+	public void onSuccess(ArrayList<RequestLogEntry> entries) {
+	}
+			
+	public void onError(String errorMessage) {
+	}
+});
+```
