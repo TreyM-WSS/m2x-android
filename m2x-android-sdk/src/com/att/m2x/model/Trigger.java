@@ -1,6 +1,7 @@
 package com.att.m2x.model;
 
 import java.util.Date;
+import java.util.Locale;
 
 public class Trigger {
 
@@ -102,6 +103,16 @@ public class Trigger {
 	
 	public void setUpdated(Date updated) {
 		this.updated = updated;
+	}
+
+	public String toString() {
+		return String.format(Locale.US, "M2X Trigger - %s %s (triggers when %s value is %s %f %s)", 
+				this.getId(), 
+				this.getName(), 
+				this.getStream(),
+				this.getCondition(), 
+				this.getValue(),
+				this.getUnit() ); 
 	}
 	
 }

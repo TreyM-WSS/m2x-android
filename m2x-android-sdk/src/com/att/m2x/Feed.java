@@ -83,7 +83,7 @@ public final class Feed extends com.att.m2x.model.Feed {
 
 		if (obj.has(TRIGGERS)) {
 			try {
-				JSONArray items = obj.getJSONArray(STREAMS);
+				JSONArray items = obj.getJSONArray(TRIGGERS);
 				ArrayList<Trigger> triggers = new ArrayList<Trigger>();
 				for (int i = 0; i < items.length(); i++) {
 					Trigger trigger = new Trigger(items.getJSONObject(i));

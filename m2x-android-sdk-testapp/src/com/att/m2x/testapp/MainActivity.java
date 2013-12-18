@@ -29,12 +29,13 @@ public class MainActivity extends Activity {
         M2X.getInstance().setMasterKey("8181c16a0097325041a0c5a55f4fee1d");
         
 //        this.loadFeeds();
-        this.loadFeed();
+//        this.loadFeed();
 //        this.loadLocation();
 //        this.updateLocation();
 //        this.loadStreams();
 //        this.createStream();
 //        this.loadStream();
+        this.loadTriggers();
         
     }
 
@@ -45,6 +46,29 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    private void loadTriggers() {
+    	
+    	Trigger.getTriggers(this, TEST_FEED_KEY, TEST_FEED_ID, new Trigger.TriggersListener() {
+
+			@Override
+			public void onSuccess(ArrayList<Trigger> triggers) {
+        		Log.d(LOG_TAG, String.format("Obtained %d triggers", triggers.size()));
+        		for (Trigger trigger : triggers) { 
+        			Log.d(LOG_TAG, trigger.toString());
+        		}    			
+				
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+
+        		Log.d(LOG_TAG, "Failed to obtain triggers: ".concat(errorMessage));				
+			}
+    		
+    	});
+    	
+    }
+    
     private void loadStreamValues(Stream stream) {
     	
     	stream.getValues(this, TEST_FEED_KEY, TEST_FEED_ID, null, new Stream.ValuesListener() {

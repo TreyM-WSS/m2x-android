@@ -1,9 +1,19 @@
 package com.att.m2x;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import android.content.Context;
 import com.att.m2x.helpers.JSONHelper;
 
 public final class Trigger extends com.att.m2x.model.Trigger {
+
+	public interface TriggersListener {
+		public void onSuccess(ArrayList<Trigger> triggers);
+		public void onError(String errorMessage);
+	}
 
 	private static final String ID = "id";
 	private static final String NAME = "name";
@@ -36,4 +46,37 @@ public final class Trigger extends com.att.m2x.model.Trigger {
 		this.setUpdated(JSONHelper.dateValue(obj, UPDATED, null));
 	}
 	
+	public static void getTriggers(Context context, String feedKey, String feedId, final TriggersListener callback) {
+
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/" + feedId + "/triggers";
+		
+		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+
+				ArrayList<Trigger> array = new ArrayList<Trigger>();
+				try {
+					JSONArray triggers = object.getJSONArray("triggers");
+					for (int i = 0; i < triggers.length(); i++) {
+						Trigger trigger = new Trigger(triggers.getJSONObject(i));
+						array.add(trigger);
+					}
+				} catch (JSONException e) {
+					Log.d("Failed to parse Trigger JSON objects");
+				}
+				callback.onSuccess(array);
+				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String body) {
+				callback.onError(body);
+			}
+			
+		});
+		
+	}
+
 }
