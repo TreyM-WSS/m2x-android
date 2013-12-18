@@ -172,6 +172,25 @@ public final class Trigger extends com.att.m2x.model.Trigger implements Serializ
 		});
 
 	}
+
+	public void delete(Context context, String feedKey, String feedId, final BasicListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/feeds/" + feedId + "/triggers/" + this.getId();
+		client.delete(context, feedKey, path, new M2XHttpClient.Handler() {
+			
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+			
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+		});
+		
+	}
 	
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();		

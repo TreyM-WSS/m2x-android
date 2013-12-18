@@ -20,7 +20,6 @@ public class MainActivity extends Activity {
 
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
 	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e";
-	private static String TEST_TRIGGER_ID = "34";
 	private static String TEST_STREAM_NAME = "temperature";
 
     @Override
@@ -37,9 +36,8 @@ public class MainActivity extends Activity {
 //        this.loadStreams();
 //        this.createStream();
 //        this.loadStream();
-        this.loadTrigger();
 //        this.loadTriggers();
-//        this.createTrigger();
+        this.createTrigger();
     }
 
     @Override
@@ -49,12 +47,28 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    private void deleteTrigger(final Trigger trigger) {
+    	trigger.delete(this, TEST_FEED_KEY, TEST_FEED_ID, new Trigger.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Successfully deleted trigger: ".concat(trigger.toString()));				
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to delete trigger: ".concat(trigger.toString()));				
+			}
+		});
+    }
+    
     private void testTrigger(final Trigger trigger) {
     	trigger.test(this, TEST_FEED_KEY, TEST_FEED_ID, new Trigger.BasicListener() {
 			
 			@Override
 			public void onSuccess() {
 				Log.d(LOG_TAG, "Successfully tested trigger: ".concat(trigger.toString()));
+				deleteTrigger(trigger);
 			}
 			
 			@Override
@@ -86,9 +100,9 @@ public class MainActivity extends Activity {
     	
     }
     
-    private void loadTrigger() {
+    private void loadTrigger(String triggerId) {
     	
-    	Trigger.getTrigger(this, TEST_FEED_KEY, TEST_FEED_ID, TEST_TRIGGER_ID, new Trigger.TriggerListener() {
+    	Trigger.getTrigger(this, TEST_FEED_KEY, TEST_FEED_ID, triggerId, new Trigger.TriggerListener() {
 			
 			@Override
 			public void onSuccess(Trigger trigger) {
@@ -120,7 +134,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onSuccess(Trigger trigger) {
 				Log.d(LOG_TAG, String.format(Locale.US, "Trigger created successfully with id %s", trigger.getId()));
-
+				loadTrigger(trigger.getId());
 			}
 
 			@Override
