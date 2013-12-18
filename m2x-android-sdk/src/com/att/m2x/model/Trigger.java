@@ -10,7 +10,6 @@ public class Trigger {
 	private String stream;
 	private String condition;
 	private double value;
-	private String unit;
 	private String callbackUrl;
 	private String url;
 	private String status;
@@ -57,14 +56,6 @@ public class Trigger {
 		this.value = value;
 	}
 	
-	public String getUnit() {
-		return unit;
-	}
-	
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-	
 	public String getCallbackUrl() {
 		return callbackUrl;
 	}
@@ -106,13 +97,12 @@ public class Trigger {
 	}
 
 	public String toString() {
-		return String.format(Locale.US, "M2X Trigger - %s %s (triggers when %s value is %s %f %s)", 
+		return String.format(Locale.US, "M2X Trigger - %s %s (triggers when %s value is %s %f)", 
 				this.getId(), 
 				this.getName(), 
 				this.getStream(),
 				this.getCondition(), 
-				this.getValue(),
-				this.getUnit() ); 
+				this.getValue() ); 
 	}
 	
 }

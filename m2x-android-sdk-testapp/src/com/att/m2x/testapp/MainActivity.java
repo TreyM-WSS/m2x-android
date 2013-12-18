@@ -49,19 +49,42 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    private void updateTrigger(final Trigger trigger) {
+    	
+    	Random randomGenerator = new Random(); 
+    	trigger.setValue(randomGenerator.nextDouble() * 100);
+    	
+    	trigger.update(this, TEST_FEED_KEY, TEST_FEED_ID, new Trigger.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Updated trigger successfully! ".concat(trigger.toString()));
+				
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to update trigger: ".concat(errorMessage));								
+			}
+		});
+    	
+    }
+    
     private void loadTrigger() {
     	
     	Trigger.getTrigger(this, TEST_FEED_KEY, TEST_FEED_ID, TEST_TRIGGER_ID, new Trigger.TriggerListener() {
 			
 			@Override
 			public void onSuccess(Trigger trigger) {
-				Log.d(LOG_TAG, "Found trigger: ".concat(trigger.toString()));				
+				Log.d(LOG_TAG, "Found trigger: ".concat(trigger.toString()));
+				updateTrigger(trigger);
 			}
 			
 			@Override
 			public void onError(String errorMessage) {
 				Log.d(LOG_TAG, "Failed to get trigger: ".concat(errorMessage));				
 			}
+			
 		});
     	
     }
