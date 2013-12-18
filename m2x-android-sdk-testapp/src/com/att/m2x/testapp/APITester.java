@@ -384,9 +384,32 @@ public class APITester {
 
     }
     
+    private void loadDatasources() {
+    	
+    	HashMap<String, String> params = new HashMap<String, String>();
+    	params.put("type", "blueprint");
+    	
+    	Feed.getFeeds(defaultContext,  params, new Feed.FeedsListener() { 
+
+    		public void onSuccess(ArrayList<Feed> feeds) {
+        		Log.d(LOG_TAG, String.format("Obtained %d feeds", feeds.size()));
+        		for (Feed feed : feeds) {
+        			Log.d(LOG_TAG, feed.toString());
+        		}    			
+    		}
+    		
+    		public void onError(String errorMessage) {
+        		Log.d(LOG_TAG, "Failed to obtain feeds: ".concat(errorMessage));
+        		
+    		}
+
+    	});
+    	
+    }
+
     private void loadFeeds() {
     	
-    	Feed.getFeeds(defaultContext, null, new Feed.FeedsListener() { 
+    	Feed.getFeeds(defaultContext,  null, new Feed.FeedsListener() { 
 
     		public void onSuccess(ArrayList<Feed> feeds) {
         		Log.d(LOG_TAG, String.format("Obtained %d feeds", feeds.size()));
