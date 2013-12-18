@@ -27,6 +27,15 @@ public class JSONHelper {
 		return value;
 	}
 
+	public static int intValue(JSONObject obj, String key, int defaultValue) {		
+		int value = defaultValue;
+		try {
+			value = obj.getInt(key);
+		} catch (JSONException e) {
+		}
+		return value;
+	}
+
 	public static Date dateValue(JSONObject obj, String key, Date defaultValue) {		
 		Date value = defaultValue;
 		try {

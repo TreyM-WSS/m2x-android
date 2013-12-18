@@ -37,7 +37,8 @@ public class MainActivity extends Activity {
 //        this.createStream();
 //        this.loadStream();
 //        this.loadTriggers();
-        this.createTrigger();
+//        this.createTrigger();
+        this.loadRequestLogEntries();
     }
 
     @Override
@@ -45,6 +46,25 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    private void loadRequestLogEntries() {
+    	
+    	RequestLogEntry.getEntries(this, TEST_FEED_KEY, TEST_FEED_ID, new RequestLogEntry.Listener() {
+			
+			@Override
+			public void onSuccess(ArrayList<RequestLogEntry> entries) {
+        		Log.d(LOG_TAG, String.format("Obtained %d request log entries", entries.size()));
+        		for (RequestLogEntry entry : entries) {
+        			Log.d(LOG_TAG, entry.toString());
+        		}    							
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to obtain request log entries: ".concat(errorMessage));
+			}
+		});
     }
     
     private void deleteTrigger(final Trigger trigger) {
