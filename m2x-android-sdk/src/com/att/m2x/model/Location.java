@@ -3,13 +3,30 @@ package com.att.m2x.model;
 import java.util.Date;
 import java.util.Locale;
 
-public class Location {
+import com.att.m2x.helpers.DateHelper;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Location implements Parcelable {
 	
 	private String name;
 	private double latitude;
 	private double longitude;
 	private double elevation;
 	private Date timestamp;	
+	
+	public Location() {
+		
+	}
+	
+	public Location(Parcel in) {
+		name = in.readString();
+		latitude = in.readDouble();
+		longitude = in.readDouble();
+		elevation = in.readDouble();
+		timestamp = DateHelper.stringToDate(in.readString());
+	}
 	
 	public String getName() {
 		return name;
@@ -58,4 +75,28 @@ public class Location {
 				this.getLongitude() ); 
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(name);
+		dest.writeDouble(latitude);
+		dest.writeDouble(longitude);
+		dest.writeDouble(elevation);
+		dest.writeString(DateHelper.dateToString(timestamp));
+	}
+
+	public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {
+	    public Location createFromParcel(Parcel in) {
+	     return new Location(in);
+	    }
+
+	    public Location[] newArray(int size) {
+	     return new Location[size];
+	    }
+	};
+	
 }

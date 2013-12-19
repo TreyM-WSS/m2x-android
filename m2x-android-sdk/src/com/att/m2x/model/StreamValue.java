@@ -2,12 +2,25 @@ package com.att.m2x.model;
 
 import java.util.Date;
 import java.util.Locale;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.att.m2x.helpers.DateHelper;
 
-public class StreamValue {
+public class StreamValue implements Parcelable {
 
 	private Date date;
 	private double value;
+	
+	public StreamValue() {
+		
+	}
+	
+	public StreamValue(Parcel in) {
+		date = DateHelper.stringToDate(in.readString());
+		value = in.readDouble();		
+	}
 	
 	public Date getDate() {
 		return date;
@@ -31,5 +44,26 @@ public class StreamValue {
 				this.getValue(), 
 				dateString ); 
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(DateHelper.dateToString(date));
+		dest.writeDouble(value);		
+	}
+	
+	public static final Parcelable.Creator<StreamValue> CREATOR = new Parcelable.Creator<StreamValue>() {
+	    public StreamValue createFromParcel(Parcel in) {
+	     return new StreamValue(in);
+	    }
+
+	    public StreamValue[] newArray(int size) {
+	     return new StreamValue[size];
+	    }
+	};
 	
 }

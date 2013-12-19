@@ -1,9 +1,11 @@
 package com.att.m2x;
 
 import org.json.JSONObject;
-import com.att.m2x.helpers.JSONHelper;
 
-public final class Unit extends com.att.m2x.model.Unit implements Serializable {
+import com.att.m2x.helpers.JSONHelper;
+import com.att.m2x.helpers.JSONSerializable;
+
+public final class Unit extends com.att.m2x.model.Unit implements JSONSerializable {
 
 	private static final String LABEL = "label";
 	private static final String SYMBOL = "symbol";
@@ -16,7 +18,7 @@ public final class Unit extends com.att.m2x.model.Unit implements Serializable {
 		this.setLabel(JSONHelper.stringValue(obj, LABEL, ""));
 		this.setSymbol(JSONHelper.stringValue(obj, SYMBOL, ""));		
 	}
-	
+		
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
 		JSONHelper.put(obj, LABEL, this.getLabel());

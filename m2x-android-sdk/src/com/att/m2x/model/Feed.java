@@ -3,7 +3,12 @@ package com.att.m2x.model;
 import java.util.Date;
 import java.util.Locale;
 
-public abstract class Feed {
+import com.att.m2x.helpers.DateHelper;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Feed implements Parcelable {
 
 	private String id;
 	private String name;
@@ -15,6 +20,23 @@ public abstract class Feed {
 	private String key;
 	private Date created;
 	private Date updated;
+	
+	public Feed() {
+		
+	}
+	
+	public Feed(Parcel in) {
+		id = in.readString();
+		name = in.readString();
+		description = in.readString();
+		visibility = in.readString();
+		status = in.readString();
+		type = in.readString();
+		url = in.readString();
+		key = in.readString();
+		created = DateHelper.stringToDate(in.readString());
+		updated = DateHelper.stringToDate(in.readString());
+	}
 	
 	public String getId() {
 		return id;
@@ -102,5 +124,34 @@ public abstract class Feed {
 				this.getName(), 
 				this.getType() ); 
 	}
-		
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeString(name);
+		dest.writeString(description);
+		dest.writeString(visibility);
+		dest.writeString(status);
+		dest.writeString(type);
+		dest.writeString(url);
+		dest.writeString(key);
+		dest.writeString(DateHelper.dateToString(created));
+		dest.writeString(DateHelper.dateToString(updated));
+	}
+
+	public static final Parcelable.Creator<Feed> CREATOR = new Parcelable.Creator<Feed>() {
+	    public Feed createFromParcel(Parcel in) {
+	     return new Feed(in);
+	    }
+
+	    public Feed[] newArray(int size) {
+	     return new Feed[size];
+	    }
+	};
+
 }

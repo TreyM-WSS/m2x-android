@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import com.att.m2x.helpers.*;
 
-public final class Location extends com.att.m2x.model.Location implements Serializable {
+public final class Location extends com.att.m2x.model.Location implements JSONSerializable {
 
 	public interface LocationListener {
 		public void onSuccess(Location location);

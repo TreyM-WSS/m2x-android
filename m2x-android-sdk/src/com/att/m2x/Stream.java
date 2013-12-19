@@ -8,8 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
 import com.att.m2x.helpers.JSONHelper;
+import com.att.m2x.helpers.JSONSerializable;
 
-public final class Stream extends com.att.m2x.model.Stream implements Serializable {
+public final class Stream extends com.att.m2x.model.Stream implements JSONSerializable {
 
 	public interface StreamsListener {
 		public void onSuccess(ArrayList<Stream> streams);

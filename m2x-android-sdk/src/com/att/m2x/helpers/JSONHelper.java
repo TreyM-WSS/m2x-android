@@ -5,7 +5,6 @@ import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.att.m2x.Serializable;
 
 public class JSONHelper {
 
@@ -73,11 +72,11 @@ public class JSONHelper {
 		}
 	}
 		
-	public static JSONArray putValues(JSONObject obj, String key, ArrayList<? extends Serializable> values) {
+	public static JSONArray putValues(JSONObject obj, String key, ArrayList<? extends JSONSerializable> values) {
 
 		JSONArray objects = new JSONArray();
 		if (values != null) {
-			for (Serializable value : values) {
+			for (JSONSerializable value : values) {
 				objects.put(value.toJSONObject());
 			}
 		}

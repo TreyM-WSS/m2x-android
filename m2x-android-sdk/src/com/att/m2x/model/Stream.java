@@ -3,7 +3,12 @@ package com.att.m2x.model;
 import java.util.Date;
 import java.util.Locale;
 
-public class Stream {
+import com.att.m2x.helpers.DateHelper;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Stream implements Parcelable {
 
 	private String id;
 	private String name;
@@ -14,8 +19,24 @@ public class Stream {
 	private Unit unit;
 	private String url;
 	private Date created;
-	private Date updated;
+	private Date updated;		
+	
+	public Stream() {
 		
+	}
+	
+	public Stream(Parcel in) {
+		id = in.readString();
+		name = in.readString();
+		value = in.readDouble();
+		latestValueAt = DateHelper.stringToDate(in.readString());
+		min = in.readDouble();
+		max = in.readDouble();
+		unit = in.readParcelable(Unit.class.getClassLoader());
+		url = in.readString();
+		created = DateHelper.stringToDate(in.readString());
+		updated = DateHelper.stringToDate(in.readString());
+	}
 	
 	public String getId() {
 		return id;
@@ -104,5 +125,34 @@ public class Stream {
 				this.getMax(),
 				this.getValue() ); 
 	}
-	
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeString(name);
+		dest.writeDouble(value);
+		dest.writeString(DateHelper.dateToString(latestValueAt));
+		dest.writeDouble(min);
+		dest.writeDouble(max);
+		dest.writeParcelable(unit, flags);
+		dest.writeString(url);
+		dest.writeString(DateHelper.dateToString(created));
+		dest.writeString(DateHelper.dateToString(updated));		
+	}
+
+	public static final Parcelable.Creator<Stream> CREATOR = new Parcelable.Creator<Stream>() {
+	    public Stream createFromParcel(Parcel in) {
+	     return new Stream(in);
+	    }
+
+	    public Stream[] newArray(int size) {
+	     return new Stream[size];
+	    }
+	};
+
 }

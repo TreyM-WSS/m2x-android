@@ -3,7 +3,12 @@ package com.att.m2x.model;
 import java.util.Date;
 import java.util.Locale;
 
-public class Trigger {
+import com.att.m2x.helpers.DateHelper;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Trigger implements Parcelable {
 
 	private String id;
 	private String name;
@@ -15,7 +20,24 @@ public class Trigger {
 	private String status;
 	private Date created;
 	private Date updated;
+	
+	public Trigger() {
 		
+	}
+	
+	public Trigger(Parcel in) {
+		id = in.readString();
+		name = in.readString();
+		stream = in.readString();
+		condition = in.readString();
+		value = in.readDouble();
+		callbackUrl = in.readString();
+		url = in.readString();
+		status = in.readString();
+		created = DateHelper.stringToDate(in.readString());
+		updated = DateHelper.stringToDate(in.readString());
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -104,5 +126,34 @@ public class Trigger {
 				this.getCondition(), 
 				this.getValue() ); 
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {		
+		dest.writeString(id);
+		dest.writeString(name);
+		dest.writeString(stream);
+		dest.writeString(condition);
+		dest.writeDouble(value);
+		dest.writeString(callbackUrl);
+		dest.writeString(url);
+		dest.writeString(status);
+		dest.writeString(DateHelper.dateToString(created));
+		dest.writeString(DateHelper.dateToString(updated));
+	}
 	
+	public static final Parcelable.Creator<Trigger> CREATOR = new Parcelable.Creator<Trigger>() {
+	    public Trigger createFromParcel(Parcel in) {
+	     return new Trigger(in);
+	    }
+
+	    public Trigger[] newArray(int size) {
+	     return new Trigger[size];
+	    }
+	};
+
 }

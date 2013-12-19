@@ -3,7 +3,7 @@ package com.att.m2x;
 import org.json.JSONObject;
 import com.att.m2x.helpers.*;
 
-public final class Waypoint extends com.att.m2x.model.Waypoint implements Serializable {
+public final class Waypoint extends com.att.m2x.model.Waypoint implements JSONSerializable {
 
 	private static final String TIMESTAMP = "timestamp";
 	private static final String LATITUDE = "latitude";

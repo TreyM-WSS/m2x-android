@@ -7,8 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
 import com.att.m2x.helpers.JSONHelper;
+import com.att.m2x.helpers.JSONSerializable;
 
-public final class Trigger extends com.att.m2x.model.Trigger implements Serializable {
+public final class Trigger extends com.att.m2x.model.Trigger implements JSONSerializable {
 
 	public interface TriggersListener {
 		public void onSuccess(ArrayList<Trigger> triggers);

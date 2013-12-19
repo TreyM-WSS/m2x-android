@@ -2,8 +2,9 @@ package com.att.m2x;
 
 import org.json.JSONObject;
 import com.att.m2x.helpers.JSONHelper;
+import com.att.m2x.helpers.JSONSerializable;
 
-public class StreamValue extends com.att.m2x.model.StreamValue implements Serializable {
+public class StreamValue extends com.att.m2x.model.StreamValue implements JSONSerializable {
 
 	private static final String DATE = "at";
 	private static final String VALUE = "value";

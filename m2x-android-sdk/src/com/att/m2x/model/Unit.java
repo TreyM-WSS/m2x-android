@@ -1,11 +1,21 @@
 package com.att.m2x.model;
 
 import java.util.Locale;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Unit {
+public class Unit implements Parcelable {
 
 	private String label;
 	private String symbol;
+	
+	public Unit() {
+	}
+
+	public Unit(Parcel in) {
+		label = in.readString();
+		symbol = in.readString();
+	}
 	
 	public String getLabel() {
 		return label;
@@ -29,4 +39,25 @@ public class Unit {
 				this.getSymbol() ); 
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(label);
+		dest.writeString(symbol);
+	}
+	
+	public static final Parcelable.Creator<Unit> CREATOR = new Parcelable.Creator<Unit>() {
+	    public Unit createFromParcel(Parcel in) {
+	     return new Unit(in);
+	    }
+
+	    public Unit[] newArray(int size) {
+	     return new Unit[size];
+	    }
+	};
+	
 }

@@ -6,20 +6,33 @@ import java.util.List;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.*;
 import android.widget.*;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.att.m2x.*;
 
-public class MainActivity extends Activity {
+public class FeedsActivity extends Activity {
 
-	private static String TEST_MASTER_KEY = "8181c16a0097325041a0c5a55f4fee1d";
+	private ListView feedList;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);         
-        M2X.getInstance().setMasterKey(TEST_MASTER_KEY);
+
+        feedList = (ListView) findViewById(R.id.feedView);
+    	feedList.setOnItemClickListener(new OnItemClickListener() {	
+		  @Override
+		  public void onItemClick(AdapterView<?> parent, View view,
+		    int position, long id) {
+			  Intent feedDetail = new Intent(FeedsActivity.this, FeedDetailActivity.class);
+			  FeedsActivity.this.startActivity(feedDetail);     		    
+		  }
+    	}); 
+
+        M2X.getInstance().setMasterKey(getString(R.string.m2x_master_key));
         this.loadFeeds();
     }
 
@@ -36,7 +49,8 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onSuccess(ArrayList<Feed> feeds) {
-				displayFeeds(feeds);
+		    	FeedArrayAdapter adapter = new FeedArrayAdapter(FeedsActivity.this, feeds);
+		    	feedList.setAdapter(adapter);    	
 			}
 			
 			@Override
@@ -45,13 +59,6 @@ public class MainActivity extends Activity {
 			}
 		});
     	
-    }
-
-    private void displayFeeds(ArrayList<Feed> feeds) {
-    	
-    	FeedArrayAdapter adapter = new FeedArrayAdapter(this, feeds);
-    	ListView feedList = (ListView) findViewById(R.id.feedView);
-    	feedList.setAdapter(adapter);
     }
     
     private class FeedArrayAdapter extends ArrayAdapter<Feed> {
@@ -85,9 +92,11 @@ public class MainActivity extends Activity {
                 if (type.equals("datasource")) {
                 	symbol.setText(R.string.datasource_symbol);
                 	symbol.setBackgroundResource(R.color.datasource_symbol_background);
+                	
                 } else if (type.equals("batch")) {
                 	symbol.setText(R.string.batch_symbol);
                 	symbol.setBackgroundResource(R.color.batch_symbol_background);
+                	
                 } else if (type.equals("blueprint")) {
                 	symbol.setText(R.string.blueprint_symbol);
                 	symbol.setBackgroundResource(R.color.blueprint_symbol_background);
