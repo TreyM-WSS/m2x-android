@@ -23,10 +23,10 @@ Using the Android SDK
 
 To start using this SDK you will probably need to set up your Master Key. The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. Some other features, however, can be accessed by using a Feed Key. Feed Keys allow you to access specific feeds and control access permissions (some Feed keys could grant full access to a feed, while other could be restricted to GET operations only).
 
-```
-	import com.att.m2x.*;
+```Java
+import com.att.m2x.*;
 	
-	M2X.getInstance().setMasterKey("Master Key goes here");
+M2X.getInstance().setMasterKey("Master Key goes here");
 ```
 
 API Client Examples
@@ -44,7 +44,7 @@ The following code obtains all the feeds available including blueprints, batches
 
 Note: this feature requires the Master Key
 
-```
+```Java
 Feed.getFeeds(this, null, new Feed.FeedsListener() { 
 	public void onSuccess(ArrayList<Feed> feeds) {
    }
@@ -62,7 +62,7 @@ For example, we can search for all blueprints (ignoring batches and datasources)
 
 Note: this feature requires the Master Key
 
-```
+```Java
 HashMap<String, String> params = new HashMap<String, String>();
 params.put("type", "blueprint");
 
@@ -79,7 +79,7 @@ Feed.getFeeds(this, params, new Feed.FeedsListener() {
 
 The following code gets any feed that matches the provided ID.
 
-```
+```Java
 Feed.getFeed(this, null, "Feed ID goes here", new Feed.FeedListener()  {
 	public void onSuccess(Feed feed) {
    }
@@ -93,9 +93,9 @@ Feed.getFeed(this, null, "Feed ID goes here", new Feed.FeedListener()  {
 
 ### Get feed location
 
-The following code gets the current location of *myFeed*.
+This code gets the current location of *myFeed*.
 
-```
+```Java
 Location.getLocation(this, null, myFeed.getId(), new Location.LocationListener()  {
 	public void onSuccess(Location location)  {
 	}		
@@ -109,7 +109,7 @@ Location.getLocation(this, null, myFeed.getId(), new Location.LocationListener()
 
 The following code sets the location of *myFeed* to AT&T's corporate headquarters at Dallas.
 
-```
+```Java
 Location place = new Location();
 place.setName("AT&T Corporate HQ");
 place.setLatitude(32.779846);
@@ -128,9 +128,9 @@ place.update(this, null, myFeed.getId(), new Location.UpdateListener() {
 ## Data streams
 ### List data streams in a feed
 
-The following code obtains all the data streams belonging to *myFeed*
+This is how you can obtain all the data streams belonging to *myFeed*
 
-```
+```Java
 Stream.getStreams(this, null, myFeed.getId(), new Stream.StreamsListener() {
 	public void onSuccess(ArrayList<Stream> streams) {
 	}
@@ -144,7 +144,7 @@ Stream.getStreams(this, null, myFeed.getId(), new Stream.StreamsListener() {
 
 The following code obtains the *temperature* data stream belonging to *myFeed*
 
-```
+```Java
 Stream.getStream(this, null, myFeed.getId(), "temperature", new Stream.StreamListener() {
 	public void onSuccess(Stream stream) {
 	}
@@ -158,7 +158,7 @@ Stream.getStream(this, null, myFeed.getId(), "temperature", new Stream.StreamLis
 
 The same method is used for both creating and updating a stream. If the provided stream name does not exist, a new data stream is created.
 
-```
+```Java
 Unit unit = new Unit();
 unit.setLabel("Kelvin");
 unit.setSymbol("K"); 
@@ -180,7 +180,7 @@ In this case, if the *temperature* stream does not exist, a new one is created a
 
 ### Get data stream values
 
-```
+```Java
 stream.getValues(this, null, "Feed ID goes here", null, new Stream.ValuesListener() {
 	public void onSuccess(ArrayList<StreamValue> values) {
 	}
@@ -194,7 +194,7 @@ Since a data stream can contain thousands or even more values, you can refine yo
 
 For instance, you can obtain up to 1000 temperature values with the following code:
 
-```
+```Java
 HashMap<String, String> params = new HashMap<String, String>();
 params.put("limit", "1000");
 
@@ -213,7 +213,7 @@ You can post one or more values to a stream using a single request.
 
 Let's assume you have an array of 5 random values (representing readings from a sensor)
 
-```
+```Java
 Random randomGenerator = new Random(); 
 ArrayList<StreamValue> readings = new ArrayList<StreamValue>();
 for (int i = 0 ; i < 5 ; i++) {
@@ -226,7 +226,7 @@ for (int i = 0 ; i < 5 ; i++) {
 
 Now we are going to post these values to the *temperature* data stream:
 
-```
+```Java
 temperature.setValues(this, null, myFeed.getId(), readings, new Stream.BasicListener() {
 	public void onSuccess() {
 	}
@@ -239,13 +239,12 @@ temperature.setValues(this, null, myFeed.getId(), readings, new Stream.BasicList
 
 ### Add values to multiple data streams
 
-In some occassions a sensor may provide several data values simultaneosly (such as ambient pressure, temperature and wind speed). To improve performance it is possible to post multiple values to different data streams.
+In some occasions a sensor may provide several data values simultaneosly (such as ambient pressure, temperature and wind speed). To improve performance it is possible to post multiple values to different data streams using a single HTTP request.
 
-```
-
+```Java
 HashMap<Stream, ArrayList<StreamValue>> data = new HashMap<Stream, ArrayList<StreamValue>>();
 
-// temperature, pressure and windspeed are streams belonging to myFeed
+// temperature, pressure and windspeed are streams that belong to myFeed
 
 // temperatureValues, pressureValues and windSpeedValues are new values
 // that we are adding simultaneously, each in the corresponding stream.
@@ -261,14 +260,13 @@ myFeed.setValuesForMultipleStreams(this, null, data,  new Feed.BasicListener() {
 	public void onError(String errorMessage) {
 	}			
 });
-
 ```
 
 ### Delete stream
 
 The following code deletes the *temperature* data stream belonging to myFeed.
 
-```
+```Java
 temperature.delete(this, null, myFeed.getId(), new Stream.BasicListener(){
 	public void onSuccess() {
 	}
@@ -284,7 +282,7 @@ temperature.delete(this, null, myFeed.getId(), new Stream.BasicListener(){
 
 The following code obtains all the triggers of myFeed.
 
-```
+```Java
 Trigger.getTriggers(this, null, myFeed.getId(), new Trigger.TriggersListener() {
 	public void onSuccess(ArrayList<Trigger> triggers) {
 	}
@@ -298,7 +296,7 @@ Trigger.getTriggers(this, null, myFeed.getId(), new Trigger.TriggersListener() {
 
 The following code demonstrates how to obtain an individual trigger from its ID.
 
-```
+```Java
 Trigger.getTrigger(this, null, myFeed.getId(), "Trigger ID goes here", new Trigger.TriggerListener() {
 	public void onSuccess(Trigger trigger) {
 	}
@@ -312,7 +310,7 @@ Trigger.getTrigger(this, null, myFeed.getId(), "Trigger ID goes here", new Trigg
 
 The following code creates a new alarm for the *temperature* stream belonging to *myFeed*. If temperature rises above 100 degrees, a request will be made to the provided callback URL.
 
-```
+```Java
 Trigger alarm = new Trigger();
 alarm.setStream(temperature.getName());
 alarm.setCondition(">");
@@ -334,7 +332,7 @@ alarm.create(this, null, myFeed.getId(), new Trigger.TriggerListener() {
 
 This example updates the temperature alarm from the previous example, lowering the temperature to 80 degrees
 
-```
+```Java
 alarm.setValue(80);
 alarm.update(this, null, myFeed.getId(), new Trigger.BasicListener() 
 {
@@ -349,7 +347,7 @@ alarm.update(this, null, myFeed.getId(), new Trigger.BasicListener()
 
 The following code shows how to test the *alarm* trigger, causing M2X to make a post to the provided callback URL.
 
-```
+```Java
 alarm.test(this, null, myFeed.getId(), new Trigger.BasicListener() 
 {
 	public void onSuccess() {
@@ -363,7 +361,7 @@ alarm.test(this, null, myFeed.getId(), new Trigger.BasicListener()
 
 The following example deletes the *alarm* trigger for the *temperature* stream belonging to *myFeed*.
 
-```
+```Java
 alarm.delete(this, null, myFeed.getId(), new Trigger.BasicListener() {
 	public void onSuccess() {
 	}
@@ -378,7 +376,7 @@ alarm.delete(this, null, myFeed.getId(), new Trigger.BasicListener() {
 
 The following code demonstrates how to obtain up to 100 http request log entries related to *myFeed*.
 
-```
+```Java
 RequestLogEntry.getEntries(this, null, myFeed.getId(), new RequestLogEntry.Listener() {
 	public void onSuccess(ArrayList<RequestLogEntry> entries) {
 	}
