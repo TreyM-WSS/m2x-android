@@ -82,6 +82,29 @@ public final class Blueprint extends com.att.m2x.Feed {
 		
 	}
 	
+	public static void getBlueprint(Context context, String feedKey, String blueprintId, final BlueprintListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/blueprints/" + blueprintId;
+		
+		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				Blueprint blueprint = new Blueprint(object);
+				callback.onSuccess(blueprint);
+				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String body) {
+				callback.onError(body);
+			}
+			
+		});
+		
+	}
+	
 	public void create(Context context, String feedKey, final BlueprintListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();

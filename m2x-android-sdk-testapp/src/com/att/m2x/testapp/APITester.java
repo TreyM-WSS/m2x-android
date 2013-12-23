@@ -17,8 +17,9 @@ public class APITester {
 	private static String LOG_TAG = "M2X-TestApp"; 
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
 	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e";
+	private static String TEST_BLUEPRINT_ID = "46981325f4b1e3f9569070f235631a9b";
 	private static String TEST_STREAM_NAME = "temperature";
-	
+		
 	private Context defaultContext;
 	
 	public APITester(Context context) {
@@ -36,8 +37,25 @@ public class APITester {
 //      this.loadTriggers();
 //      this.createTrigger();
 //      this.loadRequestLogEntries();
-		this.loadBlueprints();
+		
+		this.loadBlueprint();
+//		this.loadBlueprints();
 //		this.createBlueprint();
+	}
+	
+	private void loadBlueprint() {
+		Blueprint.getBlueprint(defaultContext, TEST_FEED_KEY, TEST_BLUEPRINT_ID, new Blueprint.BlueprintListener() {
+			
+			@Override
+			public void onSuccess(Blueprint blueprint) {
+				Log.d(LOG_TAG, String.format("Found blueprint %s", blueprint.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to find blueprint: ".concat(errorMessage));
+			}
+		});
 	}
 	
 	private void createBlueprint() {
