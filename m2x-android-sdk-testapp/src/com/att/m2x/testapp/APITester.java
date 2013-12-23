@@ -43,12 +43,29 @@ public class APITester {
 //		this.createBlueprint();
 	}
 	
+	private void updateBlueprint(final Blueprint blueprint) {
+		blueprint.setTags(new ArrayList<String>(Arrays.asList("updated tag1", "updated tag2")));
+		blueprint.update(defaultContext, TEST_FEED_KEY, new Blueprint.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, String.format("Updated blueprint %s successfully", blueprint.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to updated blueprint: ".concat(errorMessage));
+			}
+		});
+	}
+	
 	private void loadBlueprint() {
 		Blueprint.getBlueprint(defaultContext, TEST_FEED_KEY, TEST_BLUEPRINT_ID, new Blueprint.BlueprintListener() {
 			
 			@Override
 			public void onSuccess(Blueprint blueprint) {
 				Log.d(LOG_TAG, String.format("Found blueprint %s", blueprint.toString()));
+				updateBlueprint(blueprint);
 			}
 			
 			@Override

@@ -24,6 +24,11 @@ public final class Blueprint extends com.att.m2x.Feed {
 		public void onError(String errorMessage);		
 	}
 
+	public interface BasicListener {
+		public void onSuccess();
+		public void onError(String errorMessage);				
+	}
+	
 	protected static final String SERIAL = "serial";
 	protected static final String PAGE_KEY = "blueprints";
 	
@@ -125,6 +130,27 @@ public final class Blueprint extends com.att.m2x.Feed {
 			
 		});
 		
+	}
+	
+	public void update(Context context, String feedKey, final BasicListener callback) {
+
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/blueprints/" + this.getId();
+		JSONObject content = this.toJSONObject();
+		client.put(context, feedKey, path, content, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
 	}
 	
 	public String getSerial() {
