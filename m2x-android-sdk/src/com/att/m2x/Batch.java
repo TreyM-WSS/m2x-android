@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.att.m2x.Blueprint.BasicListener;
 import com.att.m2x.helpers.JSONHelper;
 
 import android.content.Context;
@@ -209,13 +210,25 @@ public class Batch extends com.att.m2x.Feed {
 		});
 
 	}
+	
+	public void delete(Context context, String feedKey, final BasicListener callback) {
 		
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		super.writeToParcel(dest, flags);
-		dest.writeInt(totalDatasources);
-		dest.writeInt(registeredDatasources);
-		dest.writeInt(unregisteredDatasources);
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/batches/" + this.getId();
+		client.delete(context, feedKey, path, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
 	}
 	
 	public void addDatasource(Context context, String feedKey, String serial, final DatasourceListener callback) {
@@ -273,6 +286,14 @@ public class Batch extends com.att.m2x.Feed {
 	
 	public void setUnregisteredDatasources(int unregisteredDatasources) {
 		this.unregisteredDatasources = unregisteredDatasources;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeInt(totalDatasources);
+		dest.writeInt(registeredDatasources);
+		dest.writeInt(unregisteredDatasources);
 	}
 
 	public String toString() {
