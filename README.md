@@ -1,7 +1,7 @@
 Android M2X API Client
 =====================
 
-The AT&T M2X API provides all the needed operations and methods to connect your devices to AT&T's M2X service. This client provides an easy to use interface for your favorite mobile platform, Android.
+The AT&T [M2X API](https://m2x.att.com/developer/documentation/overview) provides all the needed operations and methods to connect your devices to AT&T's M2X service. This client provides an easy to use interface for your favorite mobile platform, [Android](http://developer.android.com/index.html).
 
 
 Getting Started
@@ -16,12 +16,12 @@ If you have questions about any M2X specific terms, please consult the M2X gloss
 Before using this SDK
 ------
 
-Please have in mind that the Android M2X API Client is currently in **alpha state**. Its usage in a production environment is highly discouraged. Classes and method signatures are all subject to change.
+Please keep in mind that the Android M2X API Client is currently in **Alpha**. Using it in a production environment is highly discouraged. Classes and method signatures are all subject to change.
 
 Using the Android SDK
 ------------
 
-To start using this SDK you will probably need to set up your Master Key. The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. Some other features, however, can be accessed by using a Feed Key. Feed Keys allow you to access specific feeds and control access permissions (some Feed keys could grant full access to a feed, while other could be restricted to GET operations only).
+To start using this SDK you will need to set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. Some other features, however, can be accessed by using a Feed Key. Feed Keys allow you to access specific feeds and control access permissions (some Feed keys could grant full access to a feed, while others could be restricted to GET operations only).
 
 ```Java
 import com.att.m2x.*;
@@ -33,7 +33,7 @@ API Client Examples
 -----
 
 ### Notes
-1. All these examples use the Master Key, so make sure that you have set it.
+1. All of these examples use the Master Key, so make sure that you have set it.
 2. All examples assume that you are performing API calls directly from an activity.
 3. Many API calls include an optional feedKey argument. If this value is null the API client will perform the request using the Master Key. If the value is not null, then it will be used instead of the Master Key.
 
@@ -190,7 +190,7 @@ stream.getValues(this, null, "Feed ID goes here", null, new Stream.ValuesListene
 });
 ```
 
-Since a data stream can contain thousands or even more values, you can refine your request by adding an optional *params* argument. Valid parameters are specified in the [AT&T M2X API Documentation](https://m2x.att.com/developer/documentation/feed#List-Data-Stream-Values)
+Since a data stream can contain thousands of values (or even millions), you can refine your request by adding an optional *params* argument. Valid parameters are specified in the [AT&T M2X API Documentation](https://m2x.att.com/developer/documentation/feed#List-Data-Stream-Values)
 
 For instance, you can obtain up to 1000 temperature values with the following code:
 
@@ -239,7 +239,7 @@ temperature.setValues(this, null, myFeed.getId(), readings, new Stream.BasicList
 
 ### Add values to multiple data streams
 
-In some occasions a sensor may provide several data values simultaneosly (such as ambient pressure, temperature and wind speed). To improve performance it is possible to post multiple values to different data streams using a single HTTP request.
+In some occasions a sensor may provide several data values simultaneosly (such as ambient pressure, temperature and wind speed). To improve performance, it is possible to post multiple values to different data streams using a single HTTP request.
 
 ```Java
 HashMap<Stream, ArrayList<StreamValue>> data = new HashMap<Stream, ArrayList<StreamValue>>();
@@ -340,7 +340,8 @@ alarm.update(this, null, myFeed.getId(), new Trigger.BasicListener()
 	}
 	
 	public void onError(String errorMessage) {
-	}});
+	}
+});
 ```
 
 ### Test trigger
@@ -354,7 +355,8 @@ alarm.test(this, null, myFeed.getId(), new Trigger.BasicListener()
 	}
 	
 	public void onError(String errorMessage) {
-	}});
+	}
+});
 ```
 
 ### Delete trigger
