@@ -29,21 +29,21 @@ public class Feed extends com.att.m2x.model.Feed {
 		public void onError(String errorMessage);		
 	}
 	
-	private static final String ID = "id";
-	private static final String NAME = "name";
-	private static final String DESCRIPTION = "description";
-	private static final String VISIBILITY = "visibility";
-	private static final String STATUS = "status";
-	private static final String TYPE = "type";
-	private static final String URL = "url";
-	private static final String KEY = "key";
-	private static final String LOCATION = "location";
-	private static final String STREAMS = "streams";
-	private static final String TRIGGERS = "triggers";
-	private static final String TAGS = "tags";
-	private static final String CREATED = "created";
-	private static final String UPDATED = "updated";
-	private static final String PAGE_KEY = "feeds";
+	protected static final String ID = "id";
+	protected static final String NAME = "name";
+	protected static final String DESCRIPTION = "description";
+	protected static final String VISIBILITY = "visibility";
+	protected static final String STATUS = "status";
+	protected static final String TYPE = "type";
+	protected static final String URL = "url";
+	protected static final String KEY = "key";
+	protected static final String LOCATION = "location";
+	protected static final String STREAMS = "streams";
+	protected static final String TRIGGERS = "triggers";
+	protected static final String TAGS = "tags";
+	protected static final String CREATED = "created";
+	protected static final String UPDATED = "updated";
+	protected static final String PAGE_KEY = "feeds";
 
 	private Location location;
 	private ArrayList<Stream> streams;

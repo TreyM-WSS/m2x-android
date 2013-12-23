@@ -18,12 +18,21 @@ public final class Blueprint extends com.att.m2x.Feed {
 		public void onSuccess(ArrayList<Blueprint> blueprints);
 		public void onError(String errorMessage);		
 	}
-		
-	private static final String SERIAL = "serial";
-	private static final String PAGE_KEY = "blueprints";
+
+	public interface BlueprintListener {
+		public void onSuccess(Blueprint blueprint);
+		public void onError(String errorMessage);		
+	}
+
+	protected static final String SERIAL = "serial";
+	protected static final String PAGE_KEY = "blueprints";
 	
 	private String serial;
 
+	public Blueprint() {
+		
+	}
+	
 	public Blueprint(Parcel in) {
 		super(in);
 		serial = in.readString();
@@ -73,6 +82,28 @@ public final class Blueprint extends com.att.m2x.Feed {
 		
 	}
 	
+	public void create(Context context, String feedKey, final BlueprintListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/blueprints";
+		JSONObject content = this.toJSONObject();
+		client.post(context, feedKey, path, content, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				Blueprint blueprint = new Blueprint(object);
+				callback.onSuccess(blueprint);				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+		
+	}
+	
 	public String getSerial() {
 		return serial;
 	}
@@ -81,6 +112,24 @@ public final class Blueprint extends com.att.m2x.Feed {
 		this.serial = serial;
 	}
 	
+	public JSONObject toJSONObject() {
+		JSONObject obj = new JSONObject();		
+		JSONHelper.put(obj, NAME, this.getName());
+		JSONHelper.put(obj, DESCRIPTION, this.getDescription());
+		JSONHelper.put(obj, VISIBILITY, this.getVisibility());
+		
+		StringBuilder sb = new StringBuilder();
+		for (String tag : this.getTags())
+		{
+		    sb.append(tag);
+		    sb.append(",");
+		}
+		sb.replace(sb.length(), sb.length(), "");
+		JSONHelper.put(obj, TAGS, sb.toString());
+		
+		return obj;
+	}
+
 	public String toString() {
 		return String.format(Locale.US, "M2X Blueprint - %s %s (serial: %s)", 
 				this.getId(), 

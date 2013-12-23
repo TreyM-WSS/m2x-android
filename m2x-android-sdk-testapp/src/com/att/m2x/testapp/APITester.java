@@ -1,6 +1,7 @@
 package com.att.m2x.testapp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -36,6 +37,29 @@ public class APITester {
 //      this.createTrigger();
 //      this.loadRequestLogEntries();
 		this.loadBlueprints();
+//		this.createBlueprint();
+	}
+	
+	private void createBlueprint() {
+		Blueprint b = new Blueprint();
+		b.setName("Test Blueprint");
+		b.setDescription("This is just a test");
+		b.setVisibility("public");
+		b.setTags(new ArrayList<String>(Arrays.asList("tag1", "another tag", "yet another tag")));
+		
+		b.create(defaultContext, TEST_FEED_KEY, new Blueprint.BlueprintListener() {
+			
+			@Override
+			public void onSuccess(Blueprint blueprint) {
+				Log.d(LOG_TAG, String.format("Successfully created blueprint %s", blueprint.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+        		Log.d(LOG_TAG, "Failed to create blueprint: ".concat(errorMessage));
+			}
+		});
+		
 	}
 	
 	private void loadBlueprints() {
@@ -50,8 +74,7 @@ public class APITester {
     		}
     		
     		public void onError(String errorMessage) {
-        		Log.d(LOG_TAG, "Failed to obtain blueprints: ".concat(errorMessage));
-        		
+        		Log.d(LOG_TAG, "Failed to obtain blueprints: ".concat(errorMessage));        		
     		}
 
     	});
