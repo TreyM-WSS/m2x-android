@@ -3,8 +3,6 @@ package com.att.m2x.model;
 import java.util.Date;
 import java.util.Locale;
 
-import com.att.m2x.helpers.DateHelper;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 

@@ -11,6 +11,15 @@
     <string name="batch_symbol">B</string>
     <string name="blueprint_symbol">BP</string>
     
-    <string name="title_activity_feed_detail">FeedDetailActivity</string>
-
+    <string name="title_activity_feed_detail">Feed Detail</string>
+    
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="visibility">Visibility</string>
+    <string name="status">Status</string>
+    <string name="type">Type</string>
+    <string name="tags">Tags</string>
+    <string name="created">Created</string>
+    <string name="updated">Updated</string>
+    
 </resources>

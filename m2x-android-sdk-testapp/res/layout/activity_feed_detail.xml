@@ -1,5 +1,4 @@
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,48 +7,147 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".FeedDetailActivity">
-
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:background="#FF0000"
-         >
+    
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+        >
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Feed"
-            android:background="#0000FF"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/name"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
 
+		<TextView
+		    android:id="@+id/name"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/none"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+		<View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_marginTop="5sp"
+		    android:layout_marginBottom="5sp"
+		    android:background="@android:color/darker_gray"/>
+		
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="My Feed Name"
-            android:background="#00FF00"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/description"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    </TableRow>
+		<TextView
+		    android:id="@+id/description"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/none"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </TableRow>
+		<View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_marginTop="5sp"
+		    android:layout_marginBottom="5sp"		    
+		    android:background="@android:color/darker_gray"/>
+		
+        <TextView
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/visibility"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TableRow
-        android:id="@+id/tableRow3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </TableRow>
+		<TextView
+		    android:id="@+id/visibility"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/none"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TableRow
-        android:id="@+id/tableRow4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </TableRow>
-</TableLayout>
+		<View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_marginTop="5sp"
+		    android:layout_marginBottom="5sp"
+		    android:background="@android:color/darker_gray"/>
+		
+        <TextView
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/status"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<TextView
+		    android:id="@+id/status"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/none"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_marginTop="5sp"
+		    android:layout_marginBottom="5sp"
+		    android:background="@android:color/darker_gray"/>
+		
+        <TextView
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/type"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<TextView
+		    android:id="@+id/type"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/none"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_marginTop="5sp"
+		    android:layout_marginBottom="5sp"
+		    android:background="@android:color/darker_gray"/>
+		
+        <TextView
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/created"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<TextView
+		    android:id="@+id/created"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/none"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_marginTop="5sp"
+		    android:layout_marginBottom="5sp"
+		    android:background="@android:color/darker_gray"/>
+		
+        <TextView
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/updated"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<TextView
+		    android:id="@+id/updated"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/none"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+    </LinearLayout>
+    
+    
+</ScrollView>

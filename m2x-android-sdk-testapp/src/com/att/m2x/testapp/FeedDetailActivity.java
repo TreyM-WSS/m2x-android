@@ -3,27 +3,55 @@ package com.att.m2x.testapp;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.TextView;
 
-import com.att.m2x.Log;
+import com.att.m2x.helpers.DateHelper;
 import com.att.m2x.model.*;
 
 public class FeedDetailActivity extends Activity {
 
 	public static final String INPUT_SELECTED_FEED = "com.att.m2x.Feed.SelectedFeed";
 	
+	private Feed feed;
+	private TextView name;
+	private TextView description;
+	private TextView visibility;
+	private TextView status;
+	private TextView type;
+	private TextView created;
+	private TextView updated;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		setContentView(R.layout.activity_feed_detail);
+
 		Bundle bundle = this.getIntent().getExtras();
 		if(bundle != null){
-			Feed feed = bundle.getParcelable(INPUT_SELECTED_FEED);
-			Log.d("Got feed: " + feed.toString() );
+			feed = bundle.getParcelable(INPUT_SELECTED_FEED);
+			
+			name = (TextView) findViewById(R.id.name);
+			description = (TextView) findViewById(R.id.description);
+			visibility = (TextView) findViewById(R.id.visibility);
+			status = (TextView) findViewById(R.id.status);
+			type = (TextView) findViewById(R.id.type);
+			created = (TextView) findViewById(R.id.created);
+			updated = (TextView) findViewById(R.id.updated);
+			
+			name.setText(feed.getName());
+			description.setText(feed.getDescription());
+			visibility.setText(feed.getVisibility());
+			status.setText(feed.getStatus());
+			type.setText(feed.getType());
+			created.setText(DateHelper.dateToString(feed.getCreated()));
+			updated.setText(DateHelper.dateToString(feed.getUpdated()));
+
 		} else {
 			finish();			
 		}
 		
-		setContentView(R.layout.activity_feed_detail);
 	}
 
 	@Override
@@ -32,5 +60,5 @@ public class FeedDetailActivity extends Activity {
 		getMenuInflater().inflate(R.menu.feed_detail, menu);
 		return true;
 	}
-
+	
 }
