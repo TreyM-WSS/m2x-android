@@ -18,6 +18,7 @@ public class APITester {
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
 	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e";
 	private static String TEST_BLUEPRINT_ID = "46981325f4b1e3f9569070f235631a9b";
+	private static String TEST_BATCH_ID = "";
 	private static String TEST_STREAM_NAME = "temperature";
 		
 	private Context defaultContext;
