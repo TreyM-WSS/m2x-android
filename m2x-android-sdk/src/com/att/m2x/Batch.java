@@ -14,6 +14,11 @@ import android.os.Parcel;
 
 public class Batch extends com.att.m2x.Feed {
 
+	public interface DatasourcesListener {
+		public void onSuccess(ArrayList<Feed> datasources);
+		public void onError(String errorMessage);		
+	}
+
 	public interface BatchesListener {
 		public void onSuccess(ArrayList<Batch> batches);
 		public void onError(String errorMessage);		
@@ -30,7 +35,8 @@ public class Batch extends com.att.m2x.Feed {
 	}
 
 	protected static final String SERIAL = "serial";
-	protected static final String PAGE_KEY = "batches";
+	protected static final String BATCHES_PAGE_KEY = "batches";
+	protected static final String DATASOURCES_PAGE_KEY = "datasources";
 	protected static final String DATASOURCES = "datasources";
 	protected static final String TOTAL = "total";
 	protected static final String REGISTERED = "registered";
@@ -79,7 +85,7 @@ public class Batch extends com.att.m2x.Feed {
 
 				ArrayList<Batch> array = new ArrayList<Batch>();
 				try {
-					JSONArray batches = object.getJSONArray(PAGE_KEY);
+					JSONArray batches = object.getJSONArray(BATCHES_PAGE_KEY);
 					for (int i = 0; i < batches.length(); i++) {
 						Batch batch = new Batch(batches.getJSONObject(i));
 						array.add(batch);
@@ -111,6 +117,39 @@ public class Batch extends com.att.m2x.Feed {
 			public void onSuccess(int statusCode, JSONObject object) {
 				Batch batch = new Batch(object);
 				callback.onSuccess(batch);
+				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String body) {
+				callback.onError(body);
+			}
+			
+		});
+		
+	}
+
+	public void getDatasources(Context context, String feedKey, final DatasourcesListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/batches/" + this.getId() + "/datasources";
+		
+		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+
+				ArrayList<Feed> array = new ArrayList<Feed>();
+				try {
+					JSONArray datasources = object.getJSONArray(DATASOURCES_PAGE_KEY);
+					for (int i = 0; i < datasources.length(); i++) {
+						Feed datasource = new Feed(datasources.getJSONObject(i));
+						array.add(datasource);
+					}
+				} catch (JSONException e) {
+					Log.d("Failed to parse Datasource JSON objects");
+				}
+				callback.onSuccess(array);
 				
 			}
 
