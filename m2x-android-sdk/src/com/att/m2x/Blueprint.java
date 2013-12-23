@@ -153,6 +153,26 @@ public final class Blueprint extends com.att.m2x.Feed {
 
 	}
 	
+	public void delete(Context context, String feedKey, final BasicListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/blueprints/" + this.getId();
+		client.delete(context, feedKey, path, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
+	}
+	
 	public String getSerial() {
 		return serial;
 	}

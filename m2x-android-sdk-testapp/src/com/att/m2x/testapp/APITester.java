@@ -37,10 +37,25 @@ public class APITester {
 //      this.loadTriggers();
 //      this.createTrigger();
 //      this.loadRequestLogEntries();
-		
-		this.loadBlueprint();
+	
+//		this.loadBlueprint();
 //		this.loadBlueprints();
-//		this.createBlueprint();
+		this.createBlueprint();
+	}
+	
+	private void deleteBlueprint(final Blueprint blueprint) {
+		blueprint.delete(defaultContext, TEST_FEED_KEY, new Blueprint.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, String.format("Deleted blueprint %s successfully", blueprint.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to delete blueprint: ".concat(errorMessage));
+			}
+		});
 	}
 	
 	private void updateBlueprint(final Blueprint blueprint) {
@@ -50,6 +65,7 @@ public class APITester {
 			@Override
 			public void onSuccess() {
 				Log.d(LOG_TAG, String.format("Updated blueprint %s successfully", blueprint.toString()));
+				deleteBlueprint(blueprint);
 			}
 			
 			@Override
@@ -59,8 +75,8 @@ public class APITester {
 		});
 	}
 	
-	private void loadBlueprint() {
-		Blueprint.getBlueprint(defaultContext, TEST_FEED_KEY, TEST_BLUEPRINT_ID, new Blueprint.BlueprintListener() {
+	private void loadBlueprint(String blueprintId) {
+		Blueprint.getBlueprint(defaultContext, TEST_FEED_KEY, blueprintId, new Blueprint.BlueprintListener() {
 			
 			@Override
 			public void onSuccess(Blueprint blueprint) {
@@ -87,6 +103,7 @@ public class APITester {
 			@Override
 			public void onSuccess(Blueprint blueprint) {
 				Log.d(LOG_TAG, String.format("Successfully created blueprint %s", blueprint.toString()));
+				loadBlueprint(blueprint.getId());
 			}
 			
 			@Override
