@@ -14,6 +14,11 @@ import android.os.Parcel;
 
 public class Batch extends com.att.m2x.Feed {
 
+	public interface DatasourceListener {
+		public void onSuccess(Feed datasource);
+		public void onError(String errorMessage);			
+	}
+	
 	public interface DatasourcesListener {
 		public void onSuccess(ArrayList<Feed> datasources);
 		public void onError(String errorMessage);		
@@ -211,6 +216,31 @@ public class Batch extends com.att.m2x.Feed {
 		dest.writeInt(totalDatasources);
 		dest.writeInt(registeredDatasources);
 		dest.writeInt(unregisteredDatasources);
+	}
+	
+	public void addDatasource(Context context, String feedKey, String serial, final DatasourceListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/batches/" + this.getId() + "/datasources";
+		
+		JSONObject content = new JSONObject();
+		JSONHelper.put(content, SERIAL, serial);
+		
+		client.post(context, feedKey, path, content, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				Feed datasource = new Feed(object);
+				callback.onSuccess(datasource);				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
 	}
 	
 	public String getSerial() {
