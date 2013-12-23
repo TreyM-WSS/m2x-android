@@ -34,7 +34,28 @@ public class APITester {
 //      this.loadStream();
 //      this.loadTriggers();
 //      this.createTrigger();
-      this.loadRequestLogEntries();		
+//      this.loadRequestLogEntries();
+		this.loadBlueprints();
+	}
+	
+	private void loadBlueprints() {
+
+    	Blueprint.getBlueprints(defaultContext, TEST_FEED_KEY, new Blueprint.BlueprintsListener() { 
+
+    		public void onSuccess(ArrayList<Blueprint> blueprints) {
+        		Log.d(LOG_TAG, String.format("Obtained %d blueprints", blueprints.size()));
+        		for (Blueprint blueprint : blueprints) {
+        			Log.d(LOG_TAG, blueprint.toString());
+        		}    			
+    		}
+    		
+    		public void onError(String errorMessage) {
+        		Log.d(LOG_TAG, "Failed to obtain blueprints: ".concat(errorMessage));
+        		
+    		}
+
+    	});
+
 	}
 
     private void deleteTrigger(final Trigger trigger) {

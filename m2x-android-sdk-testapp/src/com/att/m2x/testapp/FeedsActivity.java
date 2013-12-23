@@ -27,7 +27,11 @@ public class FeedsActivity extends Activity implements OnItemClickListener {
     	feedList.setOnItemClickListener(this); 
 
         M2X.getInstance().setMasterKey(getString(R.string.m2x_master_key));
-        this.loadFeeds();
+//        this.loadFeeds();
+        
+        APITester at = new APITester(this);
+        at.run();
+        
     }
 
     @Override
