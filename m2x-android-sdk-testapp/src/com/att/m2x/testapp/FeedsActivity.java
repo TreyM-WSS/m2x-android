@@ -13,9 +13,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.att.m2x.*;
 
-public class FeedsActivity extends Activity {
+public class FeedsActivity extends Activity implements OnItemClickListener {
 
 	private ListView feedList;
+	private FeedArrayAdapter adapter;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +24,7 @@ public class FeedsActivity extends Activity {
         setContentView(R.layout.activity_main);         
 
         feedList = (ListView) findViewById(R.id.feedView);
-    	feedList.setOnItemClickListener(new OnItemClickListener() {	
-		  @Override
-		  public void onItemClick(AdapterView<?> parent, View view,
-		    int position, long id) {
-			  Intent feedDetail = new Intent(FeedsActivity.this, FeedDetailActivity.class);
-			  FeedsActivity.this.startActivity(feedDetail);     		    
-		  }
-    	}); 
+    	feedList.setOnItemClickListener(this); 
 
         M2X.getInstance().setMasterKey(getString(R.string.m2x_master_key));
         this.loadFeeds();
@@ -49,7 +43,7 @@ public class FeedsActivity extends Activity {
 			
 			@Override
 			public void onSuccess(ArrayList<Feed> feeds) {
-		    	FeedArrayAdapter adapter = new FeedArrayAdapter(FeedsActivity.this, feeds);
+		    	adapter = new FeedArrayAdapter(FeedsActivity.this, feeds);
 		    	feedList.setAdapter(adapter);    	
 			}
 			
@@ -65,10 +59,16 @@ public class FeedsActivity extends Activity {
     	
     	private Context context;
     	private static final int LAYOUT_RESOURCE = R.layout.activity_main_listitem;
+    	private List<Feed> objects;
     	
     	public FeedArrayAdapter(Context context, List<Feed> objects) {
     		super(context, LAYOUT_RESOURCE, objects);
+    		this.objects = objects;
     		this.context = context;
+    	}
+    	
+    	public List<Feed> getObjects() {
+    		return objects;
     	}
     	
     	public View getView(int position, View convertView, ViewGroup parent) {
@@ -107,5 +107,15 @@ public class FeedsActivity extends Activity {
             return view;
     	}
    }
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+		
+		  Intent feedDetail = new Intent(this, FeedDetailActivity.class);		
+		  List<Feed> objects = adapter.getObjects();
+		  Feed selectedFeed = objects.get(position);
+		  feedDetail.putExtra(FeedDetailActivity.INPUT_SELECTED_FEED, selectedFeed);
+		  startActivity(feedDetail);		
+	}
     
 }

@@ -12,17 +12,21 @@ public class DateHelper {
 	public static Date stringToDate(String dateString) {
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.US);
 		Date value = null;
-		try {
-			value = sdf.parse(dateString);
-		} catch (ParseException e) {
-			value = null;
+		if (dateString != null) {
+			try {
+				value = sdf.parse(dateString);
+			} catch (ParseException e) {
+			}
 		}
 		return value;
 	}
 
 	public static String dateToString(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.US);
-		String value = (date != null) ? sdf.format(date) : null;
+		String value = null;
+		if (date != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.US);
+			value = (date != null) ? sdf.format(date) : null;			
+		}
 		return value;
 	}
 

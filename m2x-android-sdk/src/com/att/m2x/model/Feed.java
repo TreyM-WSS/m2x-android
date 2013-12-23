@@ -34,8 +34,8 @@ public class Feed implements Parcelable {
 		type = in.readString();
 		url = in.readString();
 		key = in.readString();
-		created = DateHelper.stringToDate(in.readString());
-		updated = DateHelper.stringToDate(in.readString());
+		created = new Date(in.readLong());
+		updated = new Date(in.readLong());
 	}
 	
 	public String getId() {
@@ -140,8 +140,8 @@ public class Feed implements Parcelable {
 		dest.writeString(type);
 		dest.writeString(url);
 		dest.writeString(key);
-		dest.writeString(DateHelper.dateToString(created));
-		dest.writeString(DateHelper.dateToString(updated));
+		dest.writeLong(created.getTime());
+		dest.writeLong(updated.getTime());
 	}
 
 	public static final Parcelable.Creator<Feed> CREATOR = new Parcelable.Creator<Feed>() {

@@ -34,8 +34,8 @@ public class Trigger implements Parcelable {
 		callbackUrl = in.readString();
 		url = in.readString();
 		status = in.readString();
-		created = DateHelper.stringToDate(in.readString());
-		updated = DateHelper.stringToDate(in.readString());
+		created = new Date(in.readLong());
+		updated = new Date(in.readLong());
 	}
 	
 	public String getId() {
@@ -142,8 +142,8 @@ public class Trigger implements Parcelable {
 		dest.writeString(callbackUrl);
 		dest.writeString(url);
 		dest.writeString(status);
-		dest.writeString(DateHelper.dateToString(created));
-		dest.writeString(DateHelper.dateToString(updated));
+		dest.writeLong(created.getTime());
+		dest.writeLong(updated.getTime());
 	}
 	
 	public static final Parcelable.Creator<Trigger> CREATOR = new Parcelable.Creator<Trigger>() {

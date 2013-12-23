@@ -3,7 +3,11 @@ package com.att.m2x;
 import org.json.*;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.att.m2x.helpers.JSONHelper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -48,6 +52,22 @@ public final class Feed extends com.att.m2x.model.Feed {
 	
 	public Feed() {
 		
+	}
+	
+	public Feed(Parcel in) {
+		super(in);
+		streams = new ArrayList<Stream>();
+        in.readList(streams, Stream.class.getClassLoader());
+
+//		triggers = new ArrayList<Trigger>(); 
+//        in.readList(triggers, Trigger.class.getClassLoader());
+//
+//		tags = new ArrayList<String>(); 
+//        in.readStringList(tags);
+
+//		streams = in.readArrayList(Stream.class.getClassLoader());
+//		triggers = in.readArrayList(Trigger.class.getClassLoader());
+//		tags = in.readArrayList(String.class.getClassLoader());
 	}
 	
 	public Feed(JSONObject obj) {
@@ -245,5 +265,23 @@ public final class Feed extends com.att.m2x.model.Feed {
 	public void setTags(ArrayList<String> tags) {
 		this.tags = tags;
 	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeList(streams);
+//		dest.writeList(triggers);
+//		dest.writeStringList(tags);
+	}
+	
+	public static final Parcelable.Creator<Feed> CREATOR = new Parcelable.Creator<Feed>() {
+	    public Feed createFromParcel(Parcel in) {
+	     return new Feed(in);
+	    }
+
+	    public Feed[] newArray(int size) {
+	     return new Feed[size];
+	    }
+	};
 	
 }

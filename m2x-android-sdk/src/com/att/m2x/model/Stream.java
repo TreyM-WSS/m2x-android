@@ -34,8 +34,8 @@ public class Stream implements Parcelable {
 		max = in.readDouble();
 		unit = in.readParcelable(Unit.class.getClassLoader());
 		url = in.readString();
-		created = DateHelper.stringToDate(in.readString());
-		updated = DateHelper.stringToDate(in.readString());
+		created = new Date(in.readLong());
+		updated = new Date(in.readLong());
 	}
 	
 	public String getId() {
@@ -141,8 +141,8 @@ public class Stream implements Parcelable {
 		dest.writeDouble(max);
 		dest.writeParcelable(unit, flags);
 		dest.writeString(url);
-		dest.writeString(DateHelper.dateToString(created));
-		dest.writeString(DateHelper.dateToString(updated));		
+		dest.writeLong(created.getTime());
+		dest.writeLong(created.getTime());		
 	}
 
 	public static final Parcelable.Creator<Stream> CREATOR = new Parcelable.Creator<Stream>() {

@@ -25,7 +25,7 @@ public class Location implements Parcelable {
 		latitude = in.readDouble();
 		longitude = in.readDouble();
 		elevation = in.readDouble();
-		timestamp = DateHelper.stringToDate(in.readString());
+		timestamp = new Date(in.readLong());
 	}
 	
 	public String getName() {
@@ -86,7 +86,7 @@ public class Location implements Parcelable {
 		dest.writeDouble(latitude);
 		dest.writeDouble(longitude);
 		dest.writeDouble(elevation);
-		dest.writeString(DateHelper.dateToString(timestamp));
+		dest.writeLong(timestamp.getTime());
 	}
 
 	public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {

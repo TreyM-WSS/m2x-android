@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+
 import com.att.m2x.helpers.JSONHelper;
 import com.att.m2x.helpers.JSONSerializable;
 
@@ -47,7 +48,7 @@ public final class Stream extends com.att.m2x.model.Stream implements JSONSerial
 	public Stream() {
 		
 	}
-	
+		
 	public Stream(JSONObject obj) {
 		
 		this.setId(JSONHelper.stringValue(obj, ID, ""));
