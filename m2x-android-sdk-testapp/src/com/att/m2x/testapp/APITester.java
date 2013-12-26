@@ -94,6 +94,21 @@ public class APITester {
 
 	}
 	
+	private void regenerateKey(final Key key) {
+		key.regenerate(defaultContext, new Key.KeyListener() {
+			
+			@Override
+			public void onSuccess(Key key) {
+				Log.d(LOG_TAG, "Key successfully regenerated: " + key.toString());
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to regenerate key: " + errorMessage);
+			}
+		});
+	}
+	
 	private void updateKey(final Key key) {
 		key.setName("Updated key name");
 		key.setStreamName(null);
@@ -102,6 +117,7 @@ public class APITester {
 			@Override
 			public void onSuccess() {
 				Log.d(LOG_TAG, "Key successfully updated: " + key.toString());
+				regenerateKey(key);
 			}
 			
 			@Override
