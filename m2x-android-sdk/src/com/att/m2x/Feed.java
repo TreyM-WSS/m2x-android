@@ -269,13 +269,17 @@ public class Feed extends com.att.m2x.model.Feed {
 		JSONHelper.put(obj, VISIBILITY, this.getVisibility());
 		
 		StringBuilder sb = new StringBuilder();
-		for (String tag : this.getTags())
-		{
-		    sb.append(tag);
-		    sb.append(",");
+		ArrayList<String> tags = this.getTags();
+		if (tags != null) {
+			for (String tag : this.getTags())
+			{
+			    sb.append(tag);
+			    sb.append(",");
+			}
+			String joinedString = sb.toString();
+			joinedString = joinedString.substring(0, joinedString.length()-1);
+			JSONHelper.put(obj, TAGS, joinedString);			
 		}
-		sb.replace(sb.length(), sb.length(), "");
-		JSONHelper.put(obj, TAGS, sb.toString());
 		
 		return obj;
 	}

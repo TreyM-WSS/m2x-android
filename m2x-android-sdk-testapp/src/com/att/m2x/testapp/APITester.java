@@ -43,7 +43,32 @@ public class APITester {
 //		this.loadBlueprints();
 //		this.createBlueprint();
 		
-		this.createBatch();
+//		this.createBatch();
+		
+		this.createDatasource();
+		
+	}
+	
+	private void createDatasource() {
+		Datasource d = new Datasource();
+		d.setName("Test Datasource");
+		d.setDescription("Datasource for testing");
+		d.setVisibility("public");
+//		d.setTags(new ArrayList<String>(Arrays.asList("datasource testing tag","lalala")));
+		d.create(defaultContext, TEST_FEED_KEY, new Datasource.DatasourceListener() {
+			
+			@Override
+			public void onSuccess(Datasource datasource) {
+				Log.d(LOG_TAG, String.format("Successfully created datasource %s", datasource.toString()));
+//				loadBatch(datasource.getId());
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+        		Log.d(LOG_TAG, "Failed to create datasource: ".concat(errorMessage));
+			}
+		});
+		
 	}
 	
 	private void deleteBatch(final Batch batch) {
