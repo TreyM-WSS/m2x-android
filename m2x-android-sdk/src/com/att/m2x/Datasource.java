@@ -24,6 +24,11 @@ public final class Datasource extends Feed {
 		public void onError(String errorMessage);		
 	}
 	
+	public interface BasicListener {
+		public void onSuccess();
+		public void onError(String errorMessage);				
+	}
+
 	protected static final String SERIAL = "serial";
 	protected static final String DATASOURCES_PAGE_KEY = "datasources";
 	
@@ -98,7 +103,6 @@ public final class Datasource extends Feed {
 		});
 		
 	}
-
 	
 	public void create(Context context, String feedKey, final DatasourceListener callback) {
 		
@@ -121,7 +125,48 @@ public final class Datasource extends Feed {
 		});
 		
 	}
+
+	public void update(Context context, String feedKey, final BasicListener callback) {
+
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/datasources/" + this.getId();
+		JSONObject content = this.toJSONObject();
+		client.put(context, feedKey, path, content, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
+	}
+	
+	public void delete(Context context, String feedKey, final BasicListener callback) {
 		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/datasources/" + this.getId();
+		client.delete(context, feedKey, path, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});
+
+	}
+
 	public String getSerial() {
 		return serial;
 	}
