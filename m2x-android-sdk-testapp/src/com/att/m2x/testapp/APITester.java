@@ -50,28 +50,43 @@ public class APITester {
 		this.beginKeysTest();
 		
 	}
+	
+	private void deleteKey(final Key key) {
+		key.delete(defaultContext, new Key.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Key successfully deleted: " + key.toString());
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to delete key: " + errorMessage);
+			}
+		});
+	}
 
 	private void createKeys() {
 		
 		Calendar today_plus_year = Calendar.getInstance();  
 		today_plus_year.add( Calendar.YEAR, 1 ); 
 
-		Key masterKey = new Key();
-		masterKey.setName("Testing master key");
-		masterKey.setPermissions(new ArrayList<String>(Arrays.asList("GET", "PUT")));		
-		masterKey.setExpiresAt(today_plus_year.getTime());
-		masterKey.create(defaultContext, new Key.KeyListener() {
-			
-			@Override
-			public void onSuccess(Key key) {
-				Log.d(LOG_TAG, "Master key successfully created: " + key.toString());
-			}
-			
-			@Override
-			public void onError(String errorMessage) {
-				Log.d(LOG_TAG, "Failed to create master key: ".concat(errorMessage));				
-			}
-		});
+//		Key masterKey = new Key();
+//		masterKey.setName("Testing master key");
+//		masterKey.setPermissions(new ArrayList<String>(Arrays.asList("GET", "PUT")));		
+//		masterKey.setExpiresAt(today_plus_year.getTime());
+//		masterKey.create(defaultContext, new Key.KeyListener() {
+//			
+//			@Override
+//			public void onSuccess(Key key) {
+//				Log.d(LOG_TAG, "Master key successfully created: " + key.toString());
+//			}
+//			
+//			@Override
+//			public void onError(String errorMessage) {
+//				Log.d(LOG_TAG, "Failed to create master key: ".concat(errorMessage));				
+//			}
+//		});
 		
 		Key feedKey = new Key();
 		feedKey.setName("Testing feed key");
@@ -84,6 +99,7 @@ public class APITester {
 			@Override
 			public void onSuccess(Key key) {
 				Log.d(LOG_TAG, "Feed key successfully created: " + key.toString());
+				updateKey(key);
 			}
 			
 			@Override
@@ -100,6 +116,7 @@ public class APITester {
 			@Override
 			public void onSuccess(Key key) {
 				Log.d(LOG_TAG, "Key successfully regenerated: " + key.toString());
+				deleteKey(key);
 			}
 			
 			@Override
@@ -161,20 +178,21 @@ public class APITester {
 //			}
 //		}); 
 		
-		Key.getKey(defaultContext, EXTRA_TEST_KEY, new Key.KeyListener() {
-			
-			@Override
-			public void onSuccess(Key key) {
-				Log.d(LOG_TAG, "Found key: " + key.toString() );
-				updateKey(key);
-			}
-			
-			@Override
-			public void onError(String errorMessage) {
-				Log.d(LOG_TAG, "Failed to find key: " + errorMessage );
-			}
-		});
+//		Key.getKey(defaultContext, EXTRA_TEST_KEY, new Key.KeyListener() {
+//			
+//			@Override
+//			public void onSuccess(Key key) {
+//				Log.d(LOG_TAG, "Found key: " + key.toString() );
+//				updateKey(key);
+//			}
+//			
+//			@Override
+//			public void onError(String errorMessage) {
+//				Log.d(LOG_TAG, "Failed to find key: " + errorMessage );
+//			}
+//		});
 		
+		createKeys();
 //		createKeys();
 	}
 	

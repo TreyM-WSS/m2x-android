@@ -213,6 +213,25 @@ public class Key extends com.att.m2x.model.Key {
 		});		
 	}
 	
+	public void delete(Context context, final BasicListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/keys/" + this.getKeyValue();
+		client.delete(context, null, path, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});		
+	}
+	
 	public void regenerate(Context context, final KeyListener callback) {
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/keys/" + this.getKeyValue() + "/regenerate";
