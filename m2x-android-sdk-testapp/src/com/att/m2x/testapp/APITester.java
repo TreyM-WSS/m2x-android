@@ -94,6 +94,23 @@ public class APITester {
 
 	}
 	
+	private void updateKey(final Key key) {
+		key.setName("Updated key name");
+		key.setStreamName(null);
+		key.update(defaultContext, new Key.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, "Key successfully updated: " + key.toString());
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to update key: " + errorMessage);
+			}
+		});
+	}
+	
 	private void beginKeysTest() {
 		
 //		Key.getKeys(defaultContext, new Key.KeysListener() {
@@ -133,6 +150,7 @@ public class APITester {
 			@Override
 			public void onSuccess(Key key) {
 				Log.d(LOG_TAG, "Found key: " + key.toString() );
+				updateKey(key);
 			}
 			
 			@Override

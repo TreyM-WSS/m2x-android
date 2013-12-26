@@ -10,7 +10,7 @@ import android.os.Parcelable;
 public class Key implements Parcelable {
 	
 	private String name;
-	private String key;
+	private String keyValue;
 	private String streamName;
 	private String feedId;
 	private Boolean isMaster;
@@ -24,7 +24,7 @@ public class Key implements Parcelable {
 	
 	public Key(Parcel in) {
 		name = in.readString();
-		key = in.readString();
+		keyValue = in.readString();
 		streamName = in.readString();
 		feedId = in.readString();
 		isMaster = in.readByte() != 0;
@@ -43,12 +43,12 @@ public class Key implements Parcelable {
 		this.name = name;
 	}
 	
-	public String getKey() {
-		return key;
+	public String getKeyValue() {
+		return keyValue;
 	}
 	
-	public void setKey(String key) {
-		this.key = key;
+	public void setKeyValue(String keyValue) {
+		this.keyValue = keyValue;
 	}
 	
 
@@ -109,7 +109,7 @@ public class Key implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {		
 		dest.writeString(name);		
-		dest.writeString(key);
+		dest.writeString(keyValue);
 		dest.writeString(streamName);
 		dest.writeString(feedId);
 		dest.writeByte((byte) (isMaster ? 1 : 0));
@@ -133,11 +133,11 @@ public class Key implements Parcelable {
 		String value;
 		if (isMaster) {
 			value = String.format(Locale.US, "M2X Master Key - %s (isExpired: %s)", 
-					this.getKey(),
+					this.getKeyValue(),
 					(this.getIsExpired()) ? "Yes" : "No" );
 		} else {
 			value = String.format(Locale.US, "M2X Feed Key - %s (isExpired: %s, for feed: %s, stream name is %s)", 
-					this.getKey(),
+					this.getKeyValue(),
 					(this.getIsExpired()) ? "Yes" : "No",
 					this.getFeedId(),
 					this.getStreamName() );			

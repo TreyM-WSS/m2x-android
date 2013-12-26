@@ -29,7 +29,7 @@ public class Key extends com.att.m2x.model.Key {
 	}
 	
 	private static final String NAME = "name";
-	private static final String KEY = "key";
+	private static final String KEY_VALUE = "key";
 	private static final String IS_MASTER = "master";
 	private static final String FEED_ID = "feed";
 	private static final String FEED_URL = "feed";
@@ -49,7 +49,7 @@ public class Key extends com.att.m2x.model.Key {
 	public Key(JSONObject obj) {
 		
 		this.setName(JSONHelper.stringValue(obj, NAME, ""));
-		this.setKey(JSONHelper.stringValue(obj, KEY, ""));
+		this.setKeyValue(JSONHelper.stringValue(obj, KEY_VALUE, ""));
 		this.setIsMaster(JSONHelper.booleanValue(obj, IS_MASTER, false));
 		
 		String feedUrl = JSONHelper.stringValue(obj, FEED_URL, "");
@@ -70,7 +70,7 @@ public class Key extends com.att.m2x.model.Key {
 				JSONArray items = obj.getJSONArray(PERMISSIONS);
 				ArrayList<String> permissions = new ArrayList<String>();
 				for (int i = 0; i < items.length(); i++) {
-					permissions.add(items.getJSONObject(i).toString());
+					permissions.add(items.getString(i));
 				}
 				this.setPermissions(permissions);
 			} catch (JSONException e1) {
@@ -191,6 +191,26 @@ public class Key extends com.att.m2x.model.Key {
 			
 		});
 		
+	}
+	
+	public void update(Context context, final BasicListener callback) {
+		
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/keys/" + this.getKeyValue();
+		JSONObject content = this.toJSONObject();
+		client.put(context, null, path, content, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				callback.onSuccess();				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
+			}
+			
+		});		
 	}
 	
 }
