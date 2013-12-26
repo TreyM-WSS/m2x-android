@@ -17,8 +17,6 @@ public class APITester {
 	private static String LOG_TAG = "M2X-TestApp"; 
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
 	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e";
-	private static String TEST_BLUEPRINT_ID = "46981325f4b1e3f9569070f235631a9b";
-	private static String TEST_BATCH_ID = "";
 	private static String TEST_STREAM_NAME = "temperature";
 		
 	private Context defaultContext;
@@ -43,24 +41,72 @@ public class APITester {
 //		this.loadBlueprints();
 //		this.createBlueprint();
 		
-//		this.createBatch();
+		this.createBatch();
 		
-		this.createDatasource();
+//		this.createDatasource();
 		
 	}
+
+	private void deleteDatasource(final Datasource datasource) {
+		datasource.delete(defaultContext, new Datasource.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, String.format("Deleted datasource %s successfully", datasource.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to delete datasource: ".concat(errorMessage));
+			}
+		});
+	}
 	
+	private void updateDatasource(final Datasource datasource) {
+		datasource.setTags(new ArrayList<String>(Arrays.asList("updated tag1", "updated tag2")));
+		datasource.update(defaultContext, new Datasource.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, String.format("Updated datasource %s successfully", datasource.toString()));
+				deleteDatasource(datasource);
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to update datasource: ".concat(errorMessage));
+			}
+		});
+	}
+	
+	private void loadDatasource(String datasourceId) {
+		Datasource.getDatasource(defaultContext, datasourceId, new Datasource.DatasourceListener() {
+			
+			@Override
+			public void onSuccess(Datasource datasource) {
+				Log.d(LOG_TAG, String.format("Found datasource %s", datasource.toString()));
+				updateDatasource(datasource);
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to find datasource: ".concat(errorMessage));
+			}
+		});
+	}
+
 	private void createDatasource() {
 		Datasource d = new Datasource();
 		d.setName("Test Datasource");
 		d.setDescription("Datasource for testing");
 		d.setVisibility("public");
-//		d.setTags(new ArrayList<String>(Arrays.asList("datasource testing tag","lalala")));
-		d.create(defaultContext, TEST_FEED_KEY, new Datasource.DatasourceListener() {
+		d.setTags(new ArrayList<String>(Arrays.asList("datasource testing tag","lalala")));
+		d.create(defaultContext, new Datasource.DatasourceListener() {
 			
 			@Override
 			public void onSuccess(Datasource datasource) {
 				Log.d(LOG_TAG, String.format("Successfully created datasource %s", datasource.toString()));
-//				loadBatch(datasource.getId());
+				loadDatasource(datasource.getId());
 			}
 			
 			@Override
@@ -72,7 +118,7 @@ public class APITester {
 	}
 	
 	private void deleteBatch(final Batch batch) {
-		batch.delete(defaultContext, TEST_FEED_KEY, new Batch.BasicListener() {
+		batch.delete(defaultContext, new Batch.BasicListener() {
 			
 			@Override
 			public void onSuccess() {
@@ -92,7 +138,7 @@ public class APITester {
 	
 	private void updateBatch(final Batch batch) {
 		batch.setTags(new ArrayList<String>(Arrays.asList("updated tag1", "updated tag2")));
-		batch.update(defaultContext, TEST_FEED_KEY, new Batch.BasicListener() {
+		batch.update(defaultContext, new Batch.BasicListener() {
 			
 			@Override
 			public void onSuccess() {
@@ -108,7 +154,7 @@ public class APITester {
 	}
 	
 	private void loadBatch(String batchId) {
-		Batch.getBatch(defaultContext, TEST_FEED_KEY, batchId, new Batch.BatchListener() {
+		Batch.getBatch(defaultContext, batchId, new Batch.BatchListener() {
 			
 			@Override
 			public void onSuccess(Batch batch) {
@@ -130,7 +176,7 @@ public class APITester {
 		b.setVisibility("public");
 		b.setTags(new ArrayList<String>(Arrays.asList("tag1", "another tag", "yet another tag")));
 		
-		b.create(defaultContext, TEST_FEED_KEY, new Batch.BatchListener() {
+		b.create(defaultContext, new Batch.BatchListener() {
 			
 			@Override
 			public void onSuccess(Batch batch) {
@@ -147,7 +193,7 @@ public class APITester {
 	}
 	
 	private void deleteBlueprint(final Blueprint blueprint) {
-		blueprint.delete(defaultContext, TEST_FEED_KEY, new Blueprint.BasicListener() {
+		blueprint.delete(defaultContext, new Blueprint.BasicListener() {
 			
 			@Override
 			public void onSuccess() {
@@ -163,7 +209,7 @@ public class APITester {
 	
 	private void updateBlueprint(final Blueprint blueprint) {
 		blueprint.setTags(new ArrayList<String>(Arrays.asList("updated tag1", "updated tag2")));
-		blueprint.update(defaultContext, TEST_FEED_KEY, new Blueprint.BasicListener() {
+		blueprint.update(defaultContext, new Blueprint.BasicListener() {
 			
 			@Override
 			public void onSuccess() {
@@ -179,7 +225,7 @@ public class APITester {
 	}
 	
 	private void loadBlueprint(String blueprintId) {
-		Blueprint.getBlueprint(defaultContext, TEST_FEED_KEY, blueprintId, new Blueprint.BlueprintListener() {
+		Blueprint.getBlueprint(defaultContext, blueprintId, new Blueprint.BlueprintListener() {
 			
 			@Override
 			public void onSuccess(Blueprint blueprint) {
@@ -201,7 +247,7 @@ public class APITester {
 		b.setVisibility("public");
 		b.setTags(new ArrayList<String>(Arrays.asList("tag1", "another tag", "yet another tag")));
 		
-		b.create(defaultContext, TEST_FEED_KEY, new Blueprint.BlueprintListener() {
+		b.create(defaultContext, new Blueprint.BlueprintListener() {
 			
 			@Override
 			public void onSuccess(Blueprint blueprint) {
@@ -219,7 +265,7 @@ public class APITester {
 	
 	private void loadBlueprints() {
 
-    	Blueprint.getBlueprints(defaultContext, TEST_FEED_KEY, new Blueprint.BlueprintsListener() { 
+    	Blueprint.getBlueprints(defaultContext, new Blueprint.BlueprintsListener() { 
 
     		public void onSuccess(ArrayList<Blueprint> blueprints) {
         		Log.d(LOG_TAG, String.format("Obtained %d blueprints", blueprints.size()));

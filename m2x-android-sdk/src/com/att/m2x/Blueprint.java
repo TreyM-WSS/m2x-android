@@ -54,12 +54,12 @@ public final class Blueprint extends com.att.m2x.Feed {
 		dest.writeString(serial);
 	}
 
-	public static void getBlueprints(Context context, String feedKey, final BlueprintsListener callback) {
+	public static void getBlueprints(Context context, final BlueprintsListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/blueprints";
 		
-		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+		client.get(context, null, path, null, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -87,12 +87,12 @@ public final class Blueprint extends com.att.m2x.Feed {
 		
 	}
 	
-	public static void getBlueprint(Context context, String feedKey, String blueprintId, final BlueprintListener callback) {
+	public static void getBlueprint(Context context, String blueprintId, final BlueprintListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/blueprints/" + blueprintId;
 		
-		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+		client.get(context, null, path, null, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -110,12 +110,12 @@ public final class Blueprint extends com.att.m2x.Feed {
 		
 	}
 	
-	public void create(Context context, String feedKey, final BlueprintListener callback) {
+	public void create(Context context, final BlueprintListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/blueprints";
 		JSONObject content = this.toJSONObject();
-		client.post(context, feedKey, path, content, new M2XHttpClient.Handler() {
+		client.post(context, null, path, content, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -132,12 +132,12 @@ public final class Blueprint extends com.att.m2x.Feed {
 		
 	}
 	
-	public void update(Context context, String feedKey, final BasicListener callback) {
+	public void update(Context context, final BasicListener callback) {
 
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/blueprints/" + this.getId();
 		JSONObject content = this.toJSONObject();
-		client.put(context, feedKey, path, content, new M2XHttpClient.Handler() {
+		client.put(context, null, path, content, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -153,11 +153,11 @@ public final class Blueprint extends com.att.m2x.Feed {
 
 	}
 	
-	public void delete(Context context, String feedKey, final BasicListener callback) {
+	public void delete(Context context, final BasicListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/blueprints/" + this.getId();
-		client.delete(context, feedKey, path, new M2XHttpClient.Handler() {
+		client.delete(context, null, path, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {

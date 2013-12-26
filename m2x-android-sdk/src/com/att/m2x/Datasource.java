@@ -48,12 +48,12 @@ public final class Datasource extends Feed {
 		this.setSerial(JSONHelper.stringValue(obj, SERIAL, ""));
 	}
 
-	public static void getDatasources(Context context, String feedKey, final DatasourcesListener callback) {
+	public static void getDatasources(Context context, final DatasourcesListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/datasources";
 		
-		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+		client.get(context, null, path, null, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -81,12 +81,12 @@ public final class Datasource extends Feed {
 		
 	}
 	
-	public static void getDatasource(Context context, String feedKey, String datasourceId, final DatasourceListener callback) {
+	public static void getDatasource(Context context, String datasourceId, final DatasourceListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/datasources/" + datasourceId;
 		
-		client.get(context, feedKey, path, null, new M2XHttpClient.Handler() {
+		client.get(context, null, path, null, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -104,12 +104,12 @@ public final class Datasource extends Feed {
 		
 	}
 	
-	public void create(Context context, String feedKey, final DatasourceListener callback) {
+	public void create(Context context, final DatasourceListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/datasources";
 		JSONObject content = this.toJSONObject();
-		client.post(context, feedKey, path, content, new M2XHttpClient.Handler() {
+		client.post(context, null, path, content, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -126,12 +126,12 @@ public final class Datasource extends Feed {
 		
 	}
 
-	public void update(Context context, String feedKey, final BasicListener callback) {
+	public void update(Context context, final BasicListener callback) {
 
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/datasources/" + this.getId();
 		JSONObject content = this.toJSONObject();
-		client.put(context, feedKey, path, content, new M2XHttpClient.Handler() {
+		client.put(context, null, path, content, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -147,11 +147,11 @@ public final class Datasource extends Feed {
 
 	}
 	
-	public void delete(Context context, String feedKey, final BasicListener callback) {
+	public void delete(Context context, final BasicListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/datasources/" + this.getId();
-		client.delete(context, feedKey, path, new M2XHttpClient.Handler() {
+		client.delete(context, null, path, new M2XHttpClient.Handler() {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
@@ -182,7 +182,7 @@ public final class Datasource extends Feed {
 	}
 
 	public String toString() {
-		return String.format(Locale.US, "M2X Datasource - %s %s (serial: %d)", 
+		return String.format(Locale.US, "M2X Datasource - %s %s (serial: %s)", 
 				this.getId(), 
 				this.getName(), 
 				this.getSerial() ); 
