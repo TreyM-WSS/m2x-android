@@ -7,23 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.att.m2x.Blueprint.BasicListener;
 import com.att.m2x.helpers.JSONHelper;
 
 import android.content.Context;
 import android.os.Parcel;
 
-public class Batch extends com.att.m2x.Feed {
-
-	public interface DatasourceListener {
-		public void onSuccess(Feed datasource);
-		public void onError(String errorMessage);			
-	}
-	
-	public interface DatasourcesListener {
-		public void onSuccess(ArrayList<Feed> datasources);
-		public void onError(String errorMessage);		
-	}
+public final class Batch extends com.att.m2x.Feed {
 
 	public interface BatchesListener {
 		public void onSuccess(ArrayList<Batch> batches);
@@ -135,7 +124,7 @@ public class Batch extends com.att.m2x.Feed {
 		
 	}
 
-	public void getDatasources(Context context, String feedKey, final DatasourcesListener callback) {
+	public void getBatchDatasources(Context context, String feedKey, final Datasource.DatasourcesListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/batches/" + this.getId() + "/datasources";
@@ -145,11 +134,11 @@ public class Batch extends com.att.m2x.Feed {
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
 
-				ArrayList<Feed> array = new ArrayList<Feed>();
+				ArrayList<Datasource> array = new ArrayList<Datasource>();
 				try {
 					JSONArray datasources = object.getJSONArray(DATASOURCES_PAGE_KEY);
 					for (int i = 0; i < datasources.length(); i++) {
-						Feed datasource = new Feed(datasources.getJSONObject(i));
+						Datasource datasource = new Datasource(datasources.getJSONObject(i));
 						array.add(datasource);
 					}
 				} catch (JSONException e) {
@@ -231,7 +220,7 @@ public class Batch extends com.att.m2x.Feed {
 
 	}
 	
-	public void addDatasource(Context context, String feedKey, String serial, final DatasourceListener callback) {
+	public void addDatasource(Context context, String feedKey, String serial, final Datasource.DatasourceListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/batches/" + this.getId() + "/datasources";
@@ -243,7 +232,7 @@ public class Batch extends com.att.m2x.Feed {
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject object) {
-				Feed datasource = new Feed(object);
+				Datasource datasource = new Datasource(object);
 				callback.onSuccess(datasource);				
 			}
 
@@ -291,6 +280,7 @@ public class Batch extends com.att.m2x.Feed {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
+		dest.writeString(serial);
 		dest.writeInt(totalDatasources);
 		dest.writeInt(registeredDatasources);
 		dest.writeInt(unregisteredDatasources);

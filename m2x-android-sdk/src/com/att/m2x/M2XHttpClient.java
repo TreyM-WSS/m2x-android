@@ -24,6 +24,7 @@ public class M2XHttpClient {
 	private final static String MESSAGE_ERROR_FIELD = "message";
 	private final static String UNDEFINED_ERROR = "Undefined error";
 	private final static String SERVER_ERROR = "Internal Server Error";
+	private final static String HOST_CONNECT_ERROR = "Could not connect to host";
 
 	private AsyncHttpClient client;
 	private String masterKey;
@@ -61,7 +62,10 @@ public class M2XHttpClient {
 			@Override
 			public void onFailure(int statusCode, java.lang.Throwable e, org.json.JSONObject errorResponse) {
 				
-				String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+				String message = HOST_CONNECT_ERROR;
+				if (errorResponse != null) {
+					message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+				}
 				handler.onFailure(statusCode, message);
 			}
 			
@@ -98,7 +102,10 @@ public class M2XHttpClient {
 				public void onFailure(int statusCode, Header[] headers,
 						Throwable e, JSONObject errorResponse) {
 
-					String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+					String message = HOST_CONNECT_ERROR;
+					if (errorResponse != null) {
+						message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+					}
 					handler.onFailure(statusCode, message);
 				}
 				
@@ -164,7 +171,10 @@ public class M2XHttpClient {
 				public void onFailure(int statusCode, Header[] headers,
 						Throwable e, JSONObject errorResponse) {
 
-					String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+					String message = HOST_CONNECT_ERROR;
+					if (errorResponse != null) {
+						message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+					}
 					handler.onFailure(statusCode, message);
 				}
 				
@@ -212,7 +222,10 @@ public class M2XHttpClient {
 			public void onFailure(int statusCode, Header[] headers,
 					Throwable e, JSONObject errorResponse) {
 
-				String message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+				String message = HOST_CONNECT_ERROR;
+				if (errorResponse != null) {
+					message = JSONHelper.stringValue(errorResponse, MESSAGE_ERROR_FIELD, UNDEFINED_ERROR);
+				}
 				handler.onFailure(statusCode, message);
 			}
 			

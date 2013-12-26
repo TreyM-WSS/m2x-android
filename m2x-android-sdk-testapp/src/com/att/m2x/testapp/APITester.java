@@ -41,7 +41,84 @@ public class APITester {
 	
 //		this.loadBlueprint();
 //		this.loadBlueprints();
-		this.createBlueprint();
+//		this.createBlueprint();
+		
+		this.createBatch();
+	}
+	
+	private void deleteBatch(final Batch batch) {
+		batch.delete(defaultContext, TEST_FEED_KEY, new Batch.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, String.format("Deleted batch %s successfully", batch.toString()));
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to delete batch: ".concat(errorMessage));
+			}
+		});
+	}
+	
+	private void addDatasourcesToBatch(Batch batch) {
+		deleteBatch(batch);
+	}
+	
+	private void updateBatch(final Batch batch) {
+		batch.setTags(new ArrayList<String>(Arrays.asList("updated tag1", "updated tag2")));
+		batch.update(defaultContext, TEST_FEED_KEY, new Batch.BasicListener() {
+			
+			@Override
+			public void onSuccess() {
+				Log.d(LOG_TAG, String.format("Updated batch %s successfully", batch.toString()));
+				addDatasourcesToBatch(batch);
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to update batch: ".concat(errorMessage));
+			}
+		});
+	}
+	
+	private void loadBatch(String batchId) {
+		Batch.getBatch(defaultContext, TEST_FEED_KEY, batchId, new Batch.BatchListener() {
+			
+			@Override
+			public void onSuccess(Batch batch) {
+				Log.d(LOG_TAG, String.format("Found batch %s", batch.toString()));
+				updateBatch(batch);
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to find batch: ".concat(errorMessage));
+			}
+		});
+	}
+	
+	private void createBatch() {
+		Batch b = new Batch();
+		b.setName("Test Batch");
+		b.setDescription("Batch for testing");
+		b.setVisibility("public");
+		b.setTags(new ArrayList<String>(Arrays.asList("tag1", "another tag", "yet another tag")));
+		
+		b.create(defaultContext, TEST_FEED_KEY, new Batch.BatchListener() {
+			
+			@Override
+			public void onSuccess(Batch batch) {
+				Log.d(LOG_TAG, String.format("Successfully created batch %s", batch.toString()));
+				loadBatch(batch.getId());
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+        		Log.d(LOG_TAG, "Failed to create batch: ".concat(errorMessage));
+			}
+		});
+		
 	}
 	
 	private void deleteBlueprint(final Blueprint blueprint) {
