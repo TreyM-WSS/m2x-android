@@ -41,12 +41,50 @@ public class APITester {
 //		this.loadBlueprints();
 //		this.createBlueprint();
 		
-		this.createBatch();
+//		this.createBatch();
 		
 //		this.createDatasource();
 		
+		this.beginKeysTest();
+		
 	}
 
+	private void beginKeysTest() {
+		
+		Key.getKeys(defaultContext, new Key.KeysListener() {
+			
+			@Override
+			public void onSuccess(ArrayList<Key> keys) {
+        		Log.d(LOG_TAG, String.format("Obtained %d keys", keys.size()));
+        		for (Key key : keys) { 
+        			Log.d(LOG_TAG, key.toString());
+        		}
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to list keys: ".concat(errorMessage));
+			}
+		});
+		
+		Key.getKeys(defaultContext, TEST_FEED_ID, new Key.KeysListener() {
+			
+			@Override
+			public void onSuccess(ArrayList<Key> keys) {
+        		Log.d(LOG_TAG, String.format("Obtained %d keys for test feed.", keys.size()));
+        		for (Key key : keys) { 
+        			Log.d(LOG_TAG, key.toString());
+        		}
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to list keys for test feed: ".concat(errorMessage));
+			}
+		});
+		
+	}
+	
 	private void deleteDatasource(final Datasource datasource) {
 		datasource.delete(defaultContext, new Datasource.BasicListener() {
 			

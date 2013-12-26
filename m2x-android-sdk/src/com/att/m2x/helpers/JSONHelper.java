@@ -35,6 +35,15 @@ public class JSONHelper {
 		return value;
 	}
 
+	public static Boolean booleanValue(JSONObject obj, String key, Boolean defaultValue) {		
+		Boolean value = defaultValue;
+		try {
+			value = obj.getBoolean(key);
+		} catch (JSONException e) {
+		}
+		return value;
+	}
+
 	public static Date dateValue(JSONObject obj, String key, Date defaultValue) {		
 		Date value = defaultValue;
 		try {

@@ -271,7 +271,7 @@ public class Feed extends com.att.m2x.model.Feed {
 		StringBuilder sb = new StringBuilder();
 		ArrayList<String> tags = this.getTags();
 		if (tags != null) {
-			for (String tag : this.getTags())
+			for (String tag : tags)
 			{
 			    sb.append(tag);
 			    sb.append(",");
