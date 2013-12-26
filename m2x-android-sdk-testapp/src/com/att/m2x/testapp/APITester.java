@@ -18,6 +18,7 @@ public class APITester {
 	private static String LOG_TAG = "M2X-TestApp"; 
 	private static String TEST_FEED_KEY = "7fde9db5578f3ba4b3a70a15893a9f04"; 
 	private static String TEST_FEED_ID = "bb15f48d8e53131faa47efe04cff734e";
+	private static String EXTRA_TEST_KEY = "274290f1e03dbfd2aca8f39fca29003e";	
 	private static String TEST_STREAM_NAME = "temperature";
 		
 	private Context defaultContext;
@@ -95,39 +96,52 @@ public class APITester {
 	
 	private void beginKeysTest() {
 		
-		Key.getKeys(defaultContext, new Key.KeysListener() {
+//		Key.getKeys(defaultContext, new Key.KeysListener() {
+//			
+//			@Override
+//			public void onSuccess(ArrayList<Key> keys) {
+//        		Log.d(LOG_TAG, String.format("Obtained %d keys", keys.size()));
+//        		for (Key key : keys) { 
+//        			Log.d(LOG_TAG, key.toString());
+//        		}
+//			}
+//			
+//			@Override
+//			public void onError(String errorMessage) {
+//				Log.d(LOG_TAG, "Failed to list keys: ".concat(errorMessage));
+//			}
+//		});
+//		
+//		Key.getKeys(defaultContext, TEST_FEED_ID, new Key.KeysListener() {
+//			
+//			@Override
+//			public void onSuccess(ArrayList<Key> keys) {
+//        		Log.d(LOG_TAG, String.format("Obtained %d keys for test feed.", keys.size()));
+//        		for (Key key : keys) { 
+//        			Log.d(LOG_TAG, key.toString());
+//        		}
+//			}
+//			
+//			@Override
+//			public void onError(String errorMessage) {
+//				Log.d(LOG_TAG, "Failed to list keys for test feed: ".concat(errorMessage));
+//			}
+//		}); 
+		
+		Key.getKey(defaultContext, EXTRA_TEST_KEY, new Key.KeyListener() {
 			
 			@Override
-			public void onSuccess(ArrayList<Key> keys) {
-        		Log.d(LOG_TAG, String.format("Obtained %d keys", keys.size()));
-        		for (Key key : keys) { 
-        			Log.d(LOG_TAG, key.toString());
-        		}
+			public void onSuccess(Key key) {
+				Log.d(LOG_TAG, "Found key: " + key.toString() );
 			}
 			
 			@Override
 			public void onError(String errorMessage) {
-				Log.d(LOG_TAG, "Failed to list keys: ".concat(errorMessage));
+				Log.d(LOG_TAG, "Failed to find key: " + errorMessage );
 			}
 		});
 		
-		Key.getKeys(defaultContext, TEST_FEED_ID, new Key.KeysListener() {
-			
-			@Override
-			public void onSuccess(ArrayList<Key> keys) {
-        		Log.d(LOG_TAG, String.format("Obtained %d keys for test feed.", keys.size()));
-        		for (Key key : keys) { 
-        			Log.d(LOG_TAG, key.toString());
-        		}
-			}
-			
-			@Override
-			public void onError(String errorMessage) {
-				Log.d(LOG_TAG, "Failed to list keys for test feed: ".concat(errorMessage));
-			}
-		});
-		
-		createKeys();
+//		createKeys();
 	}
 	
 	private void deleteDatasource(final Datasource datasource) {
