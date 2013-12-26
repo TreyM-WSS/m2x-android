@@ -2,6 +2,7 @@ package com.att.m2x.testapp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -49,6 +50,49 @@ public class APITester {
 		
 	}
 
+	private void createKeys() {
+		
+		Calendar today_plus_year = Calendar.getInstance();  
+		today_plus_year.add( Calendar.YEAR, 1 ); 
+
+		Key masterKey = new Key();
+		masterKey.setName("Testing master key");
+		masterKey.setPermissions(new ArrayList<String>(Arrays.asList("GET", "PUT")));		
+		masterKey.setExpiresAt(today_plus_year.getTime());
+		masterKey.create(defaultContext, new Key.KeyListener() {
+			
+			@Override
+			public void onSuccess(Key key) {
+				Log.d(LOG_TAG, "Master key successfully created: " + key.toString());
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to create master key: ".concat(errorMessage));				
+			}
+		});
+		
+		Key feedKey = new Key();
+		feedKey.setName("Testing feed key");
+		feedKey.setFeedId(TEST_FEED_ID);
+		feedKey.setStreamName(TEST_STREAM_NAME);
+		feedKey.setExpiresAt(today_plus_year.getTime());
+		feedKey.setPermissions(new ArrayList<String>(Arrays.asList("GET", "PUT")));
+		feedKey.create(defaultContext, new Key.KeyListener() {
+			
+			@Override
+			public void onSuccess(Key key) {
+				Log.d(LOG_TAG, "Feed key successfully created: " + key.toString());
+			}
+			
+			@Override
+			public void onError(String errorMessage) {
+				Log.d(LOG_TAG, "Failed to create feed key: ".concat(errorMessage));				
+			}
+		});
+
+	}
+	
 	private void beginKeysTest() {
 		
 		Key.getKeys(defaultContext, new Key.KeysListener() {
@@ -83,6 +127,7 @@ public class APITester {
 			}
 		});
 		
+		createKeys();
 	}
 	
 	private void deleteDatasource(final Datasource datasource) {

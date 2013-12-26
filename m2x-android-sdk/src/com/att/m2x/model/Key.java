@@ -11,8 +11,8 @@ public class Key implements Parcelable {
 	
 	private String name;
 	private String key;
-	private String streamUrl;
-	private String feedUrl;
+	private String streamName;
+	private String feedId;
 	private Boolean isMaster;
 	private Boolean isExpired;
 	private Date expiresAt;
@@ -25,8 +25,8 @@ public class Key implements Parcelable {
 	public Key(Parcel in) {
 		name = in.readString();
 		key = in.readString();
-		streamUrl = in.readString();
-		feedUrl = in.readString();
+		streamName = in.readString();
+		feedId = in.readString();
 		isMaster = in.readByte() != 0;
 		isExpired = in.readByte() != 0;
 		expiresAt = new Date(in.readLong());
@@ -51,22 +51,23 @@ public class Key implements Parcelable {
 		this.key = key;
 	}
 	
-	public String getStreamUrl() {
-		return streamUrl;
+
+	public String getStreamName() {
+		return streamName;
 	}
-	
-	public void setStreamUrl(String streamUrl) {
-		this.streamUrl = streamUrl;
+
+	public void setStreamName(String streamName) {
+		this.streamName = streamName;
 	}
-	
-	public String getFeedUrl() {
-		return feedUrl;
+
+	public String getFeedId() {
+		return feedId;
 	}
-	
-	public void setFeedUrl(String feedUrl) {
-		this.feedUrl = feedUrl;
+
+	public void setFeedId(String feedId) {
+		this.feedId = feedId;
 	}
-	
+
 	public Boolean getIsMaster() {
 		return isMaster;
 	}
@@ -109,8 +110,8 @@ public class Key implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {		
 		dest.writeString(name);		
 		dest.writeString(key);
-		dest.writeString(streamUrl);
-		dest.writeString(feedUrl);
+		dest.writeString(streamName);
+		dest.writeString(feedId);
 		dest.writeByte((byte) (isMaster ? 1 : 0));
 		dest.writeByte((byte) (isExpired ? 1 : 0));
 		dest.writeLong(expiresAt.getTime());
@@ -128,10 +129,20 @@ public class Key implements Parcelable {
 	};
 	
 	public String toString() {
-		return String.format(Locale.US, "M2X Key - %s (isMaster: %s, isExpired: %s)", 
-				this.getKey(), 
-				(this.getIsMaster()) ? "Yes" : "No", 
-				(this.getIsExpired()) ? "Yes" : "No" ); 
+		
+		String value;
+		if (isMaster) {
+			value = String.format(Locale.US, "M2X Master Key - %s (isExpired: %s)", 
+					this.getKey(),
+					(this.getIsExpired()) ? "Yes" : "No" );
+		} else {
+			value = String.format(Locale.US, "M2X Feed Key - %s (isExpired: %s, for feed: %s, stream name is %s)", 
+					this.getKey(),
+					(this.getIsExpired()) ? "Yes" : "No",
+					this.getFeedId(),
+					this.getStreamName() );			
+		}
+		return value; 
 	}
 	
 }

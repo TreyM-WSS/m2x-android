@@ -31,7 +31,10 @@ public class Key extends com.att.m2x.model.Key {
 	private static final String NAME = "name";
 	private static final String KEY = "key";
 	private static final String IS_MASTER = "master";
+	private static final String FEED_ID = "feed";
 	private static final String FEED_URL = "feed";
+	private static final String FEED_URL_PREFIX = "/feeds/";
+	private static final String STREAM_NAME = "stream";
 	private static final String STREAM_URL = "stream";
 	private static final String EXPIRES_AT = "expires_at";
 	private static final String IS_EXPIRED = "expired";
@@ -39,13 +42,26 @@ public class Key extends com.att.m2x.model.Key {
 	
 	private static final String KEYS_PAGE_KEY = "keys";
 
+	public Key() {
+		
+	}
+
 	public Key(JSONObject obj) {
 		
 		this.setName(JSONHelper.stringValue(obj, NAME, ""));
 		this.setKey(JSONHelper.stringValue(obj, KEY, ""));
 		this.setIsMaster(JSONHelper.booleanValue(obj, IS_MASTER, false));
-		this.setFeedUrl(JSONHelper.stringValue(obj, FEED_URL, ""));
-		this.setStreamUrl(JSONHelper.stringValue(obj, STREAM_URL, ""));
+		
+		String feedUrl = JSONHelper.stringValue(obj, FEED_URL, "");
+		if (feedUrl.length() > 0) {
+			this.setFeedId(feedUrl.replace(FEED_URL_PREFIX, ""));			
+		}
+		
+		String streamUrl = JSONHelper.stringValue(obj, STREAM_URL, "");
+		if (streamUrl.length() > 0) {
+			this.setStreamName(streamUrl.substring(streamUrl.lastIndexOf("/") + 1));
+		}
+		
 		this.setExpiresAt(JSONHelper.dateValue(obj, EXPIRES_AT, null));
 		this.setIsExpired(JSONHelper.booleanValue(obj, IS_EXPIRED, false));
 		
@@ -67,26 +83,23 @@ public class Key extends com.att.m2x.model.Key {
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();		
 		JSONHelper.put(obj, NAME, this.getName());
-
-		StringBuilder sb = new StringBuilder();
+		
 		ArrayList<String> permissions = this.getPermissions();
 		if (permissions != null) {
+			JSONArray array = new JSONArray();
 			for (String permission : permissions)
 			{
-			    sb.append(permission);
-			    sb.append(",");
+			    array.put(permission);
 			}
-			String joinedString = sb.toString();
-			joinedString = joinedString.substring(0, joinedString.length()-1);
-			JSONHelper.put(obj, PERMISSIONS, joinedString);			
+			JSONHelper.put(obj, PERMISSIONS, array);			
 		}
 
-		String feedUrl = this.getFeedUrl();
-		if (feedUrl != null) {
-			JSONHelper.put(obj, FEED_URL, feedUrl);
-			String streamUrl = this.getStreamUrl();
-			if (streamUrl != null) {
-				JSONHelper.put(obj, STREAM_URL, streamUrl);
+		String feedId = this.getFeedId();
+		if (feedId != null) {
+			JSONHelper.put(obj, FEED_ID, feedId);
+			String streamName = this.getStreamName();
+			if (streamName != null) {
+				JSONHelper.put(obj, STREAM_NAME, streamName);
 			}
 		}
 		JSONHelper.put(obj, EXPIRES_AT, this.getExpiresAt());		
@@ -130,6 +143,27 @@ public class Key extends com.att.m2x.model.Key {
 			@Override
 			public void onFailure(int statusCode, String body) {
 				callback.onError(body);
+			}
+			
+		});
+		
+	}
+	
+	public void create(Context context, final KeyListener callback) {
+		M2XHttpClient client = M2X.getInstance().getClient();
+		String path = "/keys";
+		JSONObject content = this.toJSONObject();
+		client.post(context, null, path, content, new M2XHttpClient.Handler() {
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject object) {
+				Key key = new Key(object);
+				callback.onSuccess(key);				
+			}
+
+			@Override
+			public void onFailure(int statusCode, String message) {
+				callback.onError(message);
 			}
 			
 		});
