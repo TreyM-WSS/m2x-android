@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
@@ -50,7 +51,7 @@ public class FeedsActivity extends Activity implements OnItemClickListener {
 			
 			@Override
 			public void onError(String errorMessage) {
-				Log.d("Failed to load feeds!");
+				Log.d("m2x-test", "Failed to load feeds! " + errorMessage);
 			}
 		});
     	
