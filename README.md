@@ -665,8 +665,6 @@ datasource.update(this, new Datasource.BasicListener() {
 ### Note
 All the methods of the Keys API require a Master Key.
 
-## Blueprints
-
 ### Get all Master keys
 
 Getting a detailed list of all Master keys is easy, as shown in the following example.
