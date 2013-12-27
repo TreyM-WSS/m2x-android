@@ -252,7 +252,7 @@ temperature.setValues(this, null, myFeed.getId(), readings, new Stream.BasicList
 
 ### Add values to multiple data streams
 
-In some occasions a sensor may provide several data values simultaneosly (such as ambient pressure, temperature and wind speed). To improve performance, it is possible to post multiple values to different data streams using a single HTTP request.
+In some cases, a sensor may provide several data values simultaneosly (such as ambient pressure, temperature and wind speed). To improve performance, it is possible to post multiple values to different data streams using a single HTTP request.
 
 ```Java
 HashMap<Stream, ArrayList<StreamValue>> data = new HashMap<Stream, ArrayList<StreamValue>>();
