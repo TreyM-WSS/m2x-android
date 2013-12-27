@@ -21,13 +21,24 @@ Please keep in mind that the Android M2X API Client is currently in **Alpha**. U
 Using the Android SDK
 ------------
 
-To start using this SDK you will need to set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. Some other features, however, can be accessed by using a Feed Key. Feed Keys allow you to access specific feeds and control access permissions (some Feed keys could grant full access to a feed, while others could be restricted to GET operations only).
+To start using this SDK you will need to follow the following steps:
+
+1. Add network permissions in your manifest file
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+2. Import the ```m2x-android-sdk-v1.jar``` library file into your project.
+3. Set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. 
 
 ```Java
 import com.att.m2x.*;
 	
 M2X.getInstance().setMasterKey("Master Key goes here");
 ```
+
+Some other features, however, can be accessed by using a Feed Key. Feed Keys allow you to access specific feeds and control access permissions (some Feed keys could grant full access to a feed, while others could be restricted to GET operations only).
 
 API Client Examples
 -----
