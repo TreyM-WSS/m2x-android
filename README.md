@@ -37,7 +37,7 @@ API Client Examples
 2. All examples assume that you are performing API calls directly from an activity.
 3. Many API calls include an optional feedKey argument. If this value is null the API client will perform the request using the Master Key. If the value is not null, then it will be used instead of the Master Key.
 
-## Feeds
+# Feed API
 ### List feeds
 
 The following code obtains all the feeds available including blueprints, batches and datasources.
@@ -387,3 +387,410 @@ RequestLogEntry.getEntries(this, null, myFeed.getId(), new RequestLogEntry.Liste
 	}
 });
 ```
+
+# Datasource API
+
+### Note
+All the methods of the Datasource API require a Master Key.
+
+## Blueprints
+
+### List all blueprints
+
+In order to obtain an arraylist with all available blueprints simply use the following code:
+
+```Java
+Blueprint.getBlueprints(this, blueprintId, new Blueprint.BlueprintsListener() {
+	public void onSuccess(ArrayList<Blueprint> blueprints) {
+	}
+			
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Find blueprint by ID
+
+The following snippet shows how to obtain a blueprint from its ID value (in this case *blueprintId*)
+
+```Java
+Blueprint.getBlueprint(this, blueprintId, new Blueprint.BlueprintListener() {
+	public void onSuccess(Blueprint blueprint) {
+	}
+			
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Create blueprint
+
+The following code will create a new blueprint and set its name, description, visibility and tags.
+
+```Java
+Blueprint b = new Blueprint();
+b.setName("Test Blueprint");
+b.setDescription("This is just a test");
+b.setVisibility("public");
+b.setTags(new ArrayList<String>(Arrays.asList("tag1", "another tag", "yet another tag")));		
+b.create(this, new Blueprint.BlueprintListener() {
+	public void onSuccess(Blueprint blueprint) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Update blueprint
+
+This code snippet will update the *blueprint* instance and change its tags.
+
+```Java
+blueprint.setTags(new ArrayList<String>(Arrays.asList("a tag", "yet another tag")));
+blueprint.update(this, new Blueprint.BasicListener() {
+	public void onSuccess() {
+	}
+			
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Delete blueprint
+
+Deleting a blueprint simply requires calling the delete instance method.
+
+```Java
+blueprint.delete(this, new Blueprint.BasicListener() {
+	public void onSuccess() {
+	}
+			
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+## Batches
+
+Accessing and modifying batches is pretty much done in the same way as blueprints, with the exception of a few methods
+
+### List all batches
+
+Obtaining a list of all batches is fairly trivial:
+
+```Java
+Batch.getBatches(this, new Batch.BatchesListener() {
+	public void onSuccess(ArrayList<Batch> batches) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Find batch by ID
+
+In order to find a batch you need to provide a Batch ID, in this case provided using the *batchId* variable.
+
+```Java
+Batch.getBatch(this, batchId, new Batch.BatchListener() {
+	public void onSuccess(Batch batch) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Create batch
+
+To create a batch, first create an instance, set up some of its properties and finally call the *create* method.
+
+```Java
+Batch b = new Batch();
+b.setName("Test Batch");
+b.setDescription("Batch for testing");
+b.setVisibility("public");
+b.setTags(new ArrayList<String>(Arrays.asList("tag1", "tag2", "tag3")));
+b.create(this, new Batch.BatchListener() {
+	public void onSuccess(Batch batch) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Update batch
+
+Updating a batch is similar to creating one, with the exception of the method being used. In this example we change a batch visibility to private.
+
+```Java
+batch.setVisibility("private");
+batch.update(this, new Batch.BasicListener() {
+	public void onSuccess() {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Delete batch
+
+To delete a batch simply call the *delete* method.
+
+```Java
+batch.delete(this, new Batch.BasicListener() {
+	public void onSuccess() {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### List data sources in a batch
+
+You can obtain an arraylist of all datasources in a batch using the code below. In the example *batch* is a Batch instance previously obtained from its ID.
+
+```Java
+batch.getBatchDatasources(this, new Datasource.DatasourcesListener() {
+	public void onSuccess(ArrayList<Datasource> datasources) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Add a new data source to a batch
+
+To add a new data source to a batch you must provide a mandatory *serial* attribute that will identify it among all other datasources. This can be a device serial number or simply a descriptive name. 
+
+```Java
+String serial = "temperature_sensor_1";
+batch.addDatasource(this, serial, new Datasource.DatasourceListener() {
+	public void onSuccess(Datasource datasource) {
+		// datasource is the newly created instance.
+	}
+
+	public void onError(String errorMessage) {
+	}
+```
+
+## Data Sources
+
+### Get all Data Sources
+
+In the following snippet we are obtaining all available data sources
+
+```Java
+Datasource.getDatasources(this, new Datasource.DatasourcesListener() {
+		
+	public void onSuccess(ArrayList<Datasource> datasources) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Find Data Source from ID
+
+In the following example we are obtaining a data source whose ID is equal to *datasourceId*
+
+```Java
+Datasource.getDatasource(this, datasourceId, new Datasource.DatasourceListener() {
+		
+	public void onSuccess(Datasource datasource) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Create Data Source
+
+In the following example we are creating a new public datasource.
+
+```Java
+Datasource d = new Datasource();
+d.setName("Test Datasource");
+d.setDescription("Datasource for testing");
+d.setVisibility("public");
+d.setTags(new ArrayList<String>(Arrays.asList("tag1","tag2")));
+d.create(this, new Datasource.DatasourceListener() {
+	public void onSuccess(Datasource datasource) {
+	}
+			
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Update Data Source
+
+In the following example we are changing a data source name.
+
+```Java
+datasource.setName("New Name");
+datasource.update(this, new Datasource.BasicListener() {
+	public void onSuccess() {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Delete Data Source
+
+Deleting a data source simply consists of calling the *delete* instance method.
+
+```Java
+datasource.update(this, new Datasource.BasicListener() {
+	public void onSuccess() {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+# Keys API
+
+### Note
+All the methods of the Keys API require a Master Key.
+
+## Blueprints
+
+### Get all Master keys
+
+Getting a detailed list of all Master keys is easy, as shown in the following example.
+
+```Java
+Key.getKeys(this, new Key.KeysListener() {
+	public void onSuccess(ArrayList<Key> keys) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Get Feed keys
+
+You can get a full list of keys associated to a Feed by using the following code. Notice that the only change respect to the previous example is the presence of a *feedId* argument.
+
+```Java
+Key.getKeys(this, feedId, new Key.KeysListener() {
+	public void onSuccess(ArrayList<Key> keys) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Obtain key information
+
+In case you've got a key and need to determine whether it is a Feed or Master key, or simply check if you have POST permissions, you can do it by using code similar to the following snippet
+
+```Java
+String keyValue = "Key Value Goes Here";
+Key.getKey(this, keyValue, new Key.KeyListener() {
+	public void onSuccess(Key key) {
+		// using the Key object you can now verify permissions (if needed)
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Create key
+
+Creating a key is really easy. In case you are creating a Master Key you do not need to provide any Feed ID or Stream name. The following code will create a Master Key with GET and PUT permissions only, and will assign to it an expiration date of a year after today.
+
+```Java
+Calendar today_plus_year = Calendar.getInstance();  
+today_plus_year.add( Calendar.YEAR, 1 ); 
+
+Key masterKey = new Key();
+masterKey.setName("My new Master Key");
+masterKey.setPermissions(new ArrayList<String>(Arrays.asList("GET", "PUT")));
+masterKey.setExpiresAt(today_plus_year.getTime());
+masterKey.create(this, new Key.KeyListener() {
+	public void onSuccess(Key key) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+To make a Feed Key simply specify an ID, and if you want to restrict it to a particular Stream, then specify the Stream name too. The following code will create a Feed key with GET permissions over the *temperature* stream of the *boiler* feed.
+
+```Java
+Key feedKey = new Key();
+feedKey.setName("Temperature read-only key");
+feedKey.setFeedId(boiler.getId());
+feedKey.setStreamName("temperature");
+feedKey.setPermissions(new ArrayList<String>(Arrays.asList("GET")));
+feedKey.create(this, new Key.KeyListener() {
+	public void onSuccess(Key key) {
+	}
+
+	public void onError(String errorMessage) {
+	}
+});
+```
+
+### Update key
+
+In the following example we restrict the permissions of a Master Key to the GET method only.
+
+```Java
+masterKey.setPermissions(new ArrayList<String>(Arrays.asList("GET")));
+masterKey.update(this, new Key.BasicListener() {
+	public void onSuccess() {
+		// update was successful
+	}
+
+	public void onError(String errorMessage) {
+	}	});
+```
+
+### Delete key
+
+The following snippet will delete a key.
+
+```Java
+Key key = new Key();
+key.setKeyValue("Key to be Deleted Goes Here");
+key.delete(this, new Key.BasicListener() {
+	public void onSuccess() {
+		// key was deleted
+	}
+
+	public void onError(String errorMessage) {
+	}	});
+```
+
+### Regenerate key
+
+Sometimes you might want to regenerate a key, preserving all of its properties (such as name and permissions) but changing the Key value. You can perform that action using the following code:
+
+```Java
+Key oldKey = new Key();
+oldKey.setKeyValue("Key to be Regenerated Goes Here");
+oldKey.regenerate(this, new Key.KeyListener() {
+	public void onSuccess(Key key) {
+		// the provided key instance contains the new key value
+	}
+
+	public void onError(String errorMessage) {
+	}	```
