@@ -1,6 +1,6 @@
 package com.att.m2x;
 
-public class Log {
+public class M2XLog {
 
 	private static String DEFAULT_TAG = "M2X-SDK";
 	

@@ -86,7 +86,7 @@ public final class Batch extends com.att.m2x.Feed {
 						array.add(batch);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse Batch JSON objects");
+					M2XLog.d("Failed to parse Batch JSON objects");
 				}
 				callback.onSuccess(array);
 				
@@ -142,7 +142,7 @@ public final class Batch extends com.att.m2x.Feed {
 						array.add(datasource);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse Datasource JSON objects");
+					M2XLog.d("Failed to parse Datasource JSON objects");
 				}
 				callback.onSuccess(array);
 				

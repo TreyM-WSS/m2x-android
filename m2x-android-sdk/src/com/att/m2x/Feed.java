@@ -146,7 +146,7 @@ public class Feed extends com.att.m2x.model.Feed {
 						array.add(feed);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse Feed JSON objects");
+					M2XLog.d("Failed to parse Feed JSON objects");
 				}
 				callback.onSuccess(array);
 				

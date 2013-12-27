@@ -85,7 +85,7 @@ public final class Stream extends com.att.m2x.model.Stream implements JSONSerial
 						array.add(stream);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse json objects");
+					M2XLog.d("Failed to parse json objects");
 				}
 				callback.onSuccess(array);
 				
@@ -171,7 +171,7 @@ public final class Stream extends com.att.m2x.model.Stream implements JSONSerial
 						array.add(value);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse StreamValue JSON objects");
+					M2XLog.d("Failed to parse StreamValue JSON objects");
 				}
 				callback.onSuccess(array);
 			}

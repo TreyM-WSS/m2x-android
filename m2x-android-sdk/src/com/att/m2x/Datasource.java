@@ -66,7 +66,7 @@ public final class Datasource extends Feed {
 						array.add(datasource);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse Batch JSON objects");
+					M2XLog.d("Failed to parse Batch JSON objects");
 				}
 				callback.onSuccess(array);
 				

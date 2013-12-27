@@ -29,8 +29,10 @@ To start using this SDK you will need to follow the following steps:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-2. Import the ```m2x-android-sdk-v1.jar``` library file into your project.
-3. Set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. 
+2. Copy to your ```libs``` directory the file ```m2x-android-sdk.jar``` found in the library ```/bin``` directory.
+3. Copy to your ```libs``` directory the file ```android-async-http-1.4.4.jar``` found in the library ```/libs``` directory.
+4. In Eclipse, right click your project and select Build Path > Configure Build Path. In the libraries tab, select ```Add JARs...```, then select both jar files added in the previous steps.
+3. Your project should now compile. To start using M2X, set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. 
 
 ```Java
 import com.att.m2x.*;

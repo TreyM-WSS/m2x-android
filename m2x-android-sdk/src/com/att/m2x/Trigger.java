@@ -73,7 +73,7 @@ public final class Trigger extends com.att.m2x.model.Trigger implements JSONSeri
 						array.add(trigger);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse Trigger JSON objects");
+					M2XLog.d("Failed to parse Trigger JSON objects");
 				}
 				callback.onSuccess(array);
 				

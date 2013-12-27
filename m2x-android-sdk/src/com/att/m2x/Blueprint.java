@@ -72,7 +72,7 @@ public final class Blueprint extends com.att.m2x.Feed {
 						array.add(blueprint);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse Blueprint JSON objects");
+					M2XLog.d("Failed to parse Blueprint JSON objects");
 				}
 				callback.onSuccess(array);
 				

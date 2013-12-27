@@ -134,7 +134,7 @@ public class Key extends com.att.m2x.model.Key {
 						array.add(key);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse Key JSON objects");
+					M2XLog.d("Failed to parse Key JSON objects");
 				}
 				callback.onSuccess(array);
 				

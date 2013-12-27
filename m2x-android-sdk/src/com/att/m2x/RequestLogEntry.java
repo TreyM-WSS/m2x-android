@@ -47,7 +47,7 @@ public class RequestLogEntry extends com.att.m2x.model.RequestLogEntry {
 						array.add(entry);
 					}
 				} catch (JSONException e) {
-					Log.d("Failed to parse RequestLogEntry JSON objects");
+					M2XLog.d("Failed to parse RequestLogEntry JSON objects");
 				}
 				callback.onSuccess(array);
 			}
