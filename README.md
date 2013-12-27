@@ -16,12 +16,12 @@ If you have questions about any M2X specific terms, please consult the M2X gloss
 Before using this SDK
 ------
 
-Please keep in mind that the Android M2X API Client is currently in **Alpha**. Using it in a production environment is highly discouraged. Classes and method signatures are all subject to change.
+Please keep in mind that the Android M2X API Client is currently in **Beta**. Please use caution when using it in a production environment. Classes and method signatures are all subject to change.
 
 Using the Android SDK
 ------------
 
-To start using this SDK you will need to follow the following steps:
+To start using this SDK you will need to follow the steps below:
 
 1. Add network permissions in your manifest file
 
@@ -120,7 +120,7 @@ Location.getLocation(this, null, myFeed.getId(), new Location.LocationListener()
 
 ### Set feed location
 
-The following code sets the location of *myFeed* to AT&T's corporate headquarters at Dallas.
+The following code sets the location of *myFeed* to AT&T's corporate headquarters in Dallas, Texas.
 
 ```Java
 Location place = new Location();
@@ -486,7 +486,7 @@ blueprint.delete(this, new Blueprint.BasicListener() {
 
 ## Batches
 
-Accessing and modifying batches is pretty much done in the same way as blueprints, with the exception of a few methods
+Accessing and modifying batches is done in a similar same way as blueprints, with the exception of a few methods
 
 ### List all batches
 
@@ -537,7 +537,7 @@ b.create(this, new Batch.BatchListener() {
 
 ### Update batch
 
-Updating a batch is similar to creating one, with the exception of the method being used. In this example we change a batch visibility to private.
+Updating a batch is similar to creating one, with the exception of the method being used. In this example we change a batch's visibility to private.
 
 ```Java
 batch.setVisibility("private");
@@ -694,7 +694,7 @@ Key.getKeys(this, new Key.KeysListener() {
 
 ### Get Feed keys
 
-You can get a full list of keys associated to a Feed by using the following code. Notice that the only change respect to the previous example is the presence of a *feedId* argument.
+You can get a full list of keys associated with a Feed by using the following code. Notice that the only change with respect to the previous example is the presence of a *feedId* argument.
 
 ```Java
 Key.getKeys(this, feedId, new Key.KeysListener() {
@@ -708,7 +708,7 @@ Key.getKeys(this, feedId, new Key.KeysListener() {
 
 ### Obtain key information
 
-In case you've got a key and need to determine whether it is a Feed or Master key, or simply check if you have POST permissions, you can do it by using code similar to the following snippet
+In case you've got a key and need to determine whether it is a Feed or Master key, or simply check if you have POST permissions, you can do so by using code similar to the following snippet
 
 ```Java
 String keyValue = "Key Value Goes Here";
@@ -724,7 +724,7 @@ Key.getKey(this, keyValue, new Key.KeyListener() {
 
 ### Create key
 
-Creating a key is really easy. In case you are creating a Master Key you do not need to provide any Feed ID or Stream name. The following code will create a Master Key with GET and PUT permissions only, and will assign to it an expiration date of a year after today.
+Creating a key is very easy. In case you are creating a Master Key you do not need to provide any Feed ID or Stream name. The following code will create a Master Key with GET and PUT permissions only, and will assign to it an expiration date of a year after today.
 
 ```Java
 Calendar today_plus_year = Calendar.getInstance();  
@@ -772,7 +772,8 @@ masterKey.update(this, new Key.BasicListener() {
 	}
 
 	public void onError(String errorMessage) {
-	}	});
+	}	
+});
 ```
 
 ### Delete key
@@ -788,7 +789,8 @@ key.delete(this, new Key.BasicListener() {
 	}
 
 	public void onError(String errorMessage) {
-	}	});
+	}	
+});
 ```
 
 ### Regenerate key
@@ -804,4 +806,5 @@ oldKey.regenerate(this, new Key.KeyListener() {
 	}
 
 	public void onError(String errorMessage) {
-	}	```
+	}	
+```
