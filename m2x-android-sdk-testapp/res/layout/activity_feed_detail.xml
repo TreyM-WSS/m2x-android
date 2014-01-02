@@ -24,7 +24,6 @@
 		    android:id="@+id/name"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:text="@string/none"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
         
 		<View
@@ -45,7 +44,6 @@
 		    android:id="@+id/description"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:text="@string/none"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		<View
@@ -65,7 +63,6 @@
 		    android:id="@+id/visibility"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:text="@string/none"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		<View
@@ -85,7 +82,6 @@
 		    android:id="@+id/status"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:text="@string/none"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		<View
@@ -105,7 +101,6 @@
 		    android:id="@+id/type"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:text="@string/none"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		<View
@@ -125,7 +120,6 @@
 		    android:id="@+id/created"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:text="@string/none"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		<View
@@ -145,10 +139,28 @@
 		    android:id="@+id/updated"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:text="@string/none"
 		    android:textAppearance="?android:attr/textAppearanceMedium" />
 		
-    </LinearLayout>
+		<View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:layout_marginTop="5sp"
+		    android:layout_marginBottom="5sp"
+		    android:background="@android:drawable/divider_horizontal_dark"/>
+		
+        <TextView
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/location"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		<TextView
+		    android:id="@+id/location"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		</LinearLayout>
     
     
 </ScrollView>

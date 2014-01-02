@@ -17,8 +17,6 @@
     <string name="tags">Tags</string>
     <string name="created">Created</string>
     <string name="updated">Updated</string>
-    <string name="title_activity_feed">FeedActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_feed_location">FeedLocationActivity</string>
+    <string name="location">Location</string>
 
 </resources>

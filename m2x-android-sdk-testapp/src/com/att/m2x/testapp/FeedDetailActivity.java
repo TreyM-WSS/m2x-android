@@ -1,12 +1,14 @@
 package com.att.m2x.testapp;
 
+import java.util.Locale;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.TextView;
 
 import com.att.m2x.helpers.DateHelper;
-import com.att.m2x.model.*;
+import com.att.m2x.*;
 
 public class FeedDetailActivity extends Activity {
 
@@ -19,8 +21,8 @@ public class FeedDetailActivity extends Activity {
 	private TextView status;
 	private TextView type;
 	private TextView created;
-	private TextView updated;
-	
+	private TextView updated;	
+	private TextView location;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class FeedDetailActivity extends Activity {
 			type = (TextView) findViewById(R.id.type);
 			created = (TextView) findViewById(R.id.created);
 			updated = (TextView) findViewById(R.id.updated);
+			location = (TextView) findViewById(R.id.location);
 			
 			name.setText(feed.getName());
 			description.setText(feed.getDescription());
@@ -47,6 +50,9 @@ public class FeedDetailActivity extends Activity {
 			type.setText(feed.getType());
 			created.setText(DateHelper.dateToString(feed.getCreated()));
 			updated.setText(DateHelper.dateToString(feed.getUpdated()));
+
+			Location loc = feed.getLocation();
+			location.setText((loc != null) ? String.format(Locale.US, "%.5f, %.5f", loc.getLatitude(), loc.getLongitude()) : "Unknown");
 
 		} else {
 			finish();			

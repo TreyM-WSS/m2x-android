@@ -54,8 +54,10 @@ public class Feed extends com.att.m2x.model.Feed {
 		
 	}
 	
-	public Feed(Parcel in) {
+	public Feed(Parcel in) {		
 		super(in);
+		location = in.readParcelable(Location.class.getClassLoader());
+		
 		streams = new ArrayList<Stream>();
         in.readList(streams, Stream.class.getClassLoader());
 
@@ -66,6 +68,14 @@ public class Feed extends com.att.m2x.model.Feed {
         in.readStringList(tags);
 	}
 	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeParcelable(location, flags);
+		dest.writeList(streams);
+		dest.writeList(triggers);
+		dest.writeStringList(tags);
+	}
 	public Feed(JSONObject obj) {
 		
 		this.setId(JSONHelper.stringValue(obj, ID, ""));
@@ -282,14 +292,6 @@ public class Feed extends com.att.m2x.model.Feed {
 		}
 		
 		return obj;
-	}
-	
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		super.writeToParcel(dest, flags);
-		dest.writeList(streams);
-		dest.writeList(triggers);
-		dest.writeStringList(tags);
 	}
 	
 	public static final Parcelable.Creator<Feed> CREATOR = new Parcelable.Creator<Feed>() {

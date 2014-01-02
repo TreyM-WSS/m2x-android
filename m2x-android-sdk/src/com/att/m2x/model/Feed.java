@@ -36,6 +36,20 @@ public class Feed implements Parcelable {
 		updated = new Date(in.readLong());
 	}
 	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeString(name);
+		dest.writeString(description);
+		dest.writeString(visibility);
+		dest.writeString(status);
+		dest.writeString(type);
+		dest.writeString(url);
+		dest.writeString(key);
+		dest.writeLong(created.getTime());
+		dest.writeLong(updated.getTime());
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -126,20 +140,6 @@ public class Feed implements Parcelable {
 	@Override
 	public int describeContents() {
 		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(id);
-		dest.writeString(name);
-		dest.writeString(description);
-		dest.writeString(visibility);
-		dest.writeString(status);
-		dest.writeString(type);
-		dest.writeString(url);
-		dest.writeString(key);
-		dest.writeLong(created.getTime());
-		dest.writeLong(updated.getTime());
 	}
 
 	public static final Parcelable.Creator<Feed> CREATOR = new Parcelable.Creator<Feed>() {

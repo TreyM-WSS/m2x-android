@@ -5,6 +5,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.att.m2x.helpers.*;
 
 public final class Location extends com.att.m2x.model.Location implements JSONSerializable {
@@ -51,6 +54,10 @@ public final class Location extends com.att.m2x.model.Location implements JSONSe
 				this.setWaypoints(null);
 			}
 		}		
+	}
+	
+	public Location(Parcel in) {
+		super(in);
 	}
 	
 	public static void getLocation(Context context, String feedKey, String feedId, final LocationListener callback) {
@@ -122,5 +129,15 @@ public final class Location extends com.att.m2x.model.Location implements JSONSe
 //		JSONHelper.putValues(obj, WAYPOINTS, this.getWaypoints());
 		return obj;
 	}
+
+	public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {
+	    public Location createFromParcel(Parcel in) {
+	     return new Location(in);
+	    }
+
+	    public Location[] newArray(int size) {
+	     return new Location[size];
+	    }
+	};
 
 }
