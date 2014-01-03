@@ -11,6 +11,7 @@ import com.att.m2x.helpers.JSONHelper;
 
 import android.content.Context;
 import android.os.Parcel;
+import android.os.Parcelable;
 
 public final class Blueprint extends com.att.m2x.Feed {
 
@@ -38,16 +39,16 @@ public final class Blueprint extends com.att.m2x.Feed {
 		
 	}
 	
-	public Blueprint(Parcel in) {
-		super(in);
-		serial = in.readString();
-	}	
-
 	public Blueprint(JSONObject obj) {
 		super(obj);
 		this.setSerial(JSONHelper.stringValue(obj, SERIAL, ""));
 	}
 	
+	public Blueprint(Parcel in) {
+		super(in);
+		serial = in.readString();
+	}	
+
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
@@ -188,4 +189,14 @@ public final class Blueprint extends com.att.m2x.Feed {
 				this.getSerial() ); 
 	}
 
+	public static final Parcelable.Creator<Blueprint> CREATOR = new Parcelable.Creator<Blueprint>() {
+	    public Blueprint createFromParcel(Parcel in) {
+	     return new Blueprint(in);
+	    }
+
+	    public Blueprint[] newArray(int size) {
+	     return new Blueprint[size];
+	    }
+	};
+	
 }

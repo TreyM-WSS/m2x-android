@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.att.m2x.helpers.JSONHelper;
 import com.att.m2x.helpers.JSONSerializable;
@@ -47,6 +49,10 @@ public final class Stream extends com.att.m2x.model.Stream implements JSONSerial
 
 	public Stream() {
 		
+	}
+	
+	public Stream(Parcel in) {
+		super(in);
 	}
 		
 	public Stream(JSONObject obj) {
@@ -256,5 +262,15 @@ public final class Stream extends com.att.m2x.model.Stream implements JSONSerial
 		JSONHelper.put(obj, UNIT, ((Unit) this.getUnit()).toJSONObject() );
 		return obj;
 	}
+	
+	public static final Parcelable.Creator<Stream> CREATOR = new Parcelable.Creator<Stream>() {
+	    public Stream createFromParcel(Parcel in) {
+	     return new Stream(in);
+	    }
+
+	    public Stream[] newArray(int size) {
+	     return new Stream[size];
+	    }
+	};
 	
 }

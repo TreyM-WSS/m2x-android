@@ -17,6 +17,12 @@ public class Unit implements Parcelable {
 		symbol = in.readString();
 	}
 	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(label);
+		dest.writeString(symbol);
+	}
+	
 	public String getLabel() {
 		return label;
 	}
@@ -42,12 +48,6 @@ public class Unit implements Parcelable {
 	@Override
 	public int describeContents() {
 		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(label);
-		dest.writeString(symbol);
 	}
 	
 	public static final Parcelable.Creator<Unit> CREATOR = new Parcelable.Creator<Unit>() {

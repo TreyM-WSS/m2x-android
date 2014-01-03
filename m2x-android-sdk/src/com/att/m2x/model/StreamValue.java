@@ -22,6 +22,12 @@ public class StreamValue implements Parcelable {
 		value = in.readDouble();		
 	}
 	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(DateHelper.dateToString(date));
+		dest.writeDouble(value);		
+	}
+		
 	public Date getDate() {
 		return date;
 	}
@@ -50,12 +56,6 @@ public class StreamValue implements Parcelable {
 		return 0;
 	}
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(DateHelper.dateToString(date));
-		dest.writeDouble(value);		
-	}
-	
 	public static final Parcelable.Creator<StreamValue> CREATOR = new Parcelable.Creator<StreamValue>() {
 	    public StreamValue createFromParcel(Parcel in) {
 	     return new StreamValue(in);

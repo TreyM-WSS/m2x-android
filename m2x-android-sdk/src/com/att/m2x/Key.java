@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import com.att.m2x.helpers.JSONHelper;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 public class Key extends com.att.m2x.model.Key {
 
@@ -78,6 +80,10 @@ public class Key extends com.att.m2x.model.Key {
 			}			
 		}
 
+	}
+	
+	public Key(Parcel in) {
+		super(in);
 	}
 	
 	public JSONObject toJSONObject() {
@@ -252,5 +258,15 @@ public class Key extends com.att.m2x.model.Key {
 		});
 		
 	}
+	
+	public static final Parcelable.Creator<Key> CREATOR = new Parcelable.Creator<Key>() {
+	    public Key createFromParcel(Parcel in) {
+	     return new Key(in);
+	    }
+
+	    public Key[] newArray(int size) {
+	     return new Key[size];
+	    }
+	};
 	
 }

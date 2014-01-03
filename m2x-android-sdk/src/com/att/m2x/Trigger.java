@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.att.m2x.helpers.JSONHelper;
 import com.att.m2x.helpers.JSONSerializable;
 
@@ -53,6 +56,10 @@ public final class Trigger extends com.att.m2x.model.Trigger implements JSONSeri
 		this.setStatus(JSONHelper.stringValue(obj, STATUS, ""));
 		this.setCreated(JSONHelper.dateValue(obj, CREATED, null));
 		this.setUpdated(JSONHelper.dateValue(obj, UPDATED, null));
+	}
+	
+	public Trigger(Parcel in) {
+		super(in);
 	}
 	
 	public static void getTriggers(Context context, String feedKey, String feedId, final TriggersListener callback) {
@@ -203,5 +210,15 @@ public final class Trigger extends com.att.m2x.model.Trigger implements JSONSeri
 		JSONHelper.put(obj, STATUS, this.getStatus());
 		return obj;
 	}
+
+	public static final Parcelable.Creator<Trigger> CREATOR = new Parcelable.Creator<Trigger>() {
+	    public Trigger createFromParcel(Parcel in) {
+	     return new Trigger(in);
+	    }
+
+	    public Trigger[] newArray(int size) {
+	     return new Trigger[size];
+	    }
+	};
 
 }

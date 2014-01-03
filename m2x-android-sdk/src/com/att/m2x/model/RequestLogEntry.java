@@ -15,7 +15,7 @@ public class RequestLogEntry implements Parcelable {
 	private String method;
 	private String path;
 	
-	public RequestLogEntry() {
+	protected RequestLogEntry() {
 		
 	}
 	
@@ -24,6 +24,14 @@ public class RequestLogEntry implements Parcelable {
 		statusCode = in.readInt();
 		method = in.readString();
 		path = in.readString();
+	}
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(DateHelper.dateToString(date));
+		dest.writeInt(statusCode);
+		dest.writeString(method);
+		dest.writeString(path);
 	}
 	
 	public Date getDate() {
@@ -69,14 +77,6 @@ public class RequestLogEntry implements Parcelable {
 	@Override
 	public int describeContents() {
 		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(DateHelper.dateToString(date));
-		dest.writeInt(statusCode);
-		dest.writeString(method);
-		dest.writeString(path);
 	}
 
 	public static final Parcelable.Creator<RequestLogEntry> CREATOR = new Parcelable.Creator<RequestLogEntry>() {

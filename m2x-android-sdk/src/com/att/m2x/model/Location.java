@@ -26,6 +26,19 @@ public class Location implements Parcelable {
 		timestamp = new Date(in.readLong());
 	}
 	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(name);
+		dest.writeDouble(latitude);
+		dest.writeDouble(longitude);
+		dest.writeDouble(elevation);
+		if (timestamp != null) {
+			dest.writeLong(timestamp.getTime());	
+		} else {
+			dest.writeLong(0);
+		}
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -76,15 +89,6 @@ public class Location implements Parcelable {
 	@Override
 	public int describeContents() {
 		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(name);
-		dest.writeDouble(latitude);
-		dest.writeDouble(longitude);
-		dest.writeDouble(elevation);
-		dest.writeLong(timestamp.getTime());
 	}
 
 	public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {

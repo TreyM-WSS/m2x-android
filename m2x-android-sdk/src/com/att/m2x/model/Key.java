@@ -117,17 +117,7 @@ public class Key implements Parcelable {
 		dest.writeLong(expiresAt.getTime());
 		dest.writeStringList(permissions);
 	}
-	
-	public static final Parcelable.Creator<Key> CREATOR = new Parcelable.Creator<Key>() {
-	    public Key createFromParcel(Parcel in) {
-	     return new Key(in);
-	    }
-
-	    public Key[] newArray(int size) {
-	     return new Key[size];
-	    }
-	};
-	
+		
 	public String toString() {
 		
 		String value;
@@ -144,5 +134,15 @@ public class Key implements Parcelable {
 		}
 		return value; 
 	}
+	
+	public static final Parcelable.Creator<Key> CREATOR = new Parcelable.Creator<Key>() {
+	    public Key createFromParcel(Parcel in) {
+	     return new Key(in);
+	    }
+
+	    public Key[] newArray(int size) {
+	     return new Key[size];
+	    }
+	};
 	
 }

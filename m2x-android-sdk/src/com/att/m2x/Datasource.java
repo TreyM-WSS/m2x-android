@@ -11,6 +11,7 @@ import com.att.m2x.helpers.JSONHelper;
 
 import android.content.Context;
 import android.os.Parcel;
+import android.os.Parcelable;
 
 public final class Datasource extends Feed {
 
@@ -38,16 +39,22 @@ public final class Datasource extends Feed {
 		
 	}
 	
-	public Datasource(Parcel in) {
-		super(in);
-		serial = in.readString();
-	}
-
 	public Datasource(JSONObject obj) {
 		super(obj);
 		this.setSerial(JSONHelper.stringValue(obj, SERIAL, ""));
 	}
 
+	public Datasource(Parcel in) {
+		super(in);
+		serial = in.readString();
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(serial);
+	}
+	
 	public static void getDatasources(Context context, final DatasourcesListener callback) {
 		
 		M2XHttpClient client = M2X.getInstance().getClient();
@@ -175,17 +182,21 @@ public final class Datasource extends Feed {
 		this.serial = serial;
 	}
 	
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		super.writeToParcel(dest, flags);
-		dest.writeString(serial);
-	}
-
 	public String toString() {
 		return String.format(Locale.US, "M2X Datasource - %s %s (serial: %s)", 
 				this.getId(), 
 				this.getName(), 
 				this.getSerial() ); 
 	}
+
+	public static final Parcelable.Creator<Datasource> CREATOR = new Parcelable.Creator<Datasource>() {
+	    public Datasource createFromParcel(Parcel in) {
+	     return new Datasource(in);
+	    }
+
+	    public Datasource[] newArray(int size) {
+	     return new Datasource[size];
+	    }
+	};
 
 }

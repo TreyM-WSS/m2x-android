@@ -11,6 +11,7 @@ import com.att.m2x.helpers.JSONHelper;
 
 import android.content.Context;
 import android.os.Parcel;
+import android.os.Parcelable;
 
 public final class Batch extends com.att.m2x.Feed {
 
@@ -45,15 +46,7 @@ public final class Batch extends com.att.m2x.Feed {
 	public Batch() {
 		
 	}
-	
-	public Batch(Parcel in) {
-		super(in);
-		serial = in.readString();
-		totalDatasources = in.readInt();
-		registeredDatasources = in.readInt();
-		unregisteredDatasources = in.readInt();
-	}
-	
+
 	public Batch(JSONObject obj) {
 		super(obj);
 		this.setSerial(JSONHelper.stringValue(obj, SERIAL, ""));
@@ -66,6 +59,23 @@ public final class Batch extends com.att.m2x.Feed {
 		} catch (JSONException e) {
 		}
 		
+	}
+	
+	public Batch(Parcel in) {
+		super(in);
+		serial = in.readString();
+		totalDatasources = in.readInt();
+		registeredDatasources = in.readInt();
+		unregisteredDatasources = in.readInt();
+	}
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(serial);
+		dest.writeInt(totalDatasources);
+		dest.writeInt(registeredDatasources);
+		dest.writeInt(unregisteredDatasources);
 	}
 	
 	public static void getBatches(Context context, final BatchesListener callback) {
@@ -277,20 +287,21 @@ public final class Batch extends com.att.m2x.Feed {
 		this.unregisteredDatasources = unregisteredDatasources;
 	}
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		super.writeToParcel(dest, flags);
-		dest.writeString(serial);
-		dest.writeInt(totalDatasources);
-		dest.writeInt(registeredDatasources);
-		dest.writeInt(unregisteredDatasources);
-	}
-
 	public String toString() {
 		return String.format(Locale.US, "M2X Batch - %s %s (total datasources: %d)", 
 				this.getId(), 
 				this.getName(), 
 				this.getTotalDatasources() ); 
 	}
+
+	public static final Parcelable.Creator<Batch> CREATOR = new Parcelable.Creator<Batch>() {
+	    public Batch createFromParcel(Parcel in) {
+	     return new Batch(in);
+	    }
+
+	    public Batch[] newArray(int size) {
+	     return new Batch[size];
+	    }
+	};
 
 }

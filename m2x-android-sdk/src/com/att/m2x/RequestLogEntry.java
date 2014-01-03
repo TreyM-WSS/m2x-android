@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.att.m2x.helpers.JSONHelper;
 
 public class RequestLogEntry extends com.att.m2x.model.RequestLogEntry {
@@ -20,9 +23,9 @@ public class RequestLogEntry extends com.att.m2x.model.RequestLogEntry {
 	private static final String METHOD = "http_method";
 	private static final String PATH = "path";
 	
-	private RequestLogEntry() {
+	protected RequestLogEntry() {		
 	}
-
+	
 	private RequestLogEntry(JSONObject obj) {		
 		this.setDate(JSONHelper.dateValue(obj, DATE, null));
 		this.setStatusCode(JSONHelper.intValue(obj, STATUS_CODE, 0));
@@ -30,6 +33,10 @@ public class RequestLogEntry extends com.att.m2x.model.RequestLogEntry {
 		this.setPath(JSONHelper.stringValue(obj, PATH, ""));
 	}
 
+	public RequestLogEntry(Parcel in) {
+		super(in);
+	}
+	
 	public static void getEntries(Context context, String feedKey, String feedId, final Listener callback) {
 		M2XHttpClient client = M2X.getInstance().getClient();
 		String path = "/feeds/" + feedId + "/log";
@@ -58,5 +65,15 @@ public class RequestLogEntry extends com.att.m2x.model.RequestLogEntry {
 			}
 		});
 	}
+	
+	public static final Parcelable.Creator<RequestLogEntry> CREATOR = new Parcelable.Creator<RequestLogEntry>() {
+	    public RequestLogEntry createFromParcel(Parcel in) {
+	     return new RequestLogEntry(in);
+	    }
+
+	    public RequestLogEntry[] newArray(int size) {
+	     return new RequestLogEntry[size];
+	    }
+	};
 	
 }

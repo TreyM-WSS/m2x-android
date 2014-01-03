@@ -88,8 +88,11 @@ public class Feed extends com.att.m2x.model.Feed {
 		this.setKey(JSONHelper.stringValue(obj, KEY, ""));
 	
 		try {
-			Location location = new Location(obj.getJSONObject(LOCATION));
-			this.setLocation(location);
+			JSONObject jsonObject = obj.getJSONObject(LOCATION);
+			if (jsonObject.length() > 0) {
+				Location location = new Location(jsonObject);
+				this.setLocation(location);
+			}
 		} catch (JSONException e) {
 		}			
 	
