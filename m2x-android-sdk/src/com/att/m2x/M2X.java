@@ -10,7 +10,7 @@ package com.att.m2x;
 public final class M2X {
 
 	public static String VERSION = "1.0";
-	private static String DEFAULT_BASE_URL = "http://api-m2x.att.citrusbyte.com/v1";
+	private static String DEFAULT_BASE_URL = "http://api-m2x.att.com/v1";
 	private static M2X mInstance = null;
 	private static M2XHttpClient client = new M2XHttpClient();
 	
