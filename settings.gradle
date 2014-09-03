@@ -1,0 +1,2 @@
+include ':m2xandroidsdk'
+include ':m2xandroidsdktestapp'

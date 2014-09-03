@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="unspecified" >
+        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/assets" />
+    </dataSet>
+    <dataSet config="main" >
+        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/assets" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/debug/assets" />
+    </dataSet>
+
+</merger>
