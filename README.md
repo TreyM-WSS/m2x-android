@@ -29,7 +29,7 @@ To start using this SDK you will need to follow the steps below:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-2. Get the .aar file from m2xandroidsdk->build->outputs->aar and import it in android studio as a new module (File->New Module->From .AAR).
+2. Get the .aar file from the project root and import it in android studio as a new module (File->New Module->From .AAR).
 3. Open your project settings and create a dependency between your app and the android sdk module.
 4. Your project should now compile. To start using M2X, set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. 
 
