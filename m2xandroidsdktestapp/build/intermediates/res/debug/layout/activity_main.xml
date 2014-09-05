@@ -8,15 +8,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".FeedsActivity" >
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="20sp"
+        android:text="Feeds"
+    />
+
     <ListView
         android:id="@+id/feedView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_height="fill_parent"
+        android:layout_below="@id/title"
+        >
+
     </ListView>
 
 </RelativeLayout>
-<!-- From: file:/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/layout/activity_main.xml -->

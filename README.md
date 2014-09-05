@@ -29,10 +29,9 @@ To start using this SDK you will need to follow the steps below:
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-2. Copy to your ```libs``` directory the file ```m2x-android-sdk.jar``` found in the library ```/bin``` directory.
-3. Copy to your ```libs``` directory the file ```android-async-http-1.4.4.jar``` found in the library ```/libs``` directory.
-4. In Eclipse, right click your project and select Build Path > Configure Build Path. In the libraries tab, select ```Add JARs...```, then select both jar files added in the previous steps.
-3. Your project should now compile. To start using M2X, set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. 
+2. Get the .aar file from m2xandroidsdk->build->outputs->aar and import it in android studio as a new module (File->New Module->From .AAR).
+3. Open your project settings and create a dependency between your app and the android sdk module.
+4. Your project should now compile. To start using M2X, set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds. 
 
 ```Java
 import com.att.m2x.*;
@@ -231,7 +230,9 @@ Random randomGenerator = new Random();
 ArrayList<StreamValue> readings = new ArrayList<StreamValue>();
 for (int i = 0 ; i < 5 ; i++) {
 	double reading = randomGenerator.nextDouble() * 100;
+	Date date = new Date();
 	StreamValue value = new StreamValue();
+    value.setDate(date);
 	value.setValue(reading);
 	readings.add(value);
 }
@@ -272,6 +273,20 @@ myFeed.setValuesForMultipleStreams(this, null, data,  new Feed.BasicListener() {
 
 	public void onError(String errorMessage) {
 	}			
+});
+```
+
+### Delete stream values by range
+
+The following code deletes the *temperature* data stream values belonging to myFeed, by range.
+
+```Java
+temperature.deleteValuesByRange(this, null, myFeed.getId(), from, end, new Stream.BasicListener() {
+    public void onSuccess() {
+    }
+
+    public void onError(String errorMessage) {
+    }
 });
 ```
 

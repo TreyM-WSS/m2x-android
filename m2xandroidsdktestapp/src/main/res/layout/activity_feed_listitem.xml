@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
     
     <TextView
         android:id="@+id/symbol"
@@ -23,6 +23,30 @@
         android:layout_marginLeft="10dp"
         android:textColor="@android:color/primary_text_light"
         android:textSize="20sp"
+    />
+
+    <ImageButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_new"
+        android:layout_toRightOf="@+id/title"
+    />
+
+    <ImageButton
+        android:id="@+id/removeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/addButton"
+        android:src="@drawable/ic_action_remove"
+    />
+
+    <ImageButton
+        android:id="@+id/deleteStreamButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/removeButton"
+        android:src="@drawable/ic_action_discard"
     />
     
 </RelativeLayout>

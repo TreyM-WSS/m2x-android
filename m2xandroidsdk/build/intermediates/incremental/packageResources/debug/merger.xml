@@ -2,30 +2,30 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res" >
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res" >
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res/drawable-hdpi/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res/drawable-hdpi/ic_launcher.png"
                 qualifiers="hdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res/drawable-mdpi/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res/drawable-mdpi/ic_launcher.png"
                 qualifiers="mdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res/drawable-xhdpi/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res/drawable-xhdpi/ic_launcher.png"
                 qualifiers="xhdpi-v4"
                 type="drawable" />
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res/values/strings.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res/values/strings.xml"
                 qualifiers="" >
                 <string name="app_name" >M2X Android SDK
                 </string>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res/values/styles.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res/values/styles.xml"
                 qualifiers="" >
 
                 <style
@@ -47,7 +47,7 @@
                 </style>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res/values-v11/styles.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res/values-v11/styles.xml"
                 qualifiers="v11" >
 
                 <style
@@ -58,7 +58,7 @@
                 </style>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/main/res/values-v14/styles.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/main/res/values-v14/styles.xml"
                 qualifiers="v14" >
 
                 <style
@@ -69,11 +69,11 @@
                 </style>
             </file>
         </source>
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/build/generated/res/rs/debug" />
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/build/generated/res/generated/debug" />
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/build/generated/res/rs/debug" />
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/build/generated/res/generated/debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdk/src/debug/res" />
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdk/src/debug/res" />
     </dataSet>
 
 </merger>

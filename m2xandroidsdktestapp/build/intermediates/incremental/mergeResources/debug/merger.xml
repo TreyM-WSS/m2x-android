@@ -2,24 +2,24 @@
 <merger version="2" >
 
     <dataSet config="unspecified" >
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/res" >
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android/m2xandroidsdk/unspecified/res" >
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/res/drawable-hdpi-v4/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android/m2xandroidsdk/unspecified/res/drawable-hdpi-v4/ic_launcher.png"
                 qualifiers="hdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/res/drawable-mdpi-v4/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android/m2xandroidsdk/unspecified/res/drawable-mdpi-v4/ic_launcher.png"
                 qualifiers="mdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/res/drawable-xhdpi-v4/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android/m2xandroidsdk/unspecified/res/drawable-xhdpi-v4/ic_launcher.png"
                 qualifiers="xhdpi-v4"
                 type="drawable" />
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/res/values/values.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android/m2xandroidsdk/unspecified/res/values/values.xml"
                 qualifiers="" >
 
                 <style
@@ -44,7 +44,7 @@
                 </style>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/res/values-v11/values.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android/m2xandroidsdk/unspecified/res/values-v11/values.xml"
                 qualifiers="v11" >
 
                 <style
@@ -55,7 +55,7 @@
                 </style>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android-sdk-testapp/m2xandroidsdk/unspecified/res/values-v14/values.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/intermediates/exploded-aar/m2x-android/m2xandroidsdk/unspecified/res/values-v14/values.xml"
                 qualifiers="v14" >
 
                 <style
@@ -68,69 +68,129 @@
         </source>
     </dataSet>
     <dataSet config="main" >
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res" >
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res" >
             <file
-                name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/drawable-hdpi/ic_launcher.png"
+                name="ic_action_discard"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-hdpi/ic_action_discard.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_new"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-hdpi/ic_action_new.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_remove"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-hdpi/ic_action_remove.png"
                 qualifiers="hdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/drawable-mdpi/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-hdpi/ic_launcher.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_discard"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-mdpi/ic_action_discard.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_new"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-mdpi/ic_action_new.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_remove"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-mdpi/ic_action_remove.png"
                 qualifiers="mdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/drawable-xhdpi/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-mdpi/ic_launcher.png"
+                qualifiers="mdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_discard"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xhdpi/ic_action_discard.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_new"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xhdpi/ic_action_new.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_remove"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xhdpi/ic_action_remove.png"
                 qualifiers="xhdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/drawable-xxhdpi/ic_launcher.png"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xhdpi/ic_launcher.png"
+                qualifiers="xhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_discard"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xxhdpi/ic_action_discard.png"
+                qualifiers="xxhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_new"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xxhdpi/ic_action_new.png"
+                qualifiers="xxhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_action_remove"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xxhdpi/ic_action_remove.png"
+                qualifiers="xxhdpi-v4"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/drawable-xxhdpi/ic_launcher.png"
                 qualifiers="xxhdpi-v4"
                 type="drawable" />
             <file
                 name="activity_feed_detail"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/layout/activity_feed_detail.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/layout/activity_feed_detail.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_feed_listitem"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/layout/activity_feed_listitem.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/layout/activity_feed_listitem.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_main"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/layout/activity_main.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/layout/activity_main.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_main_listitem"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/layout/activity_main_listitem.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/layout/activity_main_listitem.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="feed"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/menu/feed.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/menu/feed.xml"
                 qualifiers=""
                 type="menu" />
             <file
                 name="feed_detail"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/menu/feed_detail.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/menu/feed_detail.xml"
                 qualifiers=""
                 type="menu" />
             <file
                 name="feed_location"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/menu/feed_location.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/menu/feed_location.xml"
                 qualifiers=""
                 type="menu" />
             <file
                 name="main"
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/menu/main.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/menu/main.xml"
                 qualifiers=""
                 type="menu" />
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/values/colors.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/values/colors.xml"
                 qualifiers="" >
                 <color name="datasource_symbol_background" >#FF0000
                 </color>
@@ -140,7 +200,7 @@
                 </color>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/values/dimens.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/values/dimens.xml"
                 qualifiers="" >
                 <dimen name="activity_horizontal_margin" >16dp
                 </dimen>
@@ -148,7 +208,7 @@
                 </dimen>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/values/strings.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/values/strings.xml"
                 qualifiers="" >
                 <string name="streams" >Streams
                 </string>
@@ -187,7 +247,7 @@
                 <string name="none" ></string>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/values/styles.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/values/styles.xml"
                 qualifiers="" >
 
                 <style
@@ -209,13 +269,13 @@
                 </style>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/values-sw720dp-land/dimens.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/values-sw720dp-land/dimens.xml"
                 qualifiers="sw720dp-land-v13" >
                 <dimen name="activity_horizontal_margin" >128dp
                 </dimen>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/values-v11/styles.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/values-v11/styles.xml"
                 qualifiers="v11" >
 
                 <style
@@ -226,7 +286,7 @@
                 </style>
             </file>
             <file
-                path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/values-v14/styles.xml"
+                path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/values-v14/styles.xml"
                 qualifiers="v14" >
 
                 <style
@@ -237,11 +297,11 @@
                 </style>
             </file>
         </source>
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/generated/res/rs/debug" />
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/build/generated/res/generated/debug" />
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/generated/res/rs/debug" />
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/build/generated/res/generated/debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/debug/res" />
+        <source path="/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/debug/res" />
     </dataSet>
 
 </merger>

@@ -17,8 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.att.m2x.helpers.DateHelper;
 import com.att.m2x.*;
@@ -106,19 +109,19 @@ public class FeedDetailActivity extends Activity implements AdapterView.OnItemCl
 
         private Context context;
         private static final int LAYOUT_RESOURCE = R.layout.activity_feed_listitem;
-        private List<Stream> objects;
+        private ArrayList<Stream> objects;
 
-        public StreamArrayAdapter(Context context, List<Stream> objects) {
+        public StreamArrayAdapter(Context context, ArrayList<Stream> objects) {
             super(context, LAYOUT_RESOURCE, objects);
             this.objects = objects;
             this.context = context;
         }
 
-        public List<Stream> getObjects() {
+        public ArrayList<Stream> getObjects() {
             return objects;
         }
 
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             View view = convertView;
             if (view == null) {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -133,6 +136,30 @@ public class FeedDetailActivity extends Activity implements AdapterView.OnItemCl
                 TextView symbol = (TextView) view.findViewById(R.id.symbol);
                 symbol.setText("S");
                 symbol.setBackgroundResource(R.color.batch_symbol_background);
+
+                ImageButton addButton = (ImageButton) view.findViewById(R.id.addButton);
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addValues(position);
+                    }
+                });
+
+                ImageButton removeButton = (ImageButton) view.findViewById(R.id.removeButton);
+                removeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        removeValues(position);
+                    }
+                });
+
+                ImageButton deleteStreamButton = (ImageButton) view.findViewById(R.id.deleteStreamButton);
+                deleteStreamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteStream(position);
+                    }
+                });
             }
 
             return view;
@@ -140,8 +167,10 @@ public class FeedDetailActivity extends Activity implements AdapterView.OnItemCl
     }
 
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        // ADD RANDOM VALUES
+        // ...
+    }
 
+    public void addValues(int position) {
         Random randomGenerator = new Random();
         ArrayList<StreamValue> readings = new ArrayList<StreamValue>();
         for (int i = 0 ; i < 5 ; i++) {
@@ -149,7 +178,7 @@ public class FeedDetailActivity extends Activity implements AdapterView.OnItemCl
             Date date = new Date();
             StreamValue value = new StreamValue();
             value.setDate(date);
-            value.setValue((double)i);
+            value.setValue(reading);
             readings.add(value);
         }
 
@@ -164,10 +193,10 @@ public class FeedDetailActivity extends Activity implements AdapterView.OnItemCl
                 Log.d("m2x-test", "Failed to add values to the stream! " + errorMessage);
             }
         });
+    }
 
-        // DELETE STREAM VALUES BY RANGE
-
-        /*List<Stream> objects = adapter.getObjects();
+    public void removeValues(int position) {
+        List<Stream> objects = adapter.getObjects();
         Stream selectedStream = objects.get(position);
         Date from = DateHelper.stringToDate("2014-09-02T00:00:00.000Z");
         Date end = DateHelper.stringToDate("2014-09-02T14:50:51.314Z");
@@ -179,7 +208,20 @@ public class FeedDetailActivity extends Activity implements AdapterView.OnItemCl
             public void onError(String errorMessage) {
                 Log.d("m2x-test", "Failed to delete stream values by range! " + errorMessage);
             }
-        });*/
+        });
     }
-	
+
+    public void deleteStream(int position) {
+        List<Stream> objects = adapter.getObjects();
+        Stream selectedStream = objects.get(position);
+        selectedStream.delete(this, null, feed.getId(), new Stream.BasicListener() {
+            public void onSuccess() {
+                Log.d("m2x-test", "Stream deleted successfully");
+            }
+
+            public void onError(String errorMessage) {
+                Log.d("m2x-test", "Failed to delete stream! " + errorMessage);
+            }
+        });
+    }
 }

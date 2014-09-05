@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".FeedDetailActivity">
-    
+
     <LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
@@ -163,6 +163,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/streams"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -170,15 +171,15 @@
             android:id="@+id/streamView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true" >
         </ListView>
-		
-		</LinearLayout>
-    
-    
+
+	</LinearLayout>
+
+
 </ScrollView>
-<!-- From: file:/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/layout/activity_feed_detail.xml -->
+<!-- From: file:/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/layout/activity_feed_detail.xml -->

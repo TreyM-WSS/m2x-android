@@ -14,6 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.att.m2x.*;
 
+import org.json.JSONObject;
+
 public class FeedsActivity extends Activity implements OnItemClickListener {
 
 	private ListView feedList;
@@ -103,7 +105,16 @@ public class FeedsActivity extends Activity implements OnItemClickListener {
                 	symbol.setText(R.string.blueprint_symbol);
                 	symbol.setBackgroundResource(R.color.blueprint_symbol_background);
                 }
-                
+
+                ImageButton removeButton = (ImageButton) view.findViewById(R.id.deleteButton);
+                removeButton.setFocusable(Boolean.FALSE);
+                removeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        removeFeed(v);
+                    }
+                });
+                removeButton.setTag(position);
              }
             
             return view;
@@ -112,12 +123,43 @@ public class FeedsActivity extends Activity implements OnItemClickListener {
 
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		
 		  Intent feedDetail = new Intent(this, FeedDetailActivity.class);		
 		  List<Feed> objects = adapter.getObjects();
 		  Feed selectedFeed = objects.get(position);
 		  feedDetail.putExtra(FeedDetailActivity.INPUT_SELECTED_FEED, selectedFeed);
 		  startActivity(feedDetail);		
 	}
+
+    /** Called when the user touches the deleteButton */
+    public void removeFeed(View view) {
+        int position = (Integer) view.getTag();
+        List<Feed> objects = adapter.getObjects();
+        Feed selectedFeed = objects.get(position);
+
+        if (selectedFeed.getType().equals("blueprint")) {
+            Blueprint blueprint = new Blueprint();
+            blueprint.getBlueprint(this, selectedFeed.getId(), new Blueprint.BlueprintListener() {
+                public void onSuccess(Blueprint object) {
+                    deleteBlueprint(object);
+                }
+
+                public void onError(String errorMessage) {
+                    Log.d("m2x-test", "Failed to delete stream values by range! " + errorMessage);
+                }
+            });
+        }
+    }
+
+    public void deleteBlueprint(Blueprint object) {
+        object.delete(this, new Blueprint.BasicListener() {
+            public void onSuccess() {
+                Log.d("m2x-test", "Blueprint deleted successfully!");
+            }
+
+            public void onError(String errorMessage) {
+                Log.d("m2x-test", "Failed to delete stream values by range! " + errorMessage);
+            }
+        });
+    }
     
 }

@@ -34,5 +34,13 @@
         android:layout_marginLeft="10dp"
         android:textColor="@android:color/secondary_text_light"
     />
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_action_discard"
+    />
     
-</RelativeLayout><!-- From: file:/Users/martin/Documents/repos/m2x-android-sdk-testapp/m2xandroidsdktestapp/src/main/res/layout/activity_main_listitem.xml -->
+</RelativeLayout><!-- From: file:/Users/martin/Documents/repos/m2x-android/m2xandroidsdktestapp/src/main/res/layout/activity_main_listitem.xml -->
