@@ -823,3 +823,8 @@ oldKey.regenerate(this, new Key.KeyListener() {
 	public void onError(String errorMessage) {
 	}	
 ```
+
+## License
+
+The Android M2X API Client is available under the MIT license. See the [LICENSE](LICENSE) file for more information.
+
