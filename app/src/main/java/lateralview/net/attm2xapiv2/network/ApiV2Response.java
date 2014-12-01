@@ -1,11 +1,12 @@
 package lateralview.net.attm2xapiv2.network;
 
+import com.google.gson.annotations.SerializedName;
 import org.json.JSONObject;
+import java.io.Serializable;
 
 /**
  * Created by Joaquin on 28/11/14.
  */
-
 
 /*
     raw: The raw response body.
@@ -18,12 +19,18 @@ import org.json.JSONObject;
     error?: Whether client_error? or server_error? is true
  */
 
-public class Response {
+public class ApiV2Response implements Serializable {
 
+    @SerializedName("raw")
     private String _raw;
+    @SerializedName("json")
     private JSONObject _json;
+    @SerializedName("status")
     private String _status;
-    private String _header;
+    @SerializedName("headers")
+    private String _headers;
+
+    //Generated Fields
     private Boolean _success;
     private Boolean _clientError;
     private Boolean _serverError;
@@ -54,12 +61,12 @@ public class Response {
         this._status = _status;
     }
 
-    public String get_header() {
-        return _header;
+    public String get_headers() {
+        return _headers;
     }
 
-    public void set_header(String _header) {
-        this._header = _header;
+    public void set_headers(String _headers) {
+        this._headers = _headers;
     }
 
     public Boolean get_success() {
