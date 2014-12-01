@@ -1,7 +1,6 @@
 .gradle
 /local.properties
 /.idea/workspace.xml
+/.idea/libraries
 .DS_Store
-/build/*
-m2xandroidsdk/build
-m2xandroidsdktestapp/build
+/build

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/m2x-android.iml" filepath="$PROJECT_DIR$/m2x-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/m2xandroidsdk/m2xandroidsdk.iml" filepath="$PROJECT_DIR$/m2xandroidsdk/m2xandroidsdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/m2xandroidsdktestapp/m2xandroidsdktestapp.iml" filepath="$PROJECT_DIR$/m2xandroidsdktestapp/m2xandroidsdktestapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/attm2xApiv2.iml" filepath="$PROJECT_DIR$/attm2xApiv2.iml" />
     </modules>
   </component>
 </project>
