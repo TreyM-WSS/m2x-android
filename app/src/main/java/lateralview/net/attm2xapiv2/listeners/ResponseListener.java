@@ -13,13 +13,13 @@ public interface ResponseListener <T> {
      * Invoked when the request has completed its execution without errors
      * @param result The resulting object from the AsyncTask.
      */
-    public void onTaskCompleted(ApiV2Response result);
+    public void onRequestCompleted(ApiV2Response result, int requestCode);
 
 
     /**
      * Invoked when the Request has completed its execution with errors
      * @param error The error message.
      */
-    public void onTaskError(ApiV2Response error);
+    public void onRequestError(ApiV2Response error, int requestCode);
 
 }
