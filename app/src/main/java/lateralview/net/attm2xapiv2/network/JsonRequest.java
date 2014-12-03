@@ -240,7 +240,8 @@ public class JsonRequest {
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
                 apiResponse.set_error(Boolean.TRUE);
-                if(error.networkResponse.statusCode<500){
+                if(error.networkResponse!=null &&
+                        error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
                     apiResponse.set_serverError(Boolean.FALSE);
                 }else{

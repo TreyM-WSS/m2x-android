@@ -5,7 +5,8 @@ package lateralview.net.attm2xapiv2.common;
  */
 public class Constants {
 
-    public static final String API_BASE_URL = "http://api-m2x.att.com/v2";
+    //public static final String API_BASE_URL = "http://api-m2x.att.com/v2"; //PROD
+    public static final String API_BASE_URL = "http://staging-api.m2x.sl.attcompute.com/v2"; //TEST
 
     //Device calls
     public static final String DEVICE_SEARCH_PUBLIC_CATALOG = API_BASE_URL.concat("/devices/catalog");
@@ -17,18 +18,18 @@ public class Constants {
     public static final String DEVICE_READ_LOCATION = API_BASE_URL.concat("/devices/%s/location");
     public static final String DEVICE_UPDATE_LOCATION = API_BASE_URL.concat("/devices/%s/location");
     public static final String DEVICE_LIST_DATA_STREAMS = API_BASE_URL.concat("/devices/%s/streams");
-    public static final String DEVICE_CREATE_DATA_STREAMS = API_BASE_URL.concat("/devices/%s/streams/%s");
+    public static final String DEVICE_CREATE_UPDATE_DATA_STREAMS = API_BASE_URL.concat("/devices/%s/streams/%s");
     public static final String DEVICE_UPDATE_DATA_STREAM_VALUE = API_BASE_URL.concat("/devices/%s/streams/%s/value");
     public static final String DEVICE_VIEW_DATA_STREAM = API_BASE_URL.concat("/devices/%s/streams/%s");
     public static final String DEVICE_LIST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_LIST_DATA_STREAM_SAMPLING = API_BASE_URL.concat("/devices/%s/streams/%s/sampling");
     public static final String DEVICE_LIST_DATA_STREAM_STATS = API_BASE_URL.concat("/devices/%s/streams/%s/stats");
-    public static final String DEVICE_LIST_POST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
+    public static final String DEVICE_POST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM = API_BASE_URL.concat("/devices/%s/streams/%s");
     public static final String DEVICE_POST_UPDATES = API_BASE_URL.concat("/devices/%s/updates");
     public static final String DEVICE_LIST_TRIGGERS = API_BASE_URL.concat("/devices/%s/triggers");
-    public static final String DEVICE_CREATE_TRIGGERS = API_BASE_URL.concat("/devices/%s/triggers");
+    public static final String DEVICE_CREATE_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers");
     public static final String DEVICE_VIEW_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers/%s");
     public static final String DEVICE_UPDATE_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers/%s");
     public static final String DEVICE_TEST_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers/%s/test");
@@ -36,10 +37,40 @@ public class Constants {
     public static final String DEVICE_REQUEST_LOG = API_BASE_URL.concat("/devices/%s/log");
     public static final String DEVICE_DELETE = API_BASE_URL.concat("/devices/%s");
 
+    //Distribution
+    public static final String DISTRIBUTION_LIST = "/distributions";
+    public static final String DISTRIBUTION_CREATE = "/distributions";
+    public static final String DISTRIBUTION_VIEW_DETAILS = "/distributions/%s";
+    public static final String DISTRIBUTION_UPDATE_DETAILS = "/distributions/%s";
+    public static final String DISTRIBUTION_LIST_DEVICES = "/distributions/%s/devices";
+    public static final String DISTRIBUTION_ADD_DEVICE = "/distributions/%s/devices";
+    public static final String DISTRIBUTION_DELETE = "/distributions/%s";
+    public static final String DISTRIBUTION_LIST_DATA_STREAMS = "/distributions/%s/streams";
+    public static final String DISTRIBUTION_CREATE_UPDATE_DATA_STREAMS = "/distributions/%s/streams/%";
+    public static final String DISTRIBUTION_VIEW_DATA_STREAMS = "/distributions/%s/streams/%";
+    public static final String DISTRIBUTION_DELETE_DATA_STREAMS = "/distributions/%s/streams/%";
+    public static final String DISTRIBUTION_LIST_TRIGGERS = "/distributions/%s/triggers";
+    public static final String DISTRIBUTION_CREATE_TRIGGERS = "/distributions/%s/triggers";
+    public static final String DISTRIBUTION_VIEW_TRIGGER= "/distributions/%s/triggers/%s";
+    public static final String DISTRIBUTION_UPDATE_TRIGGER= "/distributions/%s/triggers/%s";
+    public static final String DISTRIBUTION_TEST_TRIGGER= "/distributions/%s/triggers/%s/test";
+    public static final String DISTRIBUTION_DELETE_TRIGGER= "/distributions/%s/triggers/%s";
 
+    //Keys
+    public static final String KEYS_LIST = "/keys";
+    public static final String KEYS_CREATE = "/keys";
+    public static final String KEYS_DETAIL = "/keys/%s";
+    public static final String KEYS_UPDATE = "/keys/%s";
+    public static final String KEYS_REGENERATE = "/keys/%s/regenerate";
+    public static final String KEYS_DELETE = "/keys/%s";
 
-
-
+    //Charts
+    public static final String CHARTS_LIST = "/charts";
+    public static final String CHARTS_CREATE = "/charts";
+    public static final String CHARTS_VIEW_DETAILS = "/charts/%s";
+    public static final String CHARTS_UPDATE = "/charts/%s";
+    public static final String CHARTS_DELETE = "/charts/%s";
+    public static final String CHARTS_RENDER = "/charts/%s.%s";
 
 
 }
