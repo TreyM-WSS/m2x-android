@@ -196,7 +196,7 @@ public class Distribution {
     public static final void deleteTrigger(Context context,String distributionId,String triggerId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
                 context,
-                String.format(Locale.US,Constants.DISTRIBUTION_DELETE_DATA_STREAMS,distributionId,triggerId),
+                String.format(Locale.US,Constants.DISTRIBUTION_DELETE_TRIGGER,distributionId,triggerId),
                 null,
                 listener,
                 REQUEST_CODE_DELETE_DATA_STREAM

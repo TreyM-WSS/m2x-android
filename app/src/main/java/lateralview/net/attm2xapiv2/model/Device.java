@@ -63,11 +63,11 @@ public class Device {
         );
     }
 
-    public static final void listDeviceGroups(Context context,HashMap<String,String> params, ResponseListener listener){
+    public static final void listDeviceGroups(Context context, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 Constants.DEVICE_LIST_GROUPS,
-                params,
+                null,
                 listener,
                 REQUEST_CODE_LIST_DEVICE_GROUP
         );
@@ -93,21 +93,21 @@ public class Device {
         );
     }
 
-    public static final void viewDeviceDetails(Context context,HashMap<String,String> params,String deviceId, ResponseListener listener){
+    public static final void viewDeviceDetails(Context context,String deviceId, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US,Constants.DEVICE_VIEW_DETAILS,deviceId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_DEVICE_DETAILS
         );
     }
 
-    public static final void readDeviceLocation(Context context,HashMap<String,String> params,String deviceId, ResponseListener listener){
+    public static final void readDeviceLocation(Context context,String deviceId, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US,Constants.DEVICE_READ_LOCATION,deviceId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_DEVICE_LOCATION
         );
@@ -123,11 +123,11 @@ public class Device {
         );
     }
 
-    public static final void listDataStreams(Context context,HashMap<String,String> params,String deviceId, ResponseListener listener){
+    public static final void listDataStreams(Context context,String deviceId, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_LIST_DATA_STREAMS, deviceId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_DEVICE_LIST_DATA_STREAMS
         );
@@ -153,11 +153,11 @@ public class Device {
         );
     }
 
-    public static final void viewDataStream(Context context,HashMap<String,String> params,String deviceId,String name, ResponseListener listener){
+    public static final void viewDataStream(Context context,String deviceId,String name, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_VIEW_DATA_STREAM, deviceId,name),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_DEVICE_VIEW_DATA_STREAM
         );
@@ -173,21 +173,21 @@ public class Device {
         );
     }
 
-    public static final void dataStreamSampling(Context context,HashMap<String,String> params,String deviceId,String name, ResponseListener listener){
+    public static final void dataStreamSampling(Context context,String deviceId,String name, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_LIST_DATA_STREAM_SAMPLING, deviceId,name),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_DEVICE_DATA_STREAM_SAMPLING
         );
     }
 
-    public static final void dataStreamStats(Context context,HashMap<String,String> params,String deviceId,String name, ResponseListener listener){
+    public static final void dataStreamStats(Context context,String deviceId,String name, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_LIST_DATA_STREAM_STATS, deviceId,name),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_DEVICE_DATA_STREAM_STATS
         );
@@ -233,11 +233,11 @@ public class Device {
         );
     }
 
-    public static final void listTriggers(Context context,HashMap<String,String> params,String deviceId, ResponseListener listener){
+    public static final void listTriggers(Context context,String deviceId, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_LIST_TRIGGERS, deviceId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_DEVICE_LIST_TRIGGERS
         );

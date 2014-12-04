@@ -45,21 +45,30 @@ public class JsonRequest {
                 apiResponse.set_error(Boolean.FALSE);
                 apiResponse.set_serverError(Boolean.FALSE);
                 apiResponse.set_success(Boolean.TRUE);
+                //Save response
+                APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestCompleted(apiResponse,requestCode);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                apiResponse.set_error(Boolean.TRUE);
-                if(error.networkResponse.statusCode<500){
-                    apiResponse.set_clientError(Boolean.TRUE);
-                    apiResponse.set_serverError(Boolean.FALSE);
+                if(!apiResponse.get_status().equals("204")){
+                    if(error.networkResponse.statusCode<500){
+                        apiResponse.set_clientError(Boolean.TRUE);
+                        apiResponse.set_serverError(Boolean.FALSE);
+                    }else{
+                        apiResponse.set_clientError(Boolean.FALSE);
+                        apiResponse.set_serverError(Boolean.TRUE);
+                    }
+                    apiResponse.set_error(Boolean.TRUE);
+                    apiResponse.set_success(Boolean.FALSE);
                 }else{
-                    apiResponse.set_clientError(Boolean.FALSE);
-                    apiResponse.set_serverError(Boolean.TRUE);
+                    apiResponse.set_error(Boolean.FALSE);
+                    apiResponse.set_success(Boolean.TRUE);
                 }
-                apiResponse.set_success(Boolean.FALSE);
+                //Save response
+                APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
             }
         }) {
@@ -96,9 +105,12 @@ public class JsonRequest {
 
         final ApiV2Response apiResponse = new ApiV2Response();
 
+        if(params!=null)
+            url = url.concat("?".concat(ArrayUtils.mapToQueryString(params)));
+
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                 Request.Method.GET,
-                url.concat("?".concat(ArrayUtils.mapToQueryString(params))),
+                url,
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -108,21 +120,30 @@ public class JsonRequest {
                         apiResponse.set_error(Boolean.FALSE);
                         apiResponse.set_serverError(Boolean.FALSE);
                         apiResponse.set_success(Boolean.TRUE);
+                        //Save response
+                        APISharedPreferences.saveLastResponse(context,apiResponse);
                         listener.onRequestCompleted(apiResponse,requestCode);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                apiResponse.set_error(Boolean.TRUE);
-                if(error.networkResponse.statusCode<500){
-                    apiResponse.set_clientError(Boolean.TRUE);
-                    apiResponse.set_serverError(Boolean.FALSE);
+                if(!apiResponse.get_status().equals("204")){
+                    if(error.networkResponse.statusCode<500){
+                        apiResponse.set_clientError(Boolean.TRUE);
+                        apiResponse.set_serverError(Boolean.FALSE);
+                    }else{
+                        apiResponse.set_clientError(Boolean.FALSE);
+                        apiResponse.set_serverError(Boolean.TRUE);
+                    }
+                    apiResponse.set_error(Boolean.TRUE);
+                    apiResponse.set_success(Boolean.FALSE);
                 }else{
-                    apiResponse.set_clientError(Boolean.FALSE);
-                    apiResponse.set_serverError(Boolean.TRUE);
+                    apiResponse.set_error(Boolean.FALSE);
+                    apiResponse.set_success(Boolean.TRUE);
                 }
-                apiResponse.set_success(Boolean.FALSE);
+                //Save response
+                APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
             }
         }) {
@@ -170,21 +191,30 @@ public class JsonRequest {
                         apiResponse.set_error(Boolean.FALSE);
                         apiResponse.set_serverError(Boolean.FALSE);
                         apiResponse.set_success(Boolean.TRUE);
+                        //Save response
+                        APISharedPreferences.saveLastResponse(context,apiResponse);
                         listener.onRequestCompleted(apiResponse,requestCode);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                apiResponse.set_error(Boolean.TRUE);
-                if(error.networkResponse.statusCode<500){
-                    apiResponse.set_clientError(Boolean.TRUE);
-                    apiResponse.set_serverError(Boolean.FALSE);
+                if(!apiResponse.get_status().equals("204")){
+                    if(error.networkResponse.statusCode<500){
+                        apiResponse.set_clientError(Boolean.TRUE);
+                        apiResponse.set_serverError(Boolean.FALSE);
+                    }else{
+                        apiResponse.set_clientError(Boolean.FALSE);
+                        apiResponse.set_serverError(Boolean.TRUE);
+                    }
+                    apiResponse.set_error(Boolean.TRUE);
+                    apiResponse.set_success(Boolean.FALSE);
                 }else{
-                    apiResponse.set_clientError(Boolean.FALSE);
-                    apiResponse.set_serverError(Boolean.TRUE);
+                    apiResponse.set_error(Boolean.FALSE);
+                    apiResponse.set_success(Boolean.TRUE);
                 }
-                apiResponse.set_success(Boolean.FALSE);
+                //Save response
+                APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
             }
         }) {
@@ -233,22 +263,30 @@ public class JsonRequest {
                         apiResponse.set_error(Boolean.FALSE);
                         apiResponse.set_serverError(Boolean.FALSE);
                         apiResponse.set_success(Boolean.TRUE);
+                        //Save response
+                        APISharedPreferences.saveLastResponse(context,apiResponse);
                         listener.onRequestCompleted(apiResponse,requestCode);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                apiResponse.set_error(Boolean.TRUE);
-                if(error.networkResponse!=null &&
-                        error.networkResponse.statusCode<500){
-                    apiResponse.set_clientError(Boolean.TRUE);
-                    apiResponse.set_serverError(Boolean.FALSE);
+                if(!apiResponse.get_status().equals("204")){
+                    if(error.networkResponse.statusCode<500){
+                        apiResponse.set_clientError(Boolean.TRUE);
+                        apiResponse.set_serverError(Boolean.FALSE);
+                    }else{
+                        apiResponse.set_clientError(Boolean.FALSE);
+                        apiResponse.set_serverError(Boolean.TRUE);
+                    }
+                    apiResponse.set_error(Boolean.TRUE);
+                    apiResponse.set_success(Boolean.FALSE);
                 }else{
-                    apiResponse.set_clientError(Boolean.FALSE);
-                    apiResponse.set_serverError(Boolean.TRUE);
+                    apiResponse.set_error(Boolean.FALSE);
+                    apiResponse.set_success(Boolean.TRUE);
                 }
-                apiResponse.set_success(Boolean.FALSE);
+                //Save response
+                APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
             }
         }) {
