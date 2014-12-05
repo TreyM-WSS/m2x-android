@@ -4,11 +4,14 @@ import android.content.Context;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -53,20 +56,19 @@ public class JsonRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                if(!apiResponse.get_status().equals("204")){
-                    if(error.networkResponse.statusCode<500){
-                        apiResponse.set_clientError(Boolean.TRUE);
-                        apiResponse.set_serverError(Boolean.FALSE);
-                    }else{
-                        apiResponse.set_clientError(Boolean.FALSE);
-                        apiResponse.set_serverError(Boolean.TRUE);
-                    }
-                    apiResponse.set_error(Boolean.TRUE);
-                    apiResponse.set_success(Boolean.FALSE);
+                if(error.networkResponse!=null)
+                    apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
+
+                if(error.networkResponse.statusCode<500){
+                    apiResponse.set_clientError(Boolean.TRUE);
+                    apiResponse.set_serverError(Boolean.FALSE);
                 }else{
-                    apiResponse.set_error(Boolean.FALSE);
-                    apiResponse.set_success(Boolean.TRUE);
+                    apiResponse.set_clientError(Boolean.FALSE);
+                    apiResponse.set_serverError(Boolean.TRUE);
                 }
+                apiResponse.set_error(Boolean.TRUE);
+                apiResponse.set_success(Boolean.FALSE);
+
                 //Save response
                 APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
@@ -84,13 +86,24 @@ public class JsonRequest {
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 try {
                     apiResponse.set_raw(new String(response.data,"utf-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }finally{
                     apiResponse.set_status(String.valueOf(response.statusCode));
                     apiResponse.set_headers(response.headers.toString());
+                    if(apiResponse.get_raw()==null || apiResponse.get_raw().equals("")
+                            && response.statusCode<400){
+                        return Response.success(
+                                null,
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }else{
+                        return Response.success(
+                                new JSONObject(apiResponse.get_raw()),
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    return Response.error(new ParseError(e));
+                } catch (JSONException e) {
+                    return Response.error(new ParseError(e));
                 }
-                return super.parseNetworkResponse(response);
             }
         };
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
@@ -128,20 +141,19 @@ public class JsonRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                if(!apiResponse.get_status().equals("204")){
-                    if(error.networkResponse.statusCode<500){
-                        apiResponse.set_clientError(Boolean.TRUE);
-                        apiResponse.set_serverError(Boolean.FALSE);
-                    }else{
-                        apiResponse.set_clientError(Boolean.FALSE);
-                        apiResponse.set_serverError(Boolean.TRUE);
-                    }
-                    apiResponse.set_error(Boolean.TRUE);
-                    apiResponse.set_success(Boolean.FALSE);
+                if(error.networkResponse!=null)
+                    apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
+
+                if(error.networkResponse.statusCode<500){
+                    apiResponse.set_clientError(Boolean.TRUE);
+                    apiResponse.set_serverError(Boolean.FALSE);
                 }else{
-                    apiResponse.set_error(Boolean.FALSE);
-                    apiResponse.set_success(Boolean.TRUE);
+                    apiResponse.set_clientError(Boolean.FALSE);
+                    apiResponse.set_serverError(Boolean.TRUE);
                 }
+                apiResponse.set_error(Boolean.TRUE);
+                apiResponse.set_success(Boolean.FALSE);
+
                 //Save response
                 APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
@@ -159,13 +171,24 @@ public class JsonRequest {
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 try {
                     apiResponse.set_raw(new String(response.data,"utf-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }finally{
                     apiResponse.set_status(String.valueOf(response.statusCode));
                     apiResponse.set_headers(response.headers.toString());
+                    if(apiResponse.get_raw()==null || apiResponse.get_raw().equals("")
+                            && response.statusCode<400){
+                        return Response.success(
+                                null,
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }else{
+                        return Response.success(
+                                new JSONObject(apiResponse.get_raw()),
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    return Response.error(new ParseError(e));
+                } catch (JSONException e) {
+                    return Response.error(new ParseError(e));
                 }
-                return super.parseNetworkResponse(response);
             }
         };
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
@@ -199,20 +222,19 @@ public class JsonRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                if(!apiResponse.get_status().equals("204")){
-                    if(error.networkResponse.statusCode<500){
-                        apiResponse.set_clientError(Boolean.TRUE);
-                        apiResponse.set_serverError(Boolean.FALSE);
-                    }else{
-                        apiResponse.set_clientError(Boolean.FALSE);
-                        apiResponse.set_serverError(Boolean.TRUE);
-                    }
-                    apiResponse.set_error(Boolean.TRUE);
-                    apiResponse.set_success(Boolean.FALSE);
+                if(error.networkResponse!=null)
+                    apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
+
+                if(error.networkResponse.statusCode<500){
+                    apiResponse.set_clientError(Boolean.TRUE);
+                    apiResponse.set_serverError(Boolean.FALSE);
                 }else{
-                    apiResponse.set_error(Boolean.FALSE);
-                    apiResponse.set_success(Boolean.TRUE);
+                    apiResponse.set_clientError(Boolean.FALSE);
+                    apiResponse.set_serverError(Boolean.TRUE);
                 }
+                apiResponse.set_error(Boolean.TRUE);
+                apiResponse.set_success(Boolean.FALSE);
+
                 //Save response
                 APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
@@ -230,13 +252,24 @@ public class JsonRequest {
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 try {
                     apiResponse.set_raw(new String(response.data,"utf-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }finally{
                     apiResponse.set_status(String.valueOf(response.statusCode));
                     apiResponse.set_headers(response.headers.toString());
+                    if(apiResponse.get_raw()==null || apiResponse.get_raw().equals("")
+                            && response.statusCode<400){
+                        return Response.success(
+                                null,
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }else{
+                        return Response.success(
+                                new JSONObject(apiResponse.get_raw()),
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    return Response.error(new ParseError(e));
+                } catch (JSONException e) {
+                    return Response.error(new ParseError(e));
                 }
-                return super.parseNetworkResponse(response);
             }
         };
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
@@ -271,20 +304,19 @@ public class JsonRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiResponse.set_json(null);
-                if(!apiResponse.get_status().equals("204")){
-                    if(error.networkResponse.statusCode<500){
-                        apiResponse.set_clientError(Boolean.TRUE);
-                        apiResponse.set_serverError(Boolean.FALSE);
-                    }else{
-                        apiResponse.set_clientError(Boolean.FALSE);
-                        apiResponse.set_serverError(Boolean.TRUE);
-                    }
-                    apiResponse.set_error(Boolean.TRUE);
-                    apiResponse.set_success(Boolean.FALSE);
+                if(error.networkResponse!=null)
+                    apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
+
+                if(error.networkResponse.statusCode<500){
+                    apiResponse.set_clientError(Boolean.TRUE);
+                    apiResponse.set_serverError(Boolean.FALSE);
                 }else{
-                    apiResponse.set_error(Boolean.FALSE);
-                    apiResponse.set_success(Boolean.TRUE);
+                    apiResponse.set_clientError(Boolean.FALSE);
+                    apiResponse.set_serverError(Boolean.TRUE);
                 }
+                apiResponse.set_error(Boolean.TRUE);
+                apiResponse.set_success(Boolean.FALSE);
+
                 //Save response
                 APISharedPreferences.saveLastResponse(context,apiResponse);
                 listener.onRequestError(apiResponse,requestCode);
@@ -302,13 +334,24 @@ public class JsonRequest {
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 try {
                     apiResponse.set_raw(new String(response.data,"utf-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }finally{
                     apiResponse.set_status(String.valueOf(response.statusCode));
                     apiResponse.set_headers(response.headers.toString());
+                    if(apiResponse.get_raw()==null || apiResponse.get_raw().equals("")
+                            && response.statusCode<400){
+                        return Response.success(
+                                null,
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }else{
+                        return Response.success(
+                                new JSONObject(apiResponse.get_raw()),
+                                HttpHeaderParser.parseCacheHeaders(response));
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    return Response.error(new ParseError(e));
+                } catch (JSONException e) {
+                    return Response.error(new ParseError(e));
                 }
-                return super.parseNetworkResponse(response);
             }
         };
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
