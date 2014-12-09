@@ -113,10 +113,10 @@ public class Distribution {
         );
     }
 
-    public static final void createUpdateDataStream(Context context,JSONObject params,String deviceId, String streamName, ResponseListener listener){
+    public static final void createUpdateDataStream(Context context,JSONObject params,String distributionId, String streamName, ResponseListener listener){
         JsonRequest.makePutRequest(
                 context,
-                String.format(Locale.US,Constants.DISTRIBUTION_CREATE_UPDATE_DATA_STREAMS,deviceId,streamName),
+                String.format(Locale.US,Constants.DISTRIBUTION_CREATE_UPDATE_DATA_STREAMS,distributionId,streamName),
                 params,
                 listener,
                 REQUEST_CODE_CREATE_UPDATE_DATA_STREAMS
@@ -199,7 +199,7 @@ public class Distribution {
                 String.format(Locale.US,Constants.DISTRIBUTION_DELETE_TRIGGER,distributionId,triggerId),
                 null,
                 listener,
-                REQUEST_CODE_DELETE_DATA_STREAM
+                REQUEST_CODE_DELETE_TRIGGER
         );
     }
 
