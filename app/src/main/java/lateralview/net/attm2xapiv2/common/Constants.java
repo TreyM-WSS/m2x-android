@@ -46,9 +46,9 @@ public class Constants {
     public static final String DISTRIBUTION_ADD_DEVICE = API_BASE_URL.concat("/distributions/%s/devices");
     public static final String DISTRIBUTION_DELETE = API_BASE_URL.concat("/distributions/%s");
     public static final String DISTRIBUTION_LIST_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams");
-    public static final String DISTRIBUTION_CREATE_UPDATE_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%");
-    public static final String DISTRIBUTION_VIEW_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%");
-    public static final String DISTRIBUTION_DELETE_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%");
+    public static final String DISTRIBUTION_CREATE_UPDATE_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%s");
+    public static final String DISTRIBUTION_VIEW_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%s");
+    public static final String DISTRIBUTION_DELETE_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%s");
     public static final String DISTRIBUTION_LIST_TRIGGERS = API_BASE_URL.concat("/distributions/%s/triggers");
     public static final String DISTRIBUTION_CREATE_TRIGGERS = API_BASE_URL.concat("/distributions/%s/triggers");
     public static final String DISTRIBUTION_VIEW_TRIGGER= API_BASE_URL.concat("/distributions/%s/triggers/%s");

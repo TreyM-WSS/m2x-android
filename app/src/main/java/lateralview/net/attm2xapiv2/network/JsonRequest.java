@@ -59,6 +59,14 @@ public class JsonRequest {
                 if(error.networkResponse!=null)
                     apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
 
+                if(error.networkResponse!=null && error.networkResponse.data!=null){
+                    try {
+                        apiResponse.set_raw(new String(error.networkResponse.data,"utf-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 if(error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
                     apiResponse.set_serverError(Boolean.FALSE);
@@ -144,6 +152,14 @@ public class JsonRequest {
                 if(error.networkResponse!=null)
                     apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
 
+                if(error.networkResponse!=null && error.networkResponse.data!=null){
+                    try {
+                        apiResponse.set_raw(new String(error.networkResponse.data,"utf-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 if(error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
                     apiResponse.set_serverError(Boolean.FALSE);
@@ -224,6 +240,14 @@ public class JsonRequest {
                 apiResponse.set_json(null);
                 if(error.networkResponse!=null)
                     apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
+
+                if(error.networkResponse!=null && error.networkResponse.data!=null){
+                    try {
+                        apiResponse.set_raw(new String(error.networkResponse.data,"utf-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 if(error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
@@ -306,6 +330,14 @@ public class JsonRequest {
                 apiResponse.set_json(null);
                 if(error.networkResponse!=null)
                     apiResponse.set_status(String.valueOf(error.networkResponse.statusCode));
+
+                if(error.networkResponse!=null && error.networkResponse.data!=null){
+                    try {
+                        apiResponse.set_raw(new String(error.networkResponse.data,"utf-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
 
                 if(error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);

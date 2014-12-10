@@ -43,11 +43,11 @@ public class Key {
         );
     }
 
-    public static final void viewDetails(Context context,HashMap<String,String> params, String keyId, ResponseListener listener){
+    public static final void viewDetails(Context context, String keyId, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
                 String.format(Locale.US, Constants.KEYS_DETAIL,keyId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_KEYS_DETAIL
         );
@@ -63,21 +63,21 @@ public class Key {
         );
     }
 
-    public static final void regenerate(Context context,JSONObject params, String keyId, ResponseListener listener){
+    public static final void regenerate(Context context, String keyId, ResponseListener listener){
         JsonRequest.makePostRequest(
                 context,
                 String.format(Locale.US,Constants.KEYS_REGENERATE,keyId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_KEYS_REGENERATE
         );
     }
 
-    public static final void delete(Context context,JSONObject params,String keyId, ResponseListener listener){
+    public static final void delete(Context context,String keyId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
                 context,
                 String.format(Locale.US,Constants.KEYS_DELETE,keyId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_KEYS_DELETE
         );

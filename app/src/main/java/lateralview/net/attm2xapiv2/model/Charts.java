@@ -52,21 +52,21 @@ public class Charts {
         );
     }
 
-    public static final void update(Context context,String chartId, ResponseListener listener){
-        JsonRequest.makeGetRequest(
+    public static final void update(Context context,JSONObject params,String chartId, ResponseListener listener){
+        JsonRequest.makePostRequest(
                 context,
                 String.format(Locale.US, Constants.CHARTS_UPDATE,chartId),
-                null,
+                params,
                 listener,
                 REQUEST_CODE_CHARTS_UPDATE
         );
     }
 
-    public static final void delete(Context context,JSONObject params,String chartId, ResponseListener listener){
+    public static final void delete(Context context,String chartId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
                 context,
                 String.format(Locale.US,Constants.CHARTS_DELETE,chartId),
-                params,
+                null,
                 listener,
                 REQUEST_CODE_CHARTS_DELETE
         );
