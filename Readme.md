@@ -39,7 +39,7 @@ You need to extend the application class and set the [Master Key] in the onCreat
     public void onCreate() {
         super.onCreate();
         //Initialize communication library
-        M2XAPI.initialize(getApplicationContext(),"84c57939b4ab16a294aecae21b9dd72a");
+        M2XAPI.initialize(getApplicationContext(),"<YOUR KEY HERE>");
     }
 ```
 

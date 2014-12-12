@@ -5,8 +5,8 @@ package lateralview.net.attm2xapiv2.common;
  */
 public class Constants {
 
-    //public static final String API_BASE_URL = "http://api-m2x.att.com/v2"; //PROD
-    public static final String API_BASE_URL = "http://staging-api.m2x.sl.attcompute.com/v2"; //TEST
+    public static final String API_BASE_URL = "http://api-m2x.att.com/v2"; //PROD
+    //public static final String API_BASE_URL = "http://staging-api.m2x.sl.attcompute.com/v2"; //TEST
 
     //Device calls
     public static final String DEVICE_SEARCH_PUBLIC_CATALOG = API_BASE_URL.concat("/devices/catalog");
