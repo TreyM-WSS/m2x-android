@@ -87,6 +87,11 @@ public class JsonRequest {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("X-M2X-KEY", APISharedPreferences.getApiKey(context));
+                params.put("User-agent", "M2X-Android/2.0.0 java/21 (".
+                        concat(System.getProperty("os.arch")).
+                        concat(" ").
+                        concat(android.os.Build.VERSION.RELEASE).
+                        concat(")"));
                 return params;
             }
 
@@ -180,6 +185,11 @@ public class JsonRequest {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("X-M2X-KEY", APISharedPreferences.getApiKey(context));
+                params.put("User-agent", "M2X-Android/2.0.0 java/21 (".
+                        concat(System.getProperty("os.arch")).
+                        concat(" ").
+                        concat(android.os.Build.VERSION.RELEASE).
+                        concat(")"));
                 return params;
             }
 
@@ -269,6 +279,11 @@ public class JsonRequest {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("X-M2X-KEY", APISharedPreferences.getApiKey(context));
+                params.put("User-agent", "M2X-Android/2.0.0 java/21 (".
+                        concat(System.getProperty("os.arch")).
+                        concat(" ").
+                        concat(android.os.Build.VERSION.RELEASE).
+                        concat(")"));
                 return params;
             }
 
@@ -359,6 +374,11 @@ public class JsonRequest {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("X-M2X-KEY", APISharedPreferences.getApiKey(context));
+                params.put("User-agent", "M2X-Android/2.0.0 java/21 (".
+                        concat(System.getProperty("os.arch")).
+                        concat(" ").
+                        concat(android.os.Build.VERSION.RELEASE).
+                        concat(")"));
                 return params;
             }
 
