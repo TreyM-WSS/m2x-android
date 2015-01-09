@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="m2x.att.attm2xapiv2">
+    package="m2x.att.client">
 
     <application android:allowBackup="true">
 
