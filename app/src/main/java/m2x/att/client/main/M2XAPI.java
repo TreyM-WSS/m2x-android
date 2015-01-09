@@ -1,9 +1,9 @@
-package m2x.att.attm2xapiv2.main;
+package m2x.att.client.main;
 
 import android.content.Context;
 
-import m2x.att.attm2xapiv2.network.ApiV2Response;
-import m2x.att.attm2xapiv2.sharedPreferences.APISharedPreferences;
+import m2x.att.client.network.ApiV2Response;
+import m2x.att.client.sharedPreferences.APISharedPreferences;
 
 /**
  * Created by Joaquin on 1/12/14.
