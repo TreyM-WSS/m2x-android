@@ -1,15 +1,14 @@
-package lateralview.net.attm2xapiv2.model;
+package m2x.att.attm2xapiv2.model;
 
 import android.content.Context;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Locale;
 
-import lateralview.net.attm2xapiv2.common.Constants;
-import lateralview.net.attm2xapiv2.listeners.ResponseListener;
-import lateralview.net.attm2xapiv2.network.JsonRequest;
+import m2x.att.attm2xapiv2.common.Constants;
+import m2x.att.attm2xapiv2.listeners.ResponseListener;
+import m2x.att.attm2xapiv2.network.JsonRequest;
 
 /**
  * Created by Joaquin on 28/11/14.

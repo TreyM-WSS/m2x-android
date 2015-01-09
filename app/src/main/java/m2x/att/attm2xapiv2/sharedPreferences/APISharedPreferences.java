@@ -1,15 +1,12 @@
-package lateralview.net.attm2xapiv2.sharedPreferences;
+package m2x.att.attm2xapiv2.sharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
-
-import lateralview.net.attm2xapiv2.network.ApiV2Response;
+import m2x.att.attm2xapiv2.network.ApiV2Response;
 
 /**
  * Created by Joaquin on 28/11/14.

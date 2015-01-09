@@ -1,4 +1,4 @@
-package lateralview.net.attm2xapiv2.common;
+package m2x.att.attm2xapiv2.common;
 
 /**
  * Created by Joaquin on 28/11/14.

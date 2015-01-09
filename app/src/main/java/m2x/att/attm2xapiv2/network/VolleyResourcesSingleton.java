@@ -1,4 +1,4 @@
-package lateralview.net.attm2xapiv2.network;
+package m2x.att.attm2xapiv2.network;
 
 import android.content.Context;
 

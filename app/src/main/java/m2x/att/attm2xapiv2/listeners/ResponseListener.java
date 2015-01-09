@@ -1,8 +1,6 @@
-package lateralview.net.attm2xapiv2.listeners;
+package m2x.att.attm2xapiv2.listeners;
 
-import java.util.List;
-
-import lateralview.net.attm2xapiv2.network.ApiV2Response;
+import m2x.att.attm2xapiv2.network.ApiV2Response;
 
 /**
  * Created by Joaquin on 1/12/14.

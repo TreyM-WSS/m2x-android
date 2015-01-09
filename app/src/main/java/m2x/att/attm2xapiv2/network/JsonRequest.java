@@ -1,4 +1,4 @@
-package lateralview.net.attm2xapiv2.network;
+package m2x.att.attm2xapiv2.network;
 
 import android.content.Context;
 
@@ -18,9 +18,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import lateralview.net.attm2xapiv2.listeners.ResponseListener;
-import lateralview.net.attm2xapiv2.sharedPreferences.APISharedPreferences;
-import lateralview.net.attm2xapiv2.utils.ArrayUtils;
+import m2x.att.attm2xapiv2.listeners.ResponseListener;
+import m2x.att.attm2xapiv2.sharedPreferences.APISharedPreferences;
+import m2x.att.attm2xapiv2.utils.ArrayUtils;
 
 /**
  * Created by Joaquin on 1/12/14.

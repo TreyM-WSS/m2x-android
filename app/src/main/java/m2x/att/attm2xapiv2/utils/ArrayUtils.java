@@ -1,4 +1,4 @@
-package lateralview.net.attm2xapiv2.utils;
+package m2x.att.attm2xapiv2.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

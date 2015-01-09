@@ -1,10 +1,9 @@
-package lateralview.net.attm2xapiv2.main;
+package m2x.att.attm2xapiv2.main;
 
 import android.content.Context;
 
-import lateralview.net.attm2xapiv2.model.Device;
-import lateralview.net.attm2xapiv2.network.ApiV2Response;
-import lateralview.net.attm2xapiv2.sharedPreferences.APISharedPreferences;
+import m2x.att.attm2xapiv2.network.ApiV2Response;
+import m2x.att.attm2xapiv2.sharedPreferences.APISharedPreferences;
 
 /**
  * Created by Joaquin on 1/12/14.
