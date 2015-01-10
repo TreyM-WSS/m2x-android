@@ -155,6 +155,10 @@ Additional labels for pre-release and build metadata are available as extensions
 
 **Note**: the client version does not necessarily reflect the version used in the AT&T M2X API.
 
+
+## Test/Sample Android Application
+To get you up and running quickly, we have provided a sample/test Android application for you here: https://github.com/attm2x/m2x-android-test-app
+
 ## License
 
 This SDK is provided under the MIT license. See [LICENSE](LICENSE) for applicable terms.
