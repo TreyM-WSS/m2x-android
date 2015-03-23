@@ -67,7 +67,7 @@ public class JsonRequest {
                     }
                 }
 
-                if(error.networkResponse.statusCode<500){
+                if(error.networkResponse!=null && error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
                     apiResponse.set_serverError(Boolean.FALSE);
                 }else{
@@ -165,7 +165,7 @@ public class JsonRequest {
                     }
                 }
 
-                if(error.networkResponse.statusCode<500){
+                if(error.networkResponse!=null && error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
                     apiResponse.set_serverError(Boolean.FALSE);
                 }else{
@@ -259,7 +259,7 @@ public class JsonRequest {
                     }
                 }
 
-                if(error.networkResponse.statusCode<500){
+                if(error.networkResponse!=null && error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
                     apiResponse.set_serverError(Boolean.FALSE);
                 }else{
@@ -354,7 +354,7 @@ public class JsonRequest {
                     }
                 }
 
-                if(error.networkResponse.statusCode<500){
+                if(error.networkResponse!=null && error.networkResponse.statusCode<500){
                     apiResponse.set_clientError(Boolean.TRUE);
                     apiResponse.set_serverError(Boolean.FALSE);
                 }else{
