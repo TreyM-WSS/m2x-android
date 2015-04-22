@@ -18,7 +18,7 @@ public class Device {
 
     public static final int REQUEST_CODE_SEARCH_PUBLIC_CATALOG = 1001;
     public static final int REQUEST_CODE_SEARCH_DEVICES = 1002;
-    public static final int REQUEST_CODE_LIST_DEVICE_GROUP = 1003;
+    public static final int REQUEST_CODE_LIST_DEVICE_TAG = 1003;
     public static final int REQUEST_CODE_CREATE_DEVICE = 1004;
     public static final int REQUEST_CODE_DEVICE_DETAILS = 1005;
     public static final int REQUEST_CODE_DEVICE_LOCATION = 1006;
@@ -63,13 +63,13 @@ public class Device {
         );
     }
 
-    public static final void listDeviceGroups(Context context, ResponseListener listener){
+    public static final void listDeviceTags(Context context, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
-                Constants.DEVICE_LIST_GROUPS,
+                Constants.DEVICE_LIST_TAGS,
                 null,
                 listener,
-                REQUEST_CODE_LIST_DEVICE_GROUP
+                REQUEST_CODE_LIST_DEVICE_TAG
         );
     }
 

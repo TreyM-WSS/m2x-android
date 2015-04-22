@@ -10,7 +10,7 @@ public class Constants {
     //Device calls
     public static final String DEVICE_SEARCH_PUBLIC_CATALOG = API_BASE_URL.concat("/devices/catalog");
     public static final String DEVICE_SEARCH_CATALOG = API_BASE_URL.concat("/devices");
-    public static final String DEVICE_LIST_GROUPS = API_BASE_URL.concat("/devices/groups");
+    public static final String DEVICE_LIST_TAGS = API_BASE_URL.concat("/devices/tags");
     public static final String DEVICE_CREATE = API_BASE_URL.concat("/devices");
     public static final String DEVICE_UPDATE_DETAILS = API_BASE_URL.concat("/devices/%s");
     public static final String DEVICE_VIEW_DETAILS = API_BASE_URL.concat("/devices/%s");
