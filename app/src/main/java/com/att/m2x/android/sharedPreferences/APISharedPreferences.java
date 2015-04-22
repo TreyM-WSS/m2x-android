@@ -1,4 +1,4 @@
-package m2x.att.client.sharedPreferences;
+package com.att.m2x.android.sharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-import m2x.att.client.network.ApiV2Response;
+import com.att.m2x.android.network.ApiV2Response;
 
 /**
  * Created by Joaquin on 28/11/14.

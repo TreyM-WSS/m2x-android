@@ -1,4 +1,4 @@
-package m2x.att.client.common;
+package com.att.m2x.android.common;
 
 /**
  * Created by Joaquin on 28/11/14.

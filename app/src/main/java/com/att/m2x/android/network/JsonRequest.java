@@ -1,4 +1,4 @@
-package m2x.att.client.network;
+package com.att.m2x.android.network;
 
 import android.content.Context;
 
@@ -18,9 +18,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import m2x.att.client.listeners.ResponseListener;
-import m2x.att.client.sharedPreferences.APISharedPreferences;
-import m2x.att.client.utils.ArrayUtils;
+import com.att.m2x.android.listeners.ResponseListener;
+import com.att.m2x.android.sharedPreferences.APISharedPreferences;
+import com.att.m2x.android.utils.ArrayUtils;
 
 /**
  * Created by Joaquin on 1/12/14.
