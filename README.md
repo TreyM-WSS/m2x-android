@@ -24,7 +24,7 @@ To start using this SDK you will need to follow the steps below:
 
 2. Generate an .aar file or import this project from the Android Studio import project wizard.
 3. Open your project settings and create a dependency between your app and the android module or library.
-4. Your project should now compile. To start using M2X, set up your [Master Key](https://m2x.att.com/account#master-keys-tab). The Master Key is required for some API features such as the ability to retrieve the full list of your feeds.
+4. Your project should now compile. To start using M2X, obtain your [Master Key](https://m2x.att.com/account#master-keys). The Master Key is required for some API features such as the ability to retrieve the full list of your devices.
 
 You need to extend the application class and set the [Master Key] in the onCreate method.
 
