@@ -1,4 +1,4 @@
-package m2x.att.client.model;
+package com.att.m2x.android.model;
 
 import android.content.Context;
 
@@ -7,9 +7,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Locale;
 
-import m2x.att.client.common.Constants;
-import m2x.att.client.listeners.ResponseListener;
-import m2x.att.client.network.JsonRequest;
+import com.att.m2x.android.common.Constants;
+import com.att.m2x.android.listeners.ResponseListener;
+import com.att.m2x.android.network.JsonRequest;
 
 /**
  * Created by Joaquin on 28/11/14.

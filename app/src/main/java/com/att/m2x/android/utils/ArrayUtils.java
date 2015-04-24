@@ -1,4 +1,4 @@
-package m2x.att.client.utils;
+package com.att.m2x.android.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

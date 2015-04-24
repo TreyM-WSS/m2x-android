@@ -1,8 +1,9 @@
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+.idea
 .DS_Store
 /build
 app/app.iml
 m2x-android.iml
+attm2xApiv2.iml
+

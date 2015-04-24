@@ -1,4 +1,4 @@
-package m2x.att.client.network;
+package com.att.m2x.android.network;
 
 import com.google.gson.annotations.SerializedName;
 import org.json.JSONObject;

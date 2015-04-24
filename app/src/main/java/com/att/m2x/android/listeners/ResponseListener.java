@@ -1,6 +1,6 @@
-package m2x.att.client.listeners;
+package com.att.m2x.android.listeners;
 
-import m2x.att.client.network.ApiV2Response;
+import com.att.m2x.android.network.ApiV2Response;
 
 /**
  * Created by Joaquin on 1/12/14.

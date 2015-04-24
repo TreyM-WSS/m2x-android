@@ -1,4 +1,4 @@
-package m2x.att.client.network;
+package com.att.m2x.android.network;
 
 import android.content.Context;
 
