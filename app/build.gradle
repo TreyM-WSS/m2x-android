@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 group = "com.att.m2x"
 archivesBaseName = "android"
-version = "2.1.0"
+version = "2.1.1"
 
 android {
     compileSdkVersion 21
@@ -13,8 +13,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 2
-        versionName "2.1.0"
+        versionCode 3
+        versionName "2.1.1"
     }
     buildTypes {
         release {
@@ -37,7 +37,7 @@ task javadoc(type: Javadoc) {
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
-    from android.sourceSets.main.java.srcDirs
+    from javadoc.destinationDir
 }
 
 task sourcesJar(type: Jar) {
@@ -68,7 +68,7 @@ uploadArchives {
 
             pom.project {
                 groupId 'com.att.m2x'
-                version '2.1.0'
+                version '2.1.1'
                 name 'AT&T M2X Android Library'
                 packaging 'jar'
                 artifactId 'android'
