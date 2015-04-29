@@ -12,7 +12,7 @@ Getting Started
 2. Create your first [Device](https://m2x.att.com/devices) and copy its _Device ID_.
 3. Review the [M2X API Documentation](https://m2x.att.com/developer/documentation/overview).
 
-## Installation
+## Setup
 
 To start using this SDK you will need to follow the steps below:
 
