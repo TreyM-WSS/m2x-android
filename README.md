@@ -8,25 +8,79 @@ The [AT&T M2X API](https://m2x.att.com/developer/documentation/overview) provide
 Getting Started
 ==========================
 1. Signup for an [M2X Account](https://m2x.att.com/signup).
-2. Obtain your _Master Key_ from the Master Keys tab of your [Account Settings](https://m2x.att.com/account) screen.
-2. Create your first [Device](https://m2x.att.com/devices) and copy its _Device ID_.
-3. Review the [M2X API Documentation](https://m2x.att.com/developer/documentation/overview).
+2. Obtain your _Master Key_ from the [Master Keys](https://m2x.att.com/account#master-keys) tab of your M2X Account Settings.
+3. Create your first [Device](https://m2x.att.com/devices) and copy its _Device ID_.
+4. Review the [M2X API Documentation](https://m2x.att.com/developer/documentation/overview).
+
 
 ## Setup
 
-To start using this SDK you will need to follow the steps below:
-
-1. Add network permissions in your manifest file
+Add network permissions to your projects `AndroidManifest.xml` file:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-2. Generate an .aar file or import this project from the Android Studio import project wizard.
-3. Open your project settings and create a dependency between your app and the android module or library.
-4. Your project should now compile. To start using M2X, obtain your [Master Key](https://m2x.att.com/account#master-keys). The Master Key is required for some API features such as the ability to retrieve the full list of your devices.
+### Via Maven Central Repository (Recommended)
 
-You need to extend the application class and set the [Master Key] in the onCreate method.
+We've added the M2X Android Client Library to the [Maven Central Repository](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%20com.att.m2x%20a%3A%20android) to make it easy for you to add it as a dependency to your Android based project.
+
+To include the M2X Android Client Library in your project :
+
+1. Add Maven Central Repository to your projects top level `build.gradle` :
+    ```
+        buildscript {
+            ...
+            repositories {
+                ...
+                mavenCentral()
+                ...
+            }
+            ...
+       }
+    ```
+
+2. Add M2X Android Library as a dependency in module level `build.gradle` :
+    ```
+    dependencies {
+        ...
+        compile group: 'com.att.m2x', name: 'android', version: '2.1.1'
+        ...
+    }
+    ```
+
+### Manual Installation
+
+1. Obtain the `m2x-android-v.v.v.aar` for the [latest version](https://github.com/attm2x/m2x-android/releases/latest) of the M2X Android Client Library.
+2. Add the following to your projects top level `build.gradle` :
+    ```
+      repositories {
+          flatDir {
+              dirs 'libs'
+          }
+      }
+    
+      dependencies {
+          compile fileTree(dir: 'libs', include: ['*.jar'])
+          compile 'com.att.m2x.android:m2x-android:2.1.1@aar'
+          compile 'com.mcxiaoke.volley:library:1.0.9'
+          compile 'com.google.code.gson:gson:2.3.1'
+      }
+    ```
+
+3. Run `gradle build` task
+
+## Requirements and Dependencies
+
+The M2X Android client requires **Java version 1.5 or greater**.
+
+The client has the following library dependencies, though if you followed the Setup instructions from above all dependencies will be included automatically:
+* com.mcxiaoke.volley:library:1.0.9
+* com.google.code.gson:gson:2.3.1
+
+## Usage
+
+Initialize using the _Master API Key_ in the onCreate method:
 
 ```Java
 @Override
@@ -37,10 +91,7 @@ You need to extend the application class and set the [Master Key] in the onCreat
     }
 ```
 
-## Usage
-
 All the methods available are explained in the AT&T [M2X API](https://m2x.att.com/developer/documentation/overview) which you can check to see the parameters that need to be provided to each method.
-
 
 This provides an interface to your data in M2X
 
@@ -126,20 +177,31 @@ Refer to the documentation on each class for further usage instructions.
 
 ## Example
 
-In order to run this example, you will need a `Device ID` and `API Key`. If you don't have any, access your M2X account, create a new [Device](https://m2x.att.com/devices), and copy the `Device ID` and `API Key` values.
+In order to run this example, you will need a `Device ID`. If you don't have any, access your M2X account, create a new [Device](https://m2x.att.com/devices), and copy the `Device ID`.
 
 This call updates the device location:
 
 ```Java
     try {
+        String deviceID = "8d24a72339fdefa88492e194b88f2586";
         JSONObject obj = new JSONObject("{ \"name\": \"Storage Room\",\n" +
-                "  \"latitude\": -37.9788423562422,\n" +
-                "  \"longitude\": -57.5478776916862,\n" +
-                "  \"timestamp\": \"2014-09-10T19:15:00.756Z\",\n" +
-                "  \"elevation\": 5 }");
-        Device.updateDeviceLocation(DeviceActivity.this,obj,"437cb907799ae7e01309133006806ba3",this);
+            "  \"latitude\": -37.9788423562422,\n" +
+            "  \"longitude\": -57.5478776916862,\n" +
+            "  \"timestamp\": \"" + DateUtils.dateTimeToString(new Date()) + "\",\n" +
+            "  \"elevation\": 5 }");
+        Device.updateDeviceLocation(getApplicationContext(), obj, deviceID, new ResponseListener() {
+            @Override
+            public void onRequestCompleted(ApiV2Response apiV2Response, int i) {
+                // Handle Success
+            }
+
+            @Override
+            public void onRequestError(ApiV2Response apiV2Response, int i) {
+                // Handle Error
+            }
+        });
     } catch (JSONException e) {
-        e.printStackTrace();
+            e.printStackTrace();
     }
 ```
 
