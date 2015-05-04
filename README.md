@@ -51,7 +51,7 @@ To include the M2X Android Client Library in your project :
 
 ### Manual Installation
 
-1. Obtain the `m2x-android-v.v.v.aar` for the [latest version](https://github.com/attm2x/m2x-android/releases/latest) of the M2X Android Client Library.
+1. Obtain the `m2x-android-v.v.v.aar` for the [latest version](https://github.com/attm2x/m2x-android/releases/latest) of the M2X Android Client Library and place it in your project's `/libs` directory (if no `/libs` directory is present, create it).
 2. Add the following to your projects top level `build.gradle` :
     ```
       repositories {
