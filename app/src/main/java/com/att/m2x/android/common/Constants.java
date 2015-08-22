@@ -27,12 +27,6 @@ public class Constants {
     public static final String DEVICE_DELETE_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM = API_BASE_URL.concat("/devices/%s/streams/%s");
     public static final String DEVICE_POST_UPDATES = API_BASE_URL.concat("/devices/%s/updates");
-    public static final String DEVICE_LIST_TRIGGERS = API_BASE_URL.concat("/devices/%s/triggers");
-    public static final String DEVICE_CREATE_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers");
-    public static final String DEVICE_VIEW_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers/%s");
-    public static final String DEVICE_UPDATE_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers/%s");
-    public static final String DEVICE_TEST_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers/%s/test");
-    public static final String DEVICE_DELETE_TRIGGER = API_BASE_URL.concat("/devices/%s/triggers/%s");
     public static final String DEVICE_REQUEST_LOG = API_BASE_URL.concat("/devices/%s/log");
     public static final String DEVICE_DELETE = API_BASE_URL.concat("/devices/%s");
 
@@ -48,12 +42,6 @@ public class Constants {
     public static final String DISTRIBUTION_CREATE_UPDATE_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%s");
     public static final String DISTRIBUTION_VIEW_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%s");
     public static final String DISTRIBUTION_DELETE_DATA_STREAMS = API_BASE_URL.concat("/distributions/%s/streams/%s");
-    public static final String DISTRIBUTION_LIST_TRIGGERS = API_BASE_URL.concat("/distributions/%s/triggers");
-    public static final String DISTRIBUTION_CREATE_TRIGGERS = API_BASE_URL.concat("/distributions/%s/triggers");
-    public static final String DISTRIBUTION_VIEW_TRIGGER= API_BASE_URL.concat("/distributions/%s/triggers/%s");
-    public static final String DISTRIBUTION_UPDATE_TRIGGER= API_BASE_URL.concat("/distributions/%s/triggers/%s");
-    public static final String DISTRIBUTION_TEST_TRIGGER= API_BASE_URL.concat("/distributions/%s/triggers/%s/test");
-    public static final String DISTRIBUTION_DELETE_TRIGGER= API_BASE_URL.concat("/distributions/%s/triggers/%s");
 
     //Keys
     public static final String KEYS_LIST = API_BASE_URL.concat("/keys");
