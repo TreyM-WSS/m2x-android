@@ -7,6 +7,13 @@ group = "com.att.m2x"
 archivesBaseName = "android"
 version = "2.1.1"
 
+buildscript {
+    repositories { mavenCentral() }
+    dependencies {
+        classpath 'io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3'
+    }
+}
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
@@ -29,7 +36,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.mcxiaoke.volley:library:1.0.9'
     compile 'com.google.code.gson:gson:2.3.1'
-    classpath 'io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3'
 }
 
 task javadoc(type: Javadoc) {
