@@ -26,11 +26,6 @@ public class Distribution {
     public static final int REQUEST_CODE_CREATE_UPDATE_DATA_STREAMS = 2008;
     public static final int REQUEST_CODE_VIEW_DATA_STREAM = 2009;
     public static final int REQUEST_CODE_DELETE_DATA_STREAM = 2010;
-    public static final int REQUEST_CODE_CREATE_TRIGGER = 2011;
-    public static final int REQUEST_CODE_VIEW_TRIGGER = 2012;
-    public static final int REQUEST_CODE_UPDATE_TRIGGER = 2013;
-    public static final int REQUEST_CODE_TEST_TRIGGER = 2014;
-    public static final int REQUEST_CODE_DELETE_TRIGGER = 2015;
 
     public static final void list(Context context, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -139,66 +134,6 @@ public class Distribution {
                 null,
                 listener,
                 REQUEST_CODE_DELETE_DATA_STREAM
-        );
-    }
-
-    public static final void listTriggers(Context context,String distributionId, ResponseListener listener){
-        JsonRequest.makeGetRequest(
-                context,
-                String.format(Locale.US,Constants.DISTRIBUTION_LIST_TRIGGERS,distributionId),
-                null,
-                listener,
-                REQUEST_CODE_VIEW_DATA_STREAM
-        );
-    }
-
-    public static final void createTrigger(Context context,JSONObject params,String distributionId, ResponseListener listener){
-        JsonRequest.makePostRequest(
-                context,
-                String.format(Locale.US,Constants.DISTRIBUTION_CREATE_TRIGGERS,distributionId),
-                params,
-                listener,
-                REQUEST_CODE_CREATE_TRIGGER
-        );
-    }
-
-    public static final void viewTrigger(Context context,String distributionId,String triggerId, ResponseListener listener){
-        JsonRequest.makeGetRequest(
-                context,
-                String.format(Locale.US,Constants.DISTRIBUTION_VIEW_TRIGGER,distributionId,triggerId),
-                null,
-                listener,
-                REQUEST_CODE_VIEW_TRIGGER
-        );
-    }
-
-    public static final void updateTrigger(Context context,JSONObject params,String distributionId, String triggerId, ResponseListener listener){
-        JsonRequest.makePutRequest(
-                context,
-                String.format(Locale.US,Constants.DISTRIBUTION_UPDATE_TRIGGER,distributionId,triggerId),
-                params,
-                listener,
-                REQUEST_CODE_UPDATE_TRIGGER
-        );
-    }
-
-    public static final void testTrigger(Context context,JSONObject params,String distributionId,String triggerId, ResponseListener listener){
-        JsonRequest.makePostRequest(
-                context,
-                String.format(Locale.US,Constants.DISTRIBUTION_TEST_TRIGGER,distributionId,triggerId),
-                params,
-                listener,
-                REQUEST_CODE_TEST_TRIGGER
-        );
-    }
-
-    public static final void deleteTrigger(Context context,String distributionId,String triggerId, ResponseListener listener){
-        JsonRequest.makeDeleteRequest(
-                context,
-                String.format(Locale.US,Constants.DISTRIBUTION_DELETE_TRIGGER,distributionId,triggerId),
-                null,
-                listener,
-                REQUEST_CODE_DELETE_TRIGGER
         );
     }
 

@@ -34,12 +34,6 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_DELETE_DATA_STREAM_VALUES = 1016;
     public static final int REQUEST_CODE_DEVICE_DELETE_DATA_STREAM = 1017;
     public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATES = 1018;
-    public static final int REQUEST_CODE_DEVICE_LIST_TRIGGERS = 1019;
-    public static final int REQUEST_CODE_DEVICE_CREATE_TRIGGER = 1020;
-    public static final int REQUEST_CODE_DEVICE_VIEW_TRIGGER = 1021;
-    public static final int REQUEST_CODE_DEVICE_UPDATE_TRIGGER = 1022;
-    public static final int REQUEST_CODE_DEVICE_TEST_TRIGGER = 1023;
-    public static final int REQUEST_CODE_DEVICE_DELETE_TRIGGER = 1024;
     public static final int REQUEST_CODE_DEVICE_VIEW_REQUEST_LOG = 1025;
     public static final int REQUEST_CODE_DEVICE_DELETE = 1026;
 
@@ -230,66 +224,6 @@ public class Device {
                 params,
                 listener,
                 REQUEST_CODE_DEVICE_POST_DEVICE_UPDATES
-        );
-    }
-
-    public static final void listTriggers(Context context,String deviceId, ResponseListener listener){
-        JsonRequest.makeGetRequest(
-                context,
-                String.format(Locale.US, Constants.DEVICE_LIST_TRIGGERS, deviceId),
-                null,
-                listener,
-                REQUEST_CODE_DEVICE_LIST_TRIGGERS
-        );
-    }
-
-    public static final void createTrigger(Context context,JSONObject params,String deviceId, ResponseListener listener){
-        JsonRequest.makePostRequest(
-                context,
-                String.format(Locale.US, Constants.DEVICE_CREATE_TRIGGER, deviceId),
-                params,
-                listener,
-                REQUEST_CODE_DEVICE_CREATE_TRIGGER
-        );
-    }
-
-    public static final void viewTrigger(Context context,String deviceId,String triggerId, ResponseListener listener){
-        JsonRequest.makeGetRequest(
-                context,
-                String.format(Locale.US, Constants.DEVICE_VIEW_TRIGGER, deviceId,triggerId),
-                null,
-                listener,
-                REQUEST_CODE_DEVICE_VIEW_TRIGGER
-        );
-    }
-
-    public static final void updateTrigger(Context context,JSONObject params,String deviceId,String triggerId, ResponseListener listener){
-        JsonRequest.makePutRequest(
-                context,
-                String.format(Locale.US, Constants.DEVICE_UPDATE_TRIGGER, deviceId,triggerId),
-                params,
-                listener,
-                REQUEST_CODE_DEVICE_UPDATE_TRIGGER
-        );
-    }
-
-    public static final void testTrigger(Context context,JSONObject params,String deviceId,String triggerId, ResponseListener listener){
-        JsonRequest.makePostRequest(
-                context,
-                String.format(Locale.US, Constants.DEVICE_TEST_TRIGGER, deviceId,triggerId),
-                params,
-                listener,
-                REQUEST_CODE_DEVICE_TEST_TRIGGER
-        );
-    }
-
-    public static final void deleteTrigger(Context context,String deviceId,String triggerId, ResponseListener listener){
-        JsonRequest.makeDeleteRequest(
-                context,
-                String.format(Locale.US,Constants.DEVICE_DELETE_TRIGGER,deviceId,triggerId),
-                null,
-                listener,
-                REQUEST_CODE_DEVICE_DELETE_TRIGGER
         );
     }
 
