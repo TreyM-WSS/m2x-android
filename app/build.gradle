@@ -101,3 +101,7 @@ uploadArchives {
         }
     }
 }
+
+nexusStaging {
+    packageGroup = "com.att.m2x"
+}
