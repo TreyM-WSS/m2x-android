@@ -44,7 +44,7 @@ To include the M2X Android Client Library in your project :
     ```
     dependencies {
         ...
-        compile group: 'com.att.m2x', name: 'android', version: '2.1.1'
+        compile group: 'com.att.m2x', name: 'android', version: '3.0.0'
         ...
     }
     ```
@@ -62,7 +62,7 @@ To include the M2X Android Client Library in your project :
     
       dependencies {
           compile fileTree(dir: 'libs', include: ['*.jar'])
-          compile 'com.att.m2x.android:m2x-android:2.1.1@aar'
+          compile 'com.att.m2x.android:m2x-android:3.0.0@aar'
           compile 'com.mcxiaoke.volley:library:1.0.9'
           compile 'com.google.code.gson:gson:2.3.1'
       }
