@@ -33,8 +33,7 @@ public class JsonRequest {
                                        String url,
                                        JSONObject params,
                                        final ResponseListener listener,
-                                       final int requestCode
-    ) {
+                                       final int requestCode) {
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                 Request.Method.POST,
@@ -45,22 +44,25 @@ public class JsonRequest {
                     public void onResponse(JSONObject o) {
                         handleResponse(context, listener, requestCode, o);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                handleError(context, listener, requestCode, error);
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return JsonRequest.getHeaders(context);
-            }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        handleError(context, listener, requestCode, error);
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        return JsonRequest.getHeaders(context);
+                    }
 
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                return JsonRequest.parseNetworkResponse(response);
-            }
-        };
+                    @Override
+                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                        return JsonRequest.parseNetworkResponse(response);
+                    }
+                };
+
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
         VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
@@ -83,22 +85,25 @@ public class JsonRequest {
                     public void onResponse(JSONObject o) {
                         handleResponse(context, listener, requestCode, o);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                handleError(context, listener, requestCode, error);
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return JsonRequest.getHeaders(context);
-            }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        handleError(context, listener, requestCode, error);
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        return JsonRequest.getHeaders(context);
+                    }
 
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                return JsonRequest.parseNetworkResponse(response);
-            }
-        };
+                    @Override
+                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                        return JsonRequest.parseNetworkResponse(response);
+                    }
+                };
+
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
         VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
@@ -119,21 +124,23 @@ public class JsonRequest {
                         handleResponse(context, listener, requestCode, o);
                     }
                 }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                handleError(context, listener, requestCode, error);
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return JsonRequest.getHeaders(context);
-            }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        handleError(context, listener, requestCode, error);
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        return JsonRequest.getHeaders(context);
+                    }
 
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                return JsonRequest.parseNetworkResponse(response);
-            }
-        };
+                    @Override
+                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                        return JsonRequest.parseNetworkResponse(response);
+                    }
+                };
+
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
         VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
@@ -153,22 +160,25 @@ public class JsonRequest {
                     public void onResponse(JSONObject o) {
                         handleResponse(context, listener, requestCode, o);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                handleError(context, listener, requestCode, error);
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return JsonRequest.getHeaders(context);
-            }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        handleError(context, listener, requestCode, error);
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        return JsonRequest.getHeaders(context);
+                    }
 
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                return JsonRequest.parseNetworkResponse(response);
-            }
-        };
+                    @Override
+                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                        return JsonRequest.parseNetworkResponse(response);
+                    }
+                };
+        
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
         VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
