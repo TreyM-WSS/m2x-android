@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.att.m2x.android.common.Constants;
 import com.att.m2x.android.listeners.ResponseListener;
 import com.att.m2x.android.sharedPreferences.APISharedPreferences;
 import com.att.m2x.android.utils.ArrayUtils;
@@ -178,7 +179,7 @@ public class JsonRequest {
                         return JsonRequest.parseNetworkResponse(response);
                     }
                 };
-        
+
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
         VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
@@ -228,11 +229,7 @@ public class JsonRequest {
         Map<String, String> params = new HashMap<String, String>();
         params.put("Content-Type", "application/json");
         params.put("X-M2X-KEY", APISharedPreferences.getApiKey(context));
-        params.put("User-agent", "M2X-Android/2.0.0 java/21 (".
-                concat(System.getProperty("os.arch")).
-                concat(" ").
-                concat(android.os.Build.VERSION.RELEASE).
-                concat(")"));
+        params.put("User-agent", Constants.USER_AGENT);
         return params;
     }
 
