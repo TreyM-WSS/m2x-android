@@ -40,11 +40,11 @@ To include the M2X Android Client Library in your project :
        }
     ```
 
-2. Add M2X Android Library as a dependency in module level `build.gradle` :
+2. Add M2X Android Library as a dependency in module level `build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
     ```
     dependencies {
         ...
-        compile group: 'com.att.m2x', name: 'android', version: '3.0.0'
+        compile group: 'com.att.m2x', name: 'android', version: 'v.v.v'
         ...
     }
     ```
@@ -52,7 +52,7 @@ To include the M2X Android Client Library in your project :
 ### Manual Installation
 
 1. Obtain the `m2x-android-v.v.v.aar` for the [latest version](https://github.com/attm2x/m2x-android/releases/latest) of the M2X Android Client Library and place it in your project's `/libs` directory (if no `/libs` directory is present, create it).
-2. Add the following to your projects top level `build.gradle` :
+2. Add the following to your projects top level `build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
     ```
       repositories {
           flatDir {
@@ -62,7 +62,7 @@ To include the M2X Android Client Library in your project :
     
       dependencies {
           compile fileTree(dir: 'libs', include: ['*.jar'])
-          compile 'com.att.m2x.android:m2x-android:3.0.0@aar'
+          compile 'com.att.m2x.android:m2x-android:v.v.v@aar'
           compile 'com.mcxiaoke.volley:library:1.0.9'
           compile 'com.google.code.gson:gson:2.3.1'
       }
@@ -175,7 +175,9 @@ The call only needs a context and if a call was made the SDK will return the las
 
 Refer to the documentation on each class for further usage instructions.
 
-## Example
+## Examples
+
+### Update Device
 
 In order to run this example, you will need a `Device ID`. If you don't have any, access your M2X account, create a new [Device](https://m2x.att.com/devices), and copy the `Device ID`.
 
@@ -190,6 +192,36 @@ This call updates the device location:
             "  \"timestamp\": \"" + DateUtils.dateTimeToString(new Date()) + "\",\n" +
             "  \"elevation\": 5 }");
         Device.updateDeviceLocation(getApplicationContext(), obj, deviceID, new ResponseListener() {
+            @Override
+            public void onRequestCompleted(ApiV2Response apiV2Response, int i) {
+                // Handle Success
+            }
+
+            @Override
+            public void onRequestError(ApiV2Response apiV2Response, int i) {
+                // Handle Error
+            }
+        });
+    } catch (JSONException e) {
+            e.printStackTrace();
+    }
+```
+
+### Search Devices
+
+The [Search Devices](https://m2x.att.com/developer/documentation/v2/device#Search-Devices) endpoint
+accepts a variety of search filters, such as `ids` or `tags`, via the URL query string. However,
+some more complex search filters must be requested via a JSON body, such as `streams` and `metadata`.
+
+The following example shows how to perform a Device search by passing search filters via both query
+string parameters and JSON body.
+
+```Java
+    try {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("name", "name-to-query");
+        JSONObject body = new JSONObject("{ \"streams\": { \"stream-id\": { \"gt\": 50 } } }");
+        Device.searchDevices(getApplicationContext(), params, body, new ResponseListener() {
             @Override
             public void onRequestCompleted(ApiV2Response apiV2Response, int i) {
                 // Handle Success
