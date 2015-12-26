@@ -32,40 +32,10 @@ public class JsonRequest {
 
     public static void makePostRequest(final Context context,
                                        String url,
-                                       JSONObject params,
+                                       JSONObject body,
                                        final ResponseListener listener,
                                        final int requestCode) {
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                params,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        handleResponse(context, listener, requestCode, o);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        handleError(context, listener, requestCode, error);
-                    }
-                })
-                {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        return JsonRequest.getHeaders(context);
-                    }
-
-                    @Override
-                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                        return JsonRequest.parseNetworkResponse(response);
-                    }
-                };
-
-        //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
-        VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
+        makeRequest(context, Request.Method.POST, url, null, body, listener, requestCode);
     }
 
     public static void makeGetRequest(final Context context,
@@ -73,40 +43,7 @@ public class JsonRequest {
                                       HashMap<String,String> params,
                                       final ResponseListener listener,
                                       final int requestCode) {
-
-        if(params!=null)
-            url = url.concat("?".concat(ArrayUtils.mapToQueryString(params)));
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        handleResponse(context, listener, requestCode, o);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        handleError(context, listener, requestCode, error);
-                    }
-                })
-                {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        return JsonRequest.getHeaders(context);
-                    }
-
-                    @Override
-                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                        return JsonRequest.parseNetworkResponse(response);
-                    }
-                };
-
-        //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
-        VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
+        makeRequest(context, Request.Method.GET, url, params, null, listener, requestCode);
     }
 
     public static void makeGetRequest(final Context context,
@@ -115,12 +52,38 @@ public class JsonRequest {
                                       JSONObject body,
                                       final ResponseListener listener,
                                       final int requestCode) {
+        makeRequest(context, Request.Method.GET, url, params, body, listener, requestCode);
+    }
+
+    public static void makePutRequest(final Context context,
+                                      String url,
+                                      JSONObject body,
+                                      final ResponseListener listener,
+                                      final int requestCode) {
+        makeRequest(context, Request.Method.PUT, url, null, body, listener, requestCode);
+    }
+
+    public static void makeDeleteRequest(final Context context,
+                                         String url,
+                                         JSONObject body,
+                                         final ResponseListener listener,
+                                         final int requestCode) {
+        makeRequest(context, Request.Method.DELETE, url, null, body, listener, requestCode);
+    }
+
+    private static void makeRequest(final Context context,
+                                    int method,
+                                    String url,
+                                    HashMap<String, String> params,
+                                    JSONObject body,
+                                    final ResponseListener listener,
+                                    final int requestCode) {
 
         if(params!=null)
             url = url.concat("?".concat(ArrayUtils.mapToQueryString(params)));
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.GET,
+                method,
                 url,
                 body,
                 new Response.Listener<JSONObject>() {
@@ -146,81 +109,6 @@ public class JsonRequest {
                 return JsonRequest.parseNetworkResponse(response);
             }
         };
-
-        //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
-        VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
-    }
-
-    public static void makePutRequest(final Context context,
-                                      String url,
-                                      JSONObject params,
-                                      final ResponseListener listener,
-                                      final int requestCode) {
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                params,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        handleResponse(context, listener, requestCode, o);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        handleError(context, listener, requestCode, error);
-                    }
-                })
-                {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        return JsonRequest.getHeaders(context);
-                    }
-
-                    @Override
-                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                        return JsonRequest.parseNetworkResponse(response);
-                    }
-                };
-
-        //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
-        VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
-    }
-
-    public static void makeDeleteRequest(final Context context,
-                                         String url,
-                                         JSONObject params,
-                                         final ResponseListener listener,
-                                         final int requestCode) {
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.DELETE,
-                url,
-                params,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject o) {
-                        handleResponse(context, listener, requestCode, o);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        handleError(context, listener, requestCode, error);
-                    }
-                })
-                {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        return JsonRequest.getHeaders(context);
-                    }
-
-                    @Override
-                    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                        return JsonRequest.parseNetworkResponse(response);
-                    }
-                };
 
         //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
         VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
