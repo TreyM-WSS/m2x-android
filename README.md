@@ -219,8 +219,8 @@ string parameters and JSON body.
 ```Java
     try {
         HashMap<String, String> params = new HashMap<>();
-        params.put("name", "name-to-query");
-        JSONObject body = new JSONObject("{ \"streams\": { \"stream-id\": { \"gt\": 50 } } }");
+        params.put("[param-name]", "[query]");
+        JSONObject body = new JSONObject("{ \"[param-object]\": { \"[key]\": \"[value]\" } }");
         Device.searchDevices(getApplicationContext(), params, body, new ResponseListener() {
             @Override
             public void onRequestCompleted(ApiV2Response apiV2Response, int i) {
