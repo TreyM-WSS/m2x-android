@@ -109,6 +109,48 @@ public class JsonRequest {
         VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
 
+    public static void makeGetRequest(final Context context,
+                                      String url,
+                                      HashMap<String,String> params,
+                                      JSONObject body,
+                                      final ResponseListener listener,
+                                      final int requestCode) {
+
+        if(params!=null)
+            url = url.concat("?".concat(ArrayUtils.mapToQueryString(params)));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject o) {
+                        handleResponse(context, listener, requestCode, o);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        handleError(context, listener, requestCode, error);
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return JsonRequest.getHeaders(context);
+            }
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                return JsonRequest.parseNetworkResponse(response);
+            }
+        };
+
+        //It's better if the queue is obtained with an app context to keep it alive while the app is in foreground.
+        VolleyResourcesSingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
+    }
+
     public static void makePutRequest(final Context context,
                                       String url,
                                       JSONObject params,

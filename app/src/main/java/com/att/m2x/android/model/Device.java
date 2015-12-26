@@ -36,6 +36,7 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATES = 1018;
     public static final int REQUEST_CODE_DEVICE_VIEW_REQUEST_LOG = 1025;
     public static final int REQUEST_CODE_DEVICE_DELETE = 1026;
+    public static final int REQUEST_CODE_LIST_DEVICES = 1027;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -47,11 +48,22 @@ public class Device {
         );
     }
 
-    public static final void searchDevices(Context context,HashMap<String,String> params, ResponseListener listener){
+    public static final void listDevices(Context context, HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
                 context,
-                Constants.DEVICE_SEARCH_CATALOG,
+                Constants.DEVICE_LIST,
                 params,
+                listener,
+                REQUEST_CODE_LIST_DEVICES
+        );
+    }
+
+    public static final void searchDevices(Context context, HashMap<String,String> params, JSONObject body, ResponseListener listener){
+        JsonRequest.makeGetRequest(
+                context,
+                Constants.DEVICE_SEARCH,
+                params,
+                body,
                 listener,
                 REQUEST_CODE_SEARCH_DEVICES
         );
