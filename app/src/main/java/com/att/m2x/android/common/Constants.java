@@ -69,5 +69,4 @@ public class Constants {
     public static final String CHARTS_DELETE = API_BASE_URL.concat("/charts/%s");
     public static final String CHARTS_RENDER = API_BASE_URL.concat("/charts/%s.%s");
 
-
 }
