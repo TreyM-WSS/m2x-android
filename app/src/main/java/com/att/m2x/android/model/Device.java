@@ -37,6 +37,10 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_VIEW_REQUEST_LOG = 1025;
     public static final int REQUEST_CODE_DEVICE_DELETE = 1026;
     public static final int REQUEST_CODE_LIST_DEVICES = 1027;
+    public static final int REQUEST_CODE_LIST_RECEIVED_COMMANDS = 1033;
+    public static final int REQUEST_CODE_VIEW_COMMAND_DETAILS = 1034;
+    public static final int REQUEST_CODE_MARK_COMMAND_PROCESSED = 1035;
+    public static final int REQUEST_CODE_MARK_COMMAND_REJECTED = 1036;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -256,6 +260,46 @@ public class Device {
                 null,
                 listener,
                 REQUEST_CODE_DEVICE_DELETE
+        );
+    }
+
+    public static final void listCommands(Context context, String deviceId, HashMap<String, String> params, ResponseListener listener){
+        JsonRequest.makeGetRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_LIST_RECEIVED_COMMANDS, deviceId),
+                params,
+                listener,
+                REQUEST_CODE_LIST_RECEIVED_COMMANDS
+        );
+    }
+
+    public static final void viewCommand(Context context, String deviceId, String commandId, ResponseListener listener){
+        JsonRequest.makeGetRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_VIEW_COMMAND_DETAILS, deviceId, commandId),
+                null,
+                listener,
+                REQUEST_CODE_VIEW_COMMAND_DETAILS
+        );
+    }
+
+    public static final void processCommand(Context context, String deviceId, String commandId, ResponseListener listener){
+        JsonRequest.makePostRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_MARK_COMMAND_PROCESSED, deviceId, commandId),
+                null,
+                listener,
+                REQUEST_CODE_MARK_COMMAND_PROCESSED
+        );
+    }
+
+    public static final void rejectCommand(Context context, String deviceId, String commandId, ResponseListener listener){
+        JsonRequest.makePostRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_MARK_COMMAND_REJECTED, deviceId, commandId),
+                null,
+                listener,
+                REQUEST_CODE_MARK_COMMAND_REJECTED
         );
     }
 

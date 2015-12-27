@@ -35,6 +35,10 @@ public class Constants {
     public static final String DEVICE_POST_UPDATES = API_BASE_URL.concat("/devices/%s/updates");
     public static final String DEVICE_REQUEST_LOG = API_BASE_URL.concat("/devices/%s/log");
     public static final String DEVICE_DELETE = API_BASE_URL.concat("/devices/%s");
+    public static final String DEVICE_LIST_RECEIVED_COMMANDS = API_BASE_URL.concat("/devices/%s/commands");
+    public static final String DEVICE_VIEW_COMMAND_DETAILS = API_BASE_URL.concat("/devices/%s/commands/%s");
+    public static final String DEVICE_MARK_COMMAND_PROCESSED = API_BASE_URL.concat("/devices/%s/commands/%s/process");
+    public static final String DEVICE_MARK_COMMAND_REJECTED = API_BASE_URL.concat("/devices/%s/commands/%s/reject");
 
     //Distribution
     public static final String DISTRIBUTION_LIST = API_BASE_URL.concat("/distributions");
@@ -65,5 +69,9 @@ public class Constants {
     public static final String CHARTS_DELETE = API_BASE_URL.concat("/charts/%s");
     public static final String CHARTS_RENDER = API_BASE_URL.concat("/charts/%s.%s");
 
+    //Command
+    public static final String COMMANDS_LIST = API_BASE_URL.concat("/commands");
+    public static final String COMMANDS_SEND = API_BASE_URL.concat("/commands");
+    public static final String COMMANDS_VIEW_DETAILS = API_BASE_URL.concat("/commands/%s");
 
 }
