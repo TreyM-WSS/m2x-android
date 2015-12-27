@@ -31,55 +31,54 @@ public class JsonRequest {
     final static ApiV2Response apiResponse = new ApiV2Response();
 
     public static void makePostRequest(final Context context,
-                                       String path,
+                                       String url,
                                        JSONObject body,
                                        final ResponseListener listener,
                                        final int requestCode) {
-        makeRequest(context, Request.Method.POST, path, null, body, listener, requestCode);
+        makeRequest(context, Request.Method.POST, url, null, body, listener, requestCode);
     }
 
     public static void makeGetRequest(final Context context,
-                                      String path,
+                                      String url,
                                       HashMap<String,String> params,
                                       final ResponseListener listener,
                                       final int requestCode) {
-        makeRequest(context, Request.Method.GET, path, params, null, listener, requestCode);
+        makeRequest(context, Request.Method.GET, url, params, null, listener, requestCode);
     }
 
     public static void makeGetRequest(final Context context,
-                                      String path,
+                                      String url,
                                       HashMap<String,String> params,
                                       JSONObject body,
                                       final ResponseListener listener,
                                       final int requestCode) {
-        makeRequest(context, Request.Method.GET, path, params, body, listener, requestCode);
+        makeRequest(context, Request.Method.GET, url, params, body, listener, requestCode);
     }
 
     public static void makePutRequest(final Context context,
-                                      String path,
+                                      String url,
                                       JSONObject body,
                                       final ResponseListener listener,
                                       final int requestCode) {
-        makeRequest(context, Request.Method.PUT, path, null, body, listener, requestCode);
+        makeRequest(context, Request.Method.PUT, url, null, body, listener, requestCode);
     }
 
     public static void makeDeleteRequest(final Context context,
-                                         String path,
+                                         String url,
                                          JSONObject body,
                                          final ResponseListener listener,
                                          final int requestCode) {
-        makeRequest(context, Request.Method.DELETE, path, null, body, listener, requestCode);
+        makeRequest(context, Request.Method.DELETE, url, null, body, listener, requestCode);
     }
 
     private static void makeRequest(final Context context,
                                     int method,
-                                    String path,
+                                    String url,
                                     HashMap<String, String> params,
                                     JSONObject body,
                                     final ResponseListener listener,
                                     final int requestCode) {
 
-        String url = Constants.API_BASE_URL.concat(path);
         if(params!=null)
             url = url.concat("?".concat(ArrayUtils.mapToQueryString(params)));
 
