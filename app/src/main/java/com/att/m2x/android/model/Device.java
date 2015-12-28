@@ -37,6 +37,7 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_VIEW_REQUEST_LOG = 1025;
     public static final int REQUEST_CODE_DEVICE_DELETE = 1026;
     public static final int REQUEST_CODE_LIST_DEVICES = 1027;
+    public static final int REQUEST_CODE_DEVICE_LOCATION_HISTORY = 1032;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -116,6 +117,16 @@ public class Device {
                 null,
                 listener,
                 REQUEST_CODE_DEVICE_LOCATION
+        );
+    }
+
+    public static final void readDeviceLocationHistory(Context context, String deviceId, HashMap<String,String> params, ResponseListener listener){
+        JsonRequest.makeGetRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_READ_LOCATION_HISTORY, deviceId),
+                params,
+                listener,
+                REQUEST_CODE_DEVICE_LOCATION_HISTORY
         );
     }
 

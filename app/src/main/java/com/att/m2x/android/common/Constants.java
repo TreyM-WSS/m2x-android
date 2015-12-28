@@ -21,6 +21,7 @@ public class Constants {
     public static final String DEVICE_UPDATE_DETAILS = API_BASE_URL.concat("/devices/%s");
     public static final String DEVICE_VIEW_DETAILS = API_BASE_URL.concat("/devices/%s");
     public static final String DEVICE_READ_LOCATION = API_BASE_URL.concat("/devices/%s/location");
+    public static final String DEVICE_READ_LOCATION_HISTORY = API_BASE_URL.concat("/devices/%s/location/waypoints");
     public static final String DEVICE_UPDATE_LOCATION = API_BASE_URL.concat("/devices/%s/location");
     public static final String DEVICE_LIST_DATA_STREAMS = API_BASE_URL.concat("/devices/%s/streams");
     public static final String DEVICE_CREATE_UPDATE_DATA_STREAMS = API_BASE_URL.concat("/devices/%s/streams/%s");
