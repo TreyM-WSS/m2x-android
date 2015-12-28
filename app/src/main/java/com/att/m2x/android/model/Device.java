@@ -283,21 +283,21 @@ public class Device {
         );
     }
 
-    public static final void processCommand(Context context, String deviceId, String commandId, ResponseListener listener){
+    public static final void processCommand(Context context, String deviceId, String commandId, JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_MARK_COMMAND_PROCESSED, deviceId, commandId),
-                null,
+                body,
                 listener,
                 REQUEST_CODE_MARK_COMMAND_PROCESSED
         );
     }
 
-    public static final void rejectCommand(Context context, String deviceId, String commandId, ResponseListener listener){
+    public static final void rejectCommand(Context context, String deviceId, String commandId,  JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_MARK_COMMAND_REJECTED, deviceId, commandId),
-                null,
+                body,
                 listener,
                 REQUEST_CODE_MARK_COMMAND_REJECTED
         );
