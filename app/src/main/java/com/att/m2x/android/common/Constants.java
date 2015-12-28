@@ -23,6 +23,8 @@ public class Constants {
     public static final String DEVICE_READ_LOCATION = API_BASE_URL.concat("/devices/%s/location");
     public static final String DEVICE_READ_LOCATION_HISTORY = API_BASE_URL.concat("/devices/%s/location/waypoints");
     public static final String DEVICE_UPDATE_LOCATION = API_BASE_URL.concat("/devices/%s/location");
+    public static final String DEVICE_METADATA = API_BASE_URL.concat("/devices/%s/metadata");
+    public static final String DEVICE_METADATA_FIELD = API_BASE_URL.concat("/devices/%s/metadata/%s");
     public static final String DEVICE_LIST_DATA_STREAMS = API_BASE_URL.concat("/devices/%s/streams");
     public static final String DEVICE_CREATE_UPDATE_DATA_STREAMS = API_BASE_URL.concat("/devices/%s/streams/%s");
     public static final String DEVICE_UPDATE_DATA_STREAM_VALUE = API_BASE_URL.concat("/devices/%s/streams/%s/value");
@@ -43,6 +45,8 @@ public class Constants {
     public static final String DISTRIBUTION_CREATE = API_BASE_URL.concat("/distributions");
     public static final String DISTRIBUTION_VIEW_DETAILS = API_BASE_URL.concat("/distributions/%s");
     public static final String DISTRIBUTION_UPDATE_DETAILS = API_BASE_URL.concat("/distributions/%s");
+    public static final String DISTRIBUTION_METADATA = API_BASE_URL.concat("/distributions/%s/metadata");
+    public static final String DISTRIBUTION_METADATA_FIELD = API_BASE_URL.concat("/distributions/%s/metadata/%s");
     public static final String DISTRIBUTION_LIST_DEVICES = API_BASE_URL.concat("/distributions/%s/devices");
     public static final String DISTRIBUTION_ADD_DEVICE = API_BASE_URL.concat("/distributions/%s/devices");
     public static final String DISTRIBUTION_DELETE = API_BASE_URL.concat("/distributions/%s");
@@ -66,6 +70,5 @@ public class Constants {
     public static final String CHARTS_UPDATE = API_BASE_URL.concat("/charts/%s");
     public static final String CHARTS_DELETE = API_BASE_URL.concat("/charts/%s");
     public static final String CHARTS_RENDER = API_BASE_URL.concat("/charts/%s.%s");
-
 
 }
