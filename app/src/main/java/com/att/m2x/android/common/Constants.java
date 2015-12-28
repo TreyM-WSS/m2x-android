@@ -21,6 +21,7 @@ public class Constants {
     public static final String DEVICE_UPDATE_DETAILS = API_BASE_URL.concat("/devices/%s");
     public static final String DEVICE_VIEW_DETAILS = API_BASE_URL.concat("/devices/%s");
     public static final String DEVICE_READ_LOCATION = API_BASE_URL.concat("/devices/%s/location");
+    public static final String DEVICE_READ_LOCATION_HISTORY = API_BASE_URL.concat("/devices/%s/location/waypoints");
     public static final String DEVICE_UPDATE_LOCATION = API_BASE_URL.concat("/devices/%s/location");
     public static final String DEVICE_METADATA = API_BASE_URL.concat("/devices/%s/metadata");
     public static final String DEVICE_METADATA_FIELD = API_BASE_URL.concat("/devices/%s/metadata/%s");
@@ -34,6 +35,7 @@ public class Constants {
     public static final String DEVICE_POST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM = API_BASE_URL.concat("/devices/%s/streams/%s");
+    public static final String DEVICE_POST_UPDATE = API_BASE_URL.concat("/devices/%s/update");
     public static final String DEVICE_POST_UPDATES = API_BASE_URL.concat("/devices/%s/updates");
     public static final String DEVICE_REQUEST_LOG = API_BASE_URL.concat("/devices/%s/log");
     public static final String DEVICE_DELETE = API_BASE_URL.concat("/devices/%s");
