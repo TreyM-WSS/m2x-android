@@ -33,6 +33,7 @@ public class Constants {
     public static final String DEVICE_POST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM = API_BASE_URL.concat("/devices/%s/streams/%s");
+    public static final String DEVICE_POST_UPDATE = API_BASE_URL.concat("/devices/%s/update");
     public static final String DEVICE_POST_UPDATES = API_BASE_URL.concat("/devices/%s/updates");
     public static final String DEVICE_REQUEST_LOG = API_BASE_URL.concat("/devices/%s/log");
     public static final String DEVICE_DELETE = API_BASE_URL.concat("/devices/%s");
