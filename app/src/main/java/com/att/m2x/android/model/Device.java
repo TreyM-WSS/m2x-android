@@ -37,10 +37,16 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_VIEW_REQUEST_LOG = 1025;
     public static final int REQUEST_CODE_DEVICE_DELETE = 1026;
     public static final int REQUEST_CODE_LIST_DEVICES = 1027;
+    public static final int REQUEST_CODE_METADATA = 1028;
+    public static final int REQUEST_CODE_UPDATE_METADATA = 1029;
+    public static final int REQUEST_CODE_METADATA_FIELD = 1030;
+    public static final int REQUEST_CODE_UPDATE_METADATA_FIELD = 1031;
+    public static final int REQUEST_CODE_DEVICE_LOCATION_HISTORY = 1032;
     public static final int REQUEST_CODE_LIST_RECEIVED_COMMANDS = 1033;
     public static final int REQUEST_CODE_VIEW_COMMAND_DETAILS = 1034;
     public static final int REQUEST_CODE_MARK_COMMAND_PROCESSED = 1035;
     public static final int REQUEST_CODE_MARK_COMMAND_REJECTED = 1036;
+    public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATE = 1037;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -123,6 +129,16 @@ public class Device {
         );
     }
 
+    public static final void readDeviceLocationHistory(Context context, String deviceId, HashMap<String,String> params, ResponseListener listener){
+        JsonRequest.makeGetRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_READ_LOCATION_HISTORY, deviceId),
+                params,
+                listener,
+                REQUEST_CODE_DEVICE_LOCATION_HISTORY
+        );
+    }
+
     public static final void updateDeviceLocation(Context context,JSONObject params,String deviceId, ResponseListener listener){
         JsonRequest.makePutRequest(
                 context,
@@ -131,6 +147,40 @@ public class Device {
                 listener,
                 REQUEST_CODE_DEVICE_UPDATE_LOCATION
         );
+    }
+
+    public static final void metadata(Context context, String deviceId, ResponseListener listener){
+        Metadata.metadata(
+                context,
+                String.format(Locale.US, Constants.DEVICE_METADATA, deviceId),
+                listener,
+                REQUEST_CODE_METADATA);
+    }
+
+    public static final void updateMetadata(Context context, String deviceId, JSONObject body, ResponseListener listener){
+        Metadata.updateMetadata(
+                context,
+                String.format(Locale.US, Constants.DEVICE_METADATA, deviceId),
+                body,
+                listener,
+                REQUEST_CODE_UPDATE_METADATA);
+    }
+
+    public static final void metadataField(Context context, String deviceId, String field, ResponseListener listener){
+        Metadata.metadataField(
+                context,
+                String.format(Locale.US, Constants.DEVICE_METADATA_FIELD, deviceId, field),
+                listener,
+                REQUEST_CODE_METADATA_FIELD);
+    }
+
+    public static final void updateMetadataField(Context context, String deviceId, String field, JSONObject body, ResponseListener listener){
+        Metadata.updateMetadataField(
+                context,
+                String.format(Locale.US, Constants.DEVICE_METADATA_FIELD, deviceId, field),
+                body,
+                listener,
+                REQUEST_CODE_UPDATE_METADATA_FIELD);
     }
 
     public static final void listDataStreams(Context context,String deviceId, ResponseListener listener){
@@ -230,6 +280,16 @@ public class Device {
                 null,
                 listener,
                 REQUEST_CODE_DEVICE_DELETE_DATA_STREAM
+        );
+    }
+
+    public static final void postDeviceUpdate(Context context, JSONObject params, String deviceId, ResponseListener listener){
+        JsonRequest.makePostRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_POST_UPDATE, deviceId),
+                params,
+                listener,
+                REQUEST_CODE_DEVICE_POST_DEVICE_UPDATE
         );
     }
 
