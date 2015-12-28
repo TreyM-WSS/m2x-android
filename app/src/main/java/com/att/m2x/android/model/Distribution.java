@@ -26,6 +26,10 @@ public class Distribution {
     public static final int REQUEST_CODE_CREATE_UPDATE_DATA_STREAMS = 2008;
     public static final int REQUEST_CODE_VIEW_DATA_STREAM = 2009;
     public static final int REQUEST_CODE_DELETE_DATA_STREAM = 2010;
+    public static final int REQUEST_CODE_METADATA = 2011;
+    public static final int REQUEST_CODE_UPDATE_METADATA = 2012;
+    public static final int REQUEST_CODE_METADATA_FIELD = 2013;
+    public static final int REQUEST_CODE_UPDATE_METADATA_FIELD = 2014;
 
     public static final void list(Context context, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -65,6 +69,40 @@ public class Distribution {
                 listener,
                 REQUEST_CODE_UPDATE_DISTRIBUTION_DETAILS
         );
+    }
+
+    public static final void metadata(Context context, String deviceId, ResponseListener listener){
+        Metadata.metadata(
+                context,
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA, deviceId),
+                listener,
+                REQUEST_CODE_METADATA);
+    }
+
+    public static final void updateMetadata(Context context, String deviceId, JSONObject body, ResponseListener listener){
+        Metadata.updateMetadata(
+                context,
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA, deviceId),
+                body,
+                listener,
+                REQUEST_CODE_UPDATE_METADATA);
+    }
+
+    public static final void metadataField(Context context, String deviceId, String field, ResponseListener listener){
+        Metadata.metadataField(
+                context,
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA_FIELD, deviceId, field),
+                listener,
+                REQUEST_CODE_METADATA_FIELD);
+    }
+
+    public static final void updateMetadataField(Context context, String deviceId, String field, JSONObject body, ResponseListener listener){
+        Metadata.updateMetadataField(
+                context,
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA_FIELD, deviceId, field),
+                body,
+                listener,
+                REQUEST_CODE_UPDATE_METADATA_FIELD);
     }
 
     public static final void listDevices(Context context,String distributionId, ResponseListener listener){
