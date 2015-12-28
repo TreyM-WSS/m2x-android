@@ -37,6 +37,7 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_VIEW_REQUEST_LOG = 1025;
     public static final int REQUEST_CODE_DEVICE_DELETE = 1026;
     public static final int REQUEST_CODE_LIST_DEVICES = 1027;
+    public static final int REQUEST_CODE_SEARCH_DATA_STREAM_VALUES = 1038;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -196,6 +197,17 @@ public class Device {
                 null,
                 listener,
                 REQUEST_CODE_DEVICE_DATA_STREAM_STATS
+        );
+    }
+
+    public static final void searchDataStreamValues(Context context, String deviceId, String format, HashMap<String, String> params, JSONObject body, ResponseListener listener){
+        JsonRequest.makeGetRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_SEARCH_DATA_STREAM_VALUES, deviceId, format),
+                params,
+                body,
+                listener,
+                REQUEST_CODE_SEARCH_DATA_STREAM_VALUES
         );
     }
 
