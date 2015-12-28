@@ -37,7 +37,7 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_VIEW_REQUEST_LOG = 1025;
     public static final int REQUEST_CODE_DEVICE_DELETE = 1026;
     public static final int REQUEST_CODE_LIST_DEVICES = 1027;
-    public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATE = 1034;
+    public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATE = 1037;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
