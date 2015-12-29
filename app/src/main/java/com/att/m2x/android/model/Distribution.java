@@ -71,35 +71,35 @@ public class Distribution {
         );
     }
 
-    public static final void metadata(Context context, String deviceId, ResponseListener listener){
+    public static final void metadata(Context context, String distributionId, ResponseListener listener){
         Metadata.metadata(
                 context,
-                String.format(Locale.US, Constants.DISTRIBUTION_METADATA, deviceId),
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA, distributionId),
                 listener,
                 REQUEST_CODE_METADATA);
     }
 
-    public static final void updateMetadata(Context context, String deviceId, JSONObject body, ResponseListener listener){
+    public static final void updateMetadata(Context context, String distributionId, JSONObject body, ResponseListener listener){
         Metadata.updateMetadata(
                 context,
-                String.format(Locale.US, Constants.DISTRIBUTION_METADATA, deviceId),
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA, distributionId),
                 body,
                 listener,
                 REQUEST_CODE_UPDATE_METADATA);
     }
 
-    public static final void metadataField(Context context, String deviceId, String field, ResponseListener listener){
+    public static final void metadataField(Context context, String distributionId, String field, ResponseListener listener){
         Metadata.metadataField(
                 context,
-                String.format(Locale.US, Constants.DISTRIBUTION_METADATA_FIELD, deviceId, field),
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA_FIELD, distributionId, field),
                 listener,
                 REQUEST_CODE_METADATA_FIELD);
     }
 
-    public static final void updateMetadataField(Context context, String deviceId, String field, JSONObject body, ResponseListener listener){
+    public static final void updateMetadataField(Context context, String distributionId, String field, JSONObject body, ResponseListener listener){
         Metadata.updateMetadataField(
                 context,
-                String.format(Locale.US, Constants.DISTRIBUTION_METADATA_FIELD, deviceId, field),
+                String.format(Locale.US, Constants.DISTRIBUTION_METADATA_FIELD, distributionId, field),
                 body,
                 listener,
                 REQUEST_CODE_UPDATE_METADATA_FIELD);
