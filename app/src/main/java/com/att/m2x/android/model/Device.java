@@ -47,6 +47,7 @@ public class Device {
     public static final int REQUEST_CODE_MARK_COMMAND_PROCESSED = 1035;
     public static final int REQUEST_CODE_MARK_COMMAND_REJECTED = 1036;
     public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATE = 1037;
+    public static final int REQUEST_CODE_DEVICE_EXPORT_VALUES = 1038;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -260,6 +261,17 @@ public class Device {
                 params,
                 listener,
                 REQUEST_CODE_DEVICE_POST_DATA_STREAM_VALUES
+        );
+    }
+
+
+    public static final void exportValues(Context context, String deviceId, HashMap<String, String> params, ResponseListener listener){
+        JsonRequest.makeGetRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_EXPORT_VALUES, deviceId),
+                params,
+                listener,
+                REQUEST_CODE_DEVICE_EXPORT_VALUES
         );
     }
 
