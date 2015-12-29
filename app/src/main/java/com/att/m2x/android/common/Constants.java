@@ -80,4 +80,7 @@ public class Constants {
     public static final String COMMANDS_SEND = API_BASE_URL.concat("/commands");
     public static final String COMMANDS_VIEW_DETAILS = API_BASE_URL.concat("/commands/%s");
 
+    //Job
+    public static final String JOB_VIEW = API_BASE_URL.concat("/jobs/%s");
+
 }
