@@ -14,7 +14,6 @@ import java.util.Locale;
 public class Job {
 
     public static final int REQUEST_CODE_VIEW_JOB_DETAILS = 7001;
-    public static final int REQUEST_CODE_VIEW_JOB_RESULTS = 7002;
 
     public static final void viewDetails(Context context, String jobId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -23,16 +22,6 @@ public class Job {
                 null,
                 listener,
                 REQUEST_CODE_VIEW_JOB_DETAILS
-        );
-    }
-
-    public static final void viewResults(Context context, String jobId, ResponseListener listener){
-        JsonRequest.makeGetRequest(
-                context,
-                String.format(Locale.US, Constants.JOB_VIEW, jobId),
-                null,
-                listener,
-                REQUEST_CODE_VIEW_JOB_RESULTS
         );
     }
 
