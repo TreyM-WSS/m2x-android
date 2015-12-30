@@ -34,6 +34,7 @@ public class Constants {
     public static final String DEVICE_LIST_DATA_STREAM_STATS = API_BASE_URL.concat("/devices/%s/streams/%s/stats");
     public static final String DEVICE_SEARCH_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/values/search.%s");
     public static final String DEVICE_POST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
+    public static final String DEVICE_EXPORT_VALUES = API_BASE_URL.concat("/devices/%s/values/export.csv");
     public static final String DEVICE_DELETE_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_DELETE_DATA_STREAM = API_BASE_URL.concat("/devices/%s/streams/%s");
     public static final String DEVICE_POST_UPDATE = API_BASE_URL.concat("/devices/%s/update");
@@ -80,5 +81,15 @@ public class Constants {
     public static final String COMMANDS_LIST = API_BASE_URL.concat("/commands");
     public static final String COMMANDS_SEND = API_BASE_URL.concat("/commands");
     public static final String COMMANDS_VIEW_DETAILS = API_BASE_URL.concat("/commands/%s");
+
+    //Collection
+    public static final String COLLECTION_LIST = API_BASE_URL.concat("/collections");
+    public static final String COLLECTION_CREATE = API_BASE_URL.concat("/collections");
+    public static final String COLLECTION_VIEW_DETAILS = API_BASE_URL.concat("/collections/%s");
+    public static final String COLLECTION_UPDATE_DETAILS = API_BASE_URL.concat("/collections/%s");
+    public static final String COLLECTION_LIST_DEVICES = API_BASE_URL.concat("/collections/%s/devices");
+    public static final String COLLECTION_METADATA = API_BASE_URL.concat("/collections/%s/metadata");
+    public static final String COLLECTION_METADATA_FIELD = API_BASE_URL.concat("/collections/%s/metadata/%s");
+    public static final String COLLECTION_DELETE = API_BASE_URL.concat("/collections/%s");
 
 }
