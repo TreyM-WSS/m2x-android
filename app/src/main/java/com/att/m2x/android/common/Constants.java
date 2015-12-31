@@ -68,14 +68,6 @@ public class Constants {
     public static final String KEYS_REGENERATE = API_BASE_URL.concat("/keys/%s/regenerate");
     public static final String KEYS_DELETE = API_BASE_URL.concat("/keys/%s");
 
-    //Charts
-    public static final String CHARTS_LIST = API_BASE_URL.concat("/charts");
-    public static final String CHARTS_CREATE = API_BASE_URL.concat("/charts");
-    public static final String CHARTS_VIEW_DETAILS = API_BASE_URL.concat("/charts/%s");
-    public static final String CHARTS_UPDATE = API_BASE_URL.concat("/charts/%s");
-    public static final String CHARTS_DELETE = API_BASE_URL.concat("/charts/%s");
-    public static final String CHARTS_RENDER = API_BASE_URL.concat("/charts/%s.%s");
-
     //Command
     public static final String COMMANDS_LIST = API_BASE_URL.concat("/commands");
     public static final String COMMANDS_SEND = API_BASE_URL.concat("/commands");

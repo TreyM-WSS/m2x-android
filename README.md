@@ -146,22 +146,6 @@ This provides an interface to your data in M2X
           });
    ```
 
-- [Charts]
-  ```Java
-    Charts.list(ChartsActivity.this,null,
-        new ResponseListener() {
-           @Override
-           public void onRequestCompleted(ApiV2Response result, int requestCode) {
-
-           }
-
-           @Override
-           public void onRequestError(ApiV2Response error, int requestCode) {
-
-           }
-       });
-   ```
-
 The SDK will return the response from the API in one of the two methods implemented above. If there is an error the SDK provides a detailed message and status to find out which is the problem that caused the failure.
 
 The SDK also provides the ability of returning the response for the last call. To access this last response you will need to do the following:
