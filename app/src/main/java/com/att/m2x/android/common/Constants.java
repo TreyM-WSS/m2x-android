@@ -6,7 +6,7 @@ package com.att.m2x.android.common;
 public class Constants {
 
     public static final String API_BASE_URL = "http://api-m2x.att.com/v2"; //PROD
-    public static final String USER_AGENT = "M2X-Android/4.0.0 java/21 (".
+    public static final String USER_AGENT = "M2X-Android/5.0.0 java/21 (".
                                             concat(System.getProperty("os.arch")).
                                             concat(" ").
                                             concat(android.os.Build.VERSION.RELEASE).
