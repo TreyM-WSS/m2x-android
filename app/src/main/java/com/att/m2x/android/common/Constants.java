@@ -6,7 +6,7 @@ package com.att.m2x.android.common;
 public class Constants {
 
     public static final String API_BASE_URL = "http://api-m2x.att.com/v2"; //PROD
-    public static final String USER_AGENT = "M2X-Android/3.0.0 java/21 (".
+    public static final String USER_AGENT = "M2X-Android/4.0.0 java/21 (".
                                             concat(System.getProperty("os.arch")).
                                             concat(" ").
                                             concat(android.os.Build.VERSION.RELEASE).
@@ -69,18 +69,13 @@ public class Constants {
     public static final String KEYS_REGENERATE = API_BASE_URL.concat("/keys/%s/regenerate");
     public static final String KEYS_DELETE = API_BASE_URL.concat("/keys/%s");
 
-    //Charts
-    public static final String CHARTS_LIST = API_BASE_URL.concat("/charts");
-    public static final String CHARTS_CREATE = API_BASE_URL.concat("/charts");
-    public static final String CHARTS_VIEW_DETAILS = API_BASE_URL.concat("/charts/%s");
-    public static final String CHARTS_UPDATE = API_BASE_URL.concat("/charts/%s");
-    public static final String CHARTS_DELETE = API_BASE_URL.concat("/charts/%s");
-    public static final String CHARTS_RENDER = API_BASE_URL.concat("/charts/%s.%s");
-
     //Command
     public static final String COMMANDS_LIST = API_BASE_URL.concat("/commands");
     public static final String COMMANDS_SEND = API_BASE_URL.concat("/commands");
     public static final String COMMANDS_VIEW_DETAILS = API_BASE_URL.concat("/commands/%s");
+
+    //Job
+    public static final String JOB_VIEW = API_BASE_URL.concat("/jobs/%s");
 
     //Collection
     public static final String COLLECTION_LIST = API_BASE_URL.concat("/collections");
