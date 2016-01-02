@@ -70,11 +70,10 @@ public class Device {
         );
     }
 
-    public static final void searchDevices(Context context, HashMap<String,String> params, JSONObject body, ResponseListener listener){
-        JsonRequest.makeGetRequest(
+    public static final void searchDevices(Context context, JSONObject body, ResponseListener listener){
+        JsonRequest.makePostRequest(
                 context,
                 Constants.DEVICE_SEARCH,
-                params,
                 body,
                 listener,
                 REQUEST_CODE_SEARCH_DEVICES
@@ -255,11 +254,10 @@ public class Device {
         );
     }
 
-    public static final void searchDataStreamValues(Context context, String deviceId, String format, HashMap<String, String> params, JSONObject body, ResponseListener listener){
-        JsonRequest.makeGetRequest(
+    public static final void searchDataStreamValues(Context context, String deviceId, String format, JSONObject body, ResponseListener listener){
+        JsonRequest.makePostRequest(
                 context,
                 String.format(Locale.US, Constants.DEVICE_SEARCH_DATA_STREAM_VALUES, deviceId, format),
-                params,
                 body,
                 listener,
                 REQUEST_CODE_SEARCH_DATA_STREAM_VALUES
