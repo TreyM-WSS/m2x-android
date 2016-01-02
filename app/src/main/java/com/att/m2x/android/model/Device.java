@@ -48,6 +48,7 @@ public class Device {
     public static final int REQUEST_CODE_MARK_COMMAND_REJECTED = 1036;
     public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATE = 1037;
     public static final int REQUEST_CODE_DEVICE_EXPORT_VALUES = 1038;
+    public static final int REQUEST_CODE_SEARCH_DATA_STREAM_VALUES = 1039;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -69,11 +70,10 @@ public class Device {
         );
     }
 
-    public static final void searchDevices(Context context, HashMap<String,String> params, JSONObject body, ResponseListener listener){
-        JsonRequest.makeGetRequest(
+    public static final void searchDevices(Context context, JSONObject body, ResponseListener listener){
+        JsonRequest.makePostRequest(
                 context,
                 Constants.DEVICE_SEARCH,
-                params,
                 body,
                 listener,
                 REQUEST_CODE_SEARCH_DEVICES
@@ -251,6 +251,16 @@ public class Device {
                 null,
                 listener,
                 REQUEST_CODE_DEVICE_DATA_STREAM_STATS
+        );
+    }
+
+    public static final void searchDataStreamValues(Context context, String deviceId, String format, JSONObject body, ResponseListener listener){
+        JsonRequest.makePostRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_SEARCH_DATA_STREAM_VALUES, deviceId, format),
+                body,
+                listener,
+                REQUEST_CODE_SEARCH_DATA_STREAM_VALUES
         );
     }
 

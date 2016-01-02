@@ -32,6 +32,7 @@ public class Constants {
     public static final String DEVICE_LIST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_LIST_DATA_STREAM_SAMPLING = API_BASE_URL.concat("/devices/%s/streams/%s/sampling");
     public static final String DEVICE_LIST_DATA_STREAM_STATS = API_BASE_URL.concat("/devices/%s/streams/%s/stats");
+    public static final String DEVICE_SEARCH_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/values/search.%s");
     public static final String DEVICE_POST_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
     public static final String DEVICE_EXPORT_VALUES = API_BASE_URL.concat("/devices/%s/values/export.csv");
     public static final String DEVICE_DELETE_DATA_STREAM_VALUES = API_BASE_URL.concat("/devices/%s/streams/%s/values");
