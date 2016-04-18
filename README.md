@@ -12,7 +12,6 @@ Getting Started
 3. Create your first [Device](https://m2x.att.com/devices) and copy its _Device ID_.
 4. Review the [M2X API Documentation](https://m2x.att.com/developer/documentation/overview).
 
-
 ## Setup
 
 Add network permissions to your projects `AndroidManifest.xml` file:
@@ -30,29 +29,23 @@ To include the M2X Android Client Library in your project :
 1. Add Maven Central Repository to your projects top level `build.gradle` :
     ```
         buildscript {
-            ...
             repositories {
-                ...
                 mavenCentral()
-                ...
             }
-            ...
        }
     ```
 
-2. Add M2X Android Library as a dependency in module level `build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
+2. Add M2X Android Library as a dependency in `/app/build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
     ```
     dependencies {
-        ...
         compile group: 'com.att.m2x', name: 'android', version: 'v.v.v'
-        ...
     }
     ```
 
 ### Manual Installation
 
 1. Obtain the `m2x-android-v.v.v.aar` for the [latest version](https://github.com/attm2x/m2x-android/releases/latest) of the M2X Android Client Library and place it in your project's `/libs` directory (if no `/libs` directory is present, create it).
-2. Add the following to your projects top level `build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
+2. Add the following to `/app/build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
     ```
       repositories {
           flatDir {
