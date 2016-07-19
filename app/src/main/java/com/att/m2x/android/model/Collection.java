@@ -26,6 +26,8 @@ public class Collection {
     public static final int REQUEST_CODE_METADATA_FIELD = 6008;
     public static final int REQUEST_CODE_UPDATE_METADATA_FIELD = 6009;
     public static final int REQUEST_CODE_DELETE_COLLECTION = 6010;
+    public static final int REQUEST_CODE_ADD_DEVICE_TO_COLLECTION = 6011;
+    public static final int REQUEST_CODE_DELETE_DEVICE_FROM_COLLECTION = 6012;
 
     public static final void list(Context context, HashMap<String, String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -121,4 +123,23 @@ public class Collection {
         );
     }
 
+    public static final void deleteDeviceFromCollection(Context context, String collectionId, String deviceId, ResponseListener listener){
+        JsonRequest.makeDeleteRequest(
+                context,
+                String.format(Locale.US, Constants.COLLECTION_DELETE_DEVICE_FROM_COLLECTION, collectionId, deviceId),
+                null,
+                listener,
+                REQUEST_CODE_DELETE_DEVICE_FROM_COLLECTION
+        );
+    }
+
+    public static final void addDeviceToCollection(Context context, String collectionId, String deviceId, ResponseListener listener){
+        JsonRequest.makePutRequest(
+                context,
+                String.format(Locale.US, Constants.COLLECTION_ADD_DEVICE_TO_COLLECTION, collectionId, deviceId),
+                null,
+                listener,
+                REQUEST_CODE_ADD_DEVICE_TO_COLLECTION
+        );
+    }
 }
