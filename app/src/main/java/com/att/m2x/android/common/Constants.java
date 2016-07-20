@@ -86,5 +86,7 @@ public class Constants {
     public static final String COLLECTION_METADATA = API_BASE_URL.concat("/collections/%s/metadata");
     public static final String COLLECTION_METADATA_FIELD = API_BASE_URL.concat("/collections/%s/metadata/%s");
     public static final String COLLECTION_DELETE = API_BASE_URL.concat("/collections/%s");
+    public static final String COLLECTION_ADD_DEVICE_TO_COLLECTION = API_BASE_URL.concat("/collections/%s/devices/%s");
+    public static final String COLLECTION_DELETE_DEVICE_FROM_COLLECTION = API_BASE_URL.concat("/collections/%s/devices/%s");
 
 }
