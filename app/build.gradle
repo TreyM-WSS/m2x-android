@@ -2,9 +2,10 @@ apply plugin: 'android-library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-group = "com.att.m2x"
+def client_version = "5.0.0"
+def maven_group = "com.att.m2x"
+
 archivesBaseName = "android"
-version = "5.0.0"
 
 android {
     compileSdkVersion 21
@@ -14,7 +15,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 6
-        versionName "5.0.0"
+        versionName client_version
     }
     buildTypes {
         release {
@@ -67,8 +68,8 @@ uploadArchives {
             }
 
             pom.project {
-                groupId 'com.att.m2x'
-                version '5.0.0'
+                groupId maven_group
+                version client_version
                 name 'AT&T M2X Android Library'
                 packaging 'jar'
                 artifactId 'android'
@@ -103,5 +104,5 @@ uploadArchives {
 }
 
 nexusStaging {
-    packageGroup = "com.att.m2x"
+    packageGroup = maven_group
 }
