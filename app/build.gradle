@@ -2,7 +2,7 @@ apply plugin: 'android-library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def clientVersion = "5.0.0"
+def clientVersion = "5.1.0"
 def mavenGroup = "com.att.m2x"
 
 archivesBaseName = "android"
