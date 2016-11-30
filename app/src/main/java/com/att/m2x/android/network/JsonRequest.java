@@ -22,6 +22,8 @@ import com.att.m2x.android.common.Constants;
 import com.att.m2x.android.listeners.ResponseListener;
 import com.att.m2x.android.sharedPreferences.APISharedPreferences;
 import com.att.m2x.android.utils.ArrayUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Created by Joaquin on 1/12/14.
@@ -68,7 +70,14 @@ public class JsonRequest {
                                          JSONObject body,
                                          final ResponseListener listener,
                                          final int requestCode) {
-        makeRequest(context, Request.Method.DELETE, url, null, body, listener, requestCode);
+        /*Converting the JSONObject body to Hash map, so that we can pass it through as
+           a query params, Volley library is not adding body for a DELETE request*/
+        HashMap<String,String> params = null;
+        if(body != null){
+            params = new Gson().fromJson(body.toString(),new TypeToken<HashMap<String, String>>(){}.getType());
+        }
+
+        makeRequest(context, Request.Method.DELETE, url, params, body, listener, requestCode);
     }
 
     private static void makeRequest(final Context context,

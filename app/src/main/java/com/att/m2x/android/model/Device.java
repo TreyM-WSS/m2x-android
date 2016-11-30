@@ -49,6 +49,7 @@ public class Device {
     public static final int REQUEST_CODE_DEVICE_POST_DEVICE_UPDATE = 1037;
     public static final int REQUEST_CODE_DEVICE_EXPORT_VALUES = 1038;
     public static final int REQUEST_CODE_SEARCH_DATA_STREAM_VALUES = 1039;
+    public static final int REQUEST_CODE_DEVICE_DELETE_LOCATION = 1040;
 
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -302,6 +303,16 @@ public class Device {
                 null,
                 listener,
                 REQUEST_CODE_DEVICE_DELETE_DATA_STREAM
+        );
+    }
+
+    public static final void deleteDeviceLocation(Context context,JSONObject params,String deviceId, ResponseListener listener){
+        JsonRequest.makeDeleteRequest(
+                context,
+                String.format(Locale.US, Constants.DEVICE_DELETE_LOCATION, deviceId),
+                params,
+                listener,
+                REQUEST_CODE_DEVICE_DELETE_LOCATION
         );
     }
 
