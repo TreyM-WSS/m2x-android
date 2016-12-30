@@ -74,7 +74,7 @@ To include the M2X Android Client Library in your project :
 
 If you are developing an [Android Things](https://developer.android.com/things/index.html) project using one of the [supported hardware kits](https://developer.android.com/things/hardware/developer-kits.html), you will need to follow the Android Things project setup steps found [here](https://developer.android.com/things/training/first-device/create-studio-project.html), which are outlined below. 
 
-_Note: these steps should be performed in addition to the M2X Android client setup instructions from above._
+_Note: these steps should be performed in addition to the M2X Android client [setup](#setup) instructions from above._
 
 1. Update your SDK tools to version 24 or higher
 2. Update your SDK with Android 7.0 (API 24) or higher 
