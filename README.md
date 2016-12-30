@@ -18,7 +18,7 @@ Getting Started
 
 ### Add Necessary Permissions
 
-Whether you install the library via [Maven](#via-maven-central-repository-recommended) or manually](https://github.com/attm2x/m2x-android#manual-installation), you'll need to add network permissions to your project's `AndroidManifest.xml` file:
+Whether you install the library via [Maven](#via-maven-central-repository-recommended) or [manually](#manual-installation), you'll need to add network permissions to your project's `AndroidManifest.xml` file:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
