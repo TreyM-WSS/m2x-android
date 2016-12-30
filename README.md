@@ -4,6 +4,8 @@
 
 The [AT&T M2X API](https://m2x.att.com/developer/documentation/overview) provides all the needed operations and methods to connect your devices to AT&T's M2X service. This library aims to provide a simple wrapper to interact with the AT&T M2X API. Refer to the [Glossary of Terms](https://m2x.att.com/developer/documentation/glossary) to understand the nomenclature used throughout this documentation.
 
+This library supports Android for mobile development as well as [Android Things](https://developer.android.com/things/index.html) for IoT devices.
+
 
 Getting Started
 ==========================
@@ -14,13 +16,18 @@ Getting Started
 
 ## Setup
 
-Add network permissions to your projects `AndroidManifest.xml` file:
+### Add Necessary Permissions
+
+Whether you install the library via [Maven](#via-maven-central-repository-recommended) or manually](https://github.com/attm2x/m2x-android#manual-installation), you'll need to add network permissions to your project's `AndroidManifest.xml` file:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
+### Install the M2X Android Client Library
 
-### Via Maven Central Repository (Recommended)
+There are two options for installing the M2X Android Client Library, seen below. We recommend using the first option, via Maven Centra Repository as it is the most straightforward.
+
+#### Via Maven Central Repository (Recommended)
 
 We've added the M2X Android Client Library to the [Maven Central Repository](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%20com.att.m2x%20a%3A%20android) to make it easy for you to add it as a dependency to your Android based project.
 
@@ -28,11 +35,11 @@ To include the M2X Android Client Library in your project :
 
 1. Add Maven Central Repository to your projects top level `build.gradle` :
     ```
-        buildscript {
-            repositories {
-                mavenCentral()
-            }
-       }
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
     ```
 
 2. Add M2X Android Library as a dependency in `/app/build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
@@ -42,7 +49,7 @@ To include the M2X Android Client Library in your project :
     }
     ```
 
-### Manual Installation
+#### Manual Installation
 
 1. Obtain the `m2x-android-v.v.v.aar` for the [latest version](https://github.com/attm2x/m2x-android/releases/latest) of the M2X Android Client Library and place it in your project's `/libs` directory (if no `/libs` directory is present, create it).
 2. Add the following to `/app/build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
@@ -62,6 +69,53 @@ To include the M2X Android Client Library in your project :
     ```
 
 3. Run `gradle build` task
+
+### Optional: Android Things Setup
+
+If you are developing an [Android Things](https://developer.android.com/things/index.html) project using one of the [supported hardware kits](https://developer.android.com/things/hardware/developer-kits.html), you will need to follow the Android Things project setup steps found [here](https://developer.android.com/things/training/first-device/create-studio-project.html), which are outlined below. 
+
+_Note: these steps should be performed in addition to the M2X Android client setup instructions from above._
+
+1. Update your SDK tools to version 24 or higher
+2. Update your SDK with Android 7.0 (API 24) or higher 
+3. Create or update your app project with the following:
+  * Add the dependency artifact to your app-level build.gradle file:
+    ```
+    dependencies {
+        ...
+        provided 'com.google.android.things:androidthings:0.1-devpreview'
+    }
+    ```
+    
+  * Add the things shared library entry to your app's manifest file:
+    ```xml
+    <application ...>
+        <uses-library android:name="com.google.android.things"/>
+        ...
+    </application>
+    ```
+
+  * Declare a home activity as follows:
+    ```xml
+    <application
+        android:label="@string/app_name">
+        <uses-library android:name="com.google.android.things"/>
+        <activity android:name=".HomeActivity">
+            <!-- Launch activity as default from Android Studio -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <!-- Launch activity automatically on boot -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.IOT_LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
+    ```
 
 ## Requirements and Dependencies
 
