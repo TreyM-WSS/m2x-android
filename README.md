@@ -42,7 +42,7 @@ To include the M2X Android Client Library in your project :
     }
     ```
 
-2. Add M2X Android Library as a dependency in `/app/build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library :
+2. Add M2X Android Library as a dependency in `/app/build.gradle`, replacing "v.v.v" with the target version number for the M2X Android library (check out our [releases](https://github.com/attm2x/m2x-android/releases) for a full list) :
     ```
     dependencies {
         compile group: 'com.att.m2x', name: 'android', version: 'v.v.v'
