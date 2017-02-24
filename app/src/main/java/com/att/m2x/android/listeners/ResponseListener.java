@@ -3,7 +3,7 @@ package com.att.m2x.android.listeners;
 import com.att.m2x.android.network.ApiV2Response;
 
 /**
- * Created by Joaquin on 1/12/14.
+ * ATT M2x response listener
  */
 public interface ResponseListener <T> {
 

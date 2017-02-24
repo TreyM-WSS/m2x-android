@@ -5,18 +5,15 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 /**
- * Created by Joaquin on 28/11/14.
- */
-
-/*
-    raw: The raw response body.
-    json: The parsed response body.
-    status: The status code of the response.
-    headers: The headers included on the response.
-    success?: Whether response status is a success (status code 2xx)
-    client_error?: Whether response status is one of 4xx
-    server_error?: Whether response status is one of 5xx
-    error?: Whether client_error? or server_error? is true
+ * The Response Class <p>
+ * raw: The raw response body. <p>
+ * json: The parsed response body. <p>
+ * status: The status code of the response. <p>
+ * headers: The headers included on the response. <p>
+ * success?: Whether response status is a success (status code 2xx) <p>
+ * client_error?: Whether response status is one of 4xx <p>
+ * server_error?: Whether response status is one of 5xx <p>
+ * error?: Whether client_error? or server_error? is true <p>
  */
 
 public class ApiV2Response implements Serializable {

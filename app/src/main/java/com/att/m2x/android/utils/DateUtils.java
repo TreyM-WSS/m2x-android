@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * Created by kristinpeterson on 4/29/15
+ * ATT M2X Date Utils
  */
 public class DateUtils {
 

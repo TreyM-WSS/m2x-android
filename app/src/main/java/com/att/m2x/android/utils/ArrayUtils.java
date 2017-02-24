@@ -5,10 +5,14 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 
 /**
- * Created by Joaquin on 2/12/14.
+ * ATT M2X Array Utils
  */
 public class ArrayUtils {
 
+    /**
+     * @param queryString as HashMap<String,String>
+     * @return as String
+     */
     public static final String mapToQueryString(HashMap<String,String> queryString){
         StringBuilder sb = new StringBuilder();
         try {

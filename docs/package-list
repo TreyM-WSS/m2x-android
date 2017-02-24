@@ -1,0 +1,6 @@
+com.att.m2x.android.listeners
+com.att.m2x.android.main
+com.att.m2x.android.model
+com.att.m2x.android.network
+com.att.m2x.android.sharedPreferences
+com.att.m2x.android.utils
