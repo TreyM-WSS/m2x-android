@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.att.m2x.android.network.ApiV2Response;
 
 /**
- * Created by Joaquin on 28/11/14.
+ * ATT M2X Shared Preference
  */
 public class APISharedPreferences {
 
@@ -25,7 +25,7 @@ public class APISharedPreferences {
     /**
      * Method to save the Key
      *
-     * @param context
+     * @param context The application Context.
      */
     public static void setApiKey(Context context, String apiKey) {
         sharedPreferences = context.getSharedPreferences(M2X_SHARED_PREFERENCES, 0);
@@ -36,8 +36,8 @@ public class APISharedPreferences {
 
     /**
      * Method to get the Key from shared preferences
-     * @param context
-     * @return
+     * @param context The application Context.
+     * @return as String, the version number
      */
     public static String getApiKey(Context context) {
         String versionNumber = "0";
@@ -54,9 +54,9 @@ public class APISharedPreferences {
     }
 
     /**
-     * Method to save the Key
+     * Method to save the last ApiV2Response response
      *
-     * @param context
+     * @param context The application Context.
      */
     public static void saveLastResponse(Context context, ApiV2Response response) {
         sharedPreferences = context.getSharedPreferences(M2X_SHARED_PREFERENCES, 0);
@@ -68,9 +68,9 @@ public class APISharedPreferences {
     }
 
     /**
-     * Method to get the Key from shared preferences
-     * @param context
-     * @return
+     * Method to get the last saved ApiV2Response response from shared preferences
+     * @param context The application Context.
+     * @return HTTP response
      */
     public static ApiV2Response getLastResponse(Context context) {
         ApiV2Response lastResponse = null;

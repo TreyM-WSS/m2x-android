@@ -8,7 +8,7 @@ import com.att.m2x.android.network.JsonRequest;
 import org.json.JSONObject;
 
 /**
- * Created by kristinpeterson on 12/26/15.
+ * Metadata Class
  */
 public class Metadata {
 
