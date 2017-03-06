@@ -40,7 +40,7 @@ public class Collection {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/collections#List-collections">List collections</a>} endpoint
      * @param context The application Context.
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void list(Context context, HashMap<String, String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -56,7 +56,7 @@ public class Collection {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/collections#Create-Collection">Create Collection</a>} endpoint
      * @param context The application Context.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void create(Context context, JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -72,7 +72,7 @@ public class Collection {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/collections#View-Collection-Details">View Collection Details</a>} endpoint
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewDetails(Context context, String collectionId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -89,7 +89,7 @@ public class Collection {
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateDetails(Context context, String collectionId, JSONObject body, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -106,7 +106,7 @@ public class Collection {
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters. 
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listDevices(Context context, String collectionId, HashMap<String, String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -122,7 +122,7 @@ public class Collection {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/collections#Read-Collection-Metadata">Read Collection Metadata</a>} endpoint
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void metadata(Context context, String collectionId, ResponseListener listener){
         Metadata.metadata(
@@ -137,7 +137,7 @@ public class Collection {
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateMetadata(Context context, String collectionId, JSONObject body, ResponseListener listener){
         Metadata.updateMetadata(
@@ -153,7 +153,7 @@ public class Collection {
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
      * @param field as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void metadataField(Context context, String collectionId, String field, ResponseListener listener){
         Metadata.metadataField(
@@ -169,7 +169,7 @@ public class Collection {
      * @param collectionId as String, ID of the collection.
      * @param field as String
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateMetadataField(Context context, String collectionId, String field, JSONObject body, ResponseListener listener){
         Metadata.updateMetadataField(
@@ -184,7 +184,7 @@ public class Collection {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/collections#Delete-Collection">Delete collections</a>} endpoint
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void delete(Context context, String collectionId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
@@ -201,7 +201,7 @@ public class Collection {
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void deleteDeviceFromCollection(Context context, String collectionId, String deviceId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
@@ -218,7 +218,7 @@ public class Collection {
      * @param context The application Context.
      * @param collectionId as String, ID of the collection.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void addDeviceToCollection(Context context, String collectionId, String deviceId, ResponseListener listener){
         JsonRequest.makePutRequest(

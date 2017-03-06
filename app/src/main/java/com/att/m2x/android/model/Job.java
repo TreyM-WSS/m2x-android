@@ -24,7 +24,7 @@ public class Job {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/jobs#View-Job-Details">View Job Details</a>} endpoint
      * @param context The application Context.
      * @param jobId as String, ID of the job.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewDetails(Context context, String jobId, ResponseListener listener){
         JsonRequest.makeGetRequest(

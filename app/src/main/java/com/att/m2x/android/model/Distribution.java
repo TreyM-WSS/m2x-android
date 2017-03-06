@@ -40,7 +40,7 @@ public class Distribution {
     /**
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/distribution#List-Distributions">List Distributions</a>} endpoint
      * @param context The application Context.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void list(Context context, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -56,7 +56,7 @@ public class Distribution {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/distribution#Create-Distribution">Create-Distribution</a>} endpoint
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void create(Context context, JSONObject params, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -72,7 +72,7 @@ public class Distribution {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/distribution#View-Distribution-Details">View Distribution Details</a>} endpoint
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewDetails(Context context, String distributionId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -89,7 +89,7 @@ public class Distribution {
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param distributionId as String, ID of the distribution.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateDetails(Context context, JSONObject params, String distributionId, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -105,7 +105,7 @@ public class Distribution {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/distribution#Read-Distribution-Metadata">Read Distribution Metadata</a>} endpoint
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void metadata(Context context, String distributionId, ResponseListener listener){
         Metadata.metadata(
@@ -120,7 +120,7 @@ public class Distribution {
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateMetadata(Context context, String distributionId, JSONObject body, ResponseListener listener){
         Metadata.updateMetadata(
@@ -136,7 +136,7 @@ public class Distribution {
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
      * @param field as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void metadataField(Context context, String distributionId, String field, ResponseListener listener){
         Metadata.metadataField(
@@ -152,7 +152,7 @@ public class Distribution {
      * @param distributionId as String, ID of the distribution.
      * @param field as String
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateMetadataField(Context context, String distributionId, String field, JSONObject body, ResponseListener listener){
         Metadata.updateMetadataField(
@@ -167,7 +167,7 @@ public class Distribution {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/distribution#List-Devices-from-an-existing-Distribution">List Devices from an existing Distribution</a>} endpoint
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listDevices(Context context, String distributionId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -184,7 +184,7 @@ public class Distribution {
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param distributionId as String, ID of the distribution.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void addDevice(Context context, JSONObject params, String distributionId, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -200,7 +200,7 @@ public class Distribution {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/distribution#Delete-Distribution">Delete Distribution</a>} endpoint
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void delete(Context context, String distributionId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
@@ -216,7 +216,7 @@ public class Distribution {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/distribution#List-Data-Streams">List Data Streams</a>} endpoint
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listDataStreams(Context context, String distributionId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -234,7 +234,7 @@ public class Distribution {
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param distributionId as String, ID of the distribution.
      * @param streamName as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void createUpdateDataStream(Context context, JSONObject params, String distributionId, String streamName, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -251,7 +251,7 @@ public class Distribution {
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
      * @param streamName as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewDataStream(Context context, String distributionId, String streamName, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -268,7 +268,7 @@ public class Distribution {
      * @param context The application Context.
      * @param distributionId as String, ID of the distribution.
      * @param streamName as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void deleteDataStream(Context context, String distributionId, String streamName, ResponseListener listener){
         JsonRequest.makeDeleteRequest(

@@ -62,7 +62,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#Search-Public-Devices-Catalog">Search Public Devices Catalog</a>} endpoint.
      * @param context The application Context
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void searchPublicCatalog(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -78,7 +78,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#List-Devices">List Devices</a>} endpoint.
      * @param context The application Context
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listDevices(Context context, HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -94,7 +94,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#Search-Devices">Search Devices</a>} endpoint
      * @param context The application Context.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void searchDevices(Context context, JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -109,7 +109,7 @@ public class Device {
     /**
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#List-Device-Tags">List Device Tags</a>} endpoint.
      * @param context The application Context
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listDeviceTags(Context context, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -125,7 +125,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#Create-Device">Create Devices</a>} endpoint
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void createDevice(Context context,JSONObject params, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -142,7 +142,7 @@ public class Device {
      * @param context The application Context
      * @param params Query parameters as JSONObject. View M2X API Docs for listing of available parameters. 
      * @param deviceId Device ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateDeviceDetails(Context context,JSONObject params,String deviceId, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -158,7 +158,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#View-Device-Details">View Device Details</a>} endpoint.
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewDeviceDetails(Context context,String deviceId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -174,7 +174,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#Read-Device-Location">Read Device Location</a>} endpoint.
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void readDeviceLocation(Context context,String deviceId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -191,7 +191,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void readDeviceLocationHistory(Context context, String deviceId, HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -208,7 +208,7 @@ public class Device {
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateDeviceLocation(Context context,JSONObject params,String deviceId, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -224,7 +224,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#Read-Device-Metadata">Read Device Metadata</a>} endpoint.
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void metadata(Context context, String deviceId, ResponseListener listener){
         Metadata.metadata(
@@ -239,7 +239,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateMetadata(Context context, String deviceId, JSONObject body, ResponseListener listener){
         Metadata.updateMetadata(
@@ -255,7 +255,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param field as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void metadataField(Context context, String deviceId, String field, ResponseListener listener){
         Metadata.metadataField(
@@ -271,7 +271,7 @@ public class Device {
      * @param deviceId as String, ID of the device.
      * @param field as String
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateMetadataField(Context context, String deviceId, String field, JSONObject body, ResponseListener listener){
         Metadata.updateMetadataField(
@@ -286,7 +286,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#List-Data-Streams">List Data Streams</a>} endpoint.
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listDataStreams(Context context,String deviceId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -304,7 +304,7 @@ public class Device {
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void createUpdateDataStreams(Context context,JSONObject params,String deviceId,String name, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -322,7 +322,7 @@ public class Device {
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void updateDataStreamValue(Context context,JSONObject params,String deviceId,String name, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -339,7 +339,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewDataStream(Context context,String deviceId,String name, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -357,7 +357,7 @@ public class Device {
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listDataStreamValues(Context context,HashMap<String,String> params,String deviceId,String name, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -374,7 +374,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void dataStreamSampling(Context context,String deviceId,String name, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -391,7 +391,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void dataStreamStats(Context context,String deviceId,String name, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -409,7 +409,7 @@ public class Device {
      * @param deviceId as String, ID of the device.
      * @param format as String
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void searchDataStreamValues(Context context, String deviceId, String format, JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -427,7 +427,7 @@ public class Device {
      * @param params as JSON Object View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void postDataStreamValues(Context context,JSONObject params,String deviceId, String name, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -445,7 +445,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void exportValues(Context context, String deviceId, HashMap<String, String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -463,7 +463,7 @@ public class Device {
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void deleteDataStreamValues(Context context,JSONObject params,String deviceId, String name, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
@@ -480,7 +480,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param name as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void deleteDataStream(Context context,String deviceId, String name, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
@@ -497,7 +497,7 @@ public class Device {
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void deleteDeviceLocation(Context context,JSONObject params,String deviceId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(
@@ -514,7 +514,7 @@ public class Device {
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void postDeviceUpdate(Context context, JSONObject params, String deviceId, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -531,7 +531,7 @@ public class Device {
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void postDeviceUpdates(Context context,JSONObject params,String deviceId, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -547,7 +547,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#View-Request-Log">View Request Log</a>} endpoint.
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewRequestLog(Context context,String deviceId,ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -563,7 +563,7 @@ public class Device {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/device#Delete-Device">Delete Device</a>} endpoint.
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void deleteDevice(Context context,String deviceId,ResponseListener listener){
         JsonRequest.makeDeleteRequest(
@@ -580,7 +580,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listCommands(Context context, String deviceId, HashMap<String, String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -597,7 +597,7 @@ public class Device {
      * @param context The application Context.
      * @param deviceId as String, ID of the device.
      * @param commandId as String, ID of the Command.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewCommand(Context context, String deviceId, String commandId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -615,7 +615,7 @@ public class Device {
      * @param deviceId as String, ID of the device.
      * @param commandId as String, ID of the Command.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void processCommand(Context context, String deviceId, String commandId, JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -633,7 +633,7 @@ public class Device {
      * @param deviceId as String, ID of the device.
      * @param commandId as String, ID of the Command.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void rejectCommand(Context context, String deviceId, String commandId,  JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(

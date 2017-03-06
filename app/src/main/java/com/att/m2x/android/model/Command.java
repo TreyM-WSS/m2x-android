@@ -31,7 +31,7 @@ public class Command {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/commands#List-Sent-Commands">List Sent Commands</a>} endpoint
      * @param context The application Context.
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void listCommands(Context context, HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -47,7 +47,7 @@ public class Command {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/commands#Send-Command">Send Command</a>} endpoint
      * @param context The application Context.
      * @param body as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void sendCommand(Context context, JSONObject body, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -63,7 +63,7 @@ public class Command {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/commands#View-Command-Details">View Command Details</a>} endpoint
      * @param context The application Context.
      * @param commandId as String
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewCommandDetails(Context context, String commandId, ResponseListener listener){
         JsonRequest.makeGetRequest(

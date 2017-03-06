@@ -32,7 +32,7 @@ public class Key {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/keys#List-Keys">List Keys</a>} endpoint
      * @param context The application Context.
      * @param params Query parameters as HashMap<String,String>. View M2X API Docs for listing of available parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void list(Context context,HashMap<String,String> params, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -48,7 +48,7 @@ public class Key {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/keys#Create-Key">Create Key</a>} endpoint
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void create(Context context,JSONObject params, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -64,7 +64,7 @@ public class Key {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/keys#View-Key-Details">View Key Details</a>} endpoint
      * @param context The application Context.
      * @param keyId as String, ID of the key.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void viewDetails(Context context, String keyId, ResponseListener listener){
         JsonRequest.makeGetRequest(
@@ -81,7 +81,7 @@ public class Key {
      * @param context The application Context.
      * @param params as JSONObject, View M2X API Docs for listing of available body parameters.
      * @param keyId as String, ID of the key.
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void update(Context context,JSONObject params,String keyId, ResponseListener listener){
         JsonRequest.makePutRequest(
@@ -97,7 +97,7 @@ public class Key {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/keys#Regenerate-Key">Regenerate Key</a>} endpoint
      * @param context The application Context.
      * @param keyId as String, ID of the key
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void regenerate(Context context, String keyId, ResponseListener listener){
         JsonRequest.makePostRequest(
@@ -113,7 +113,7 @@ public class Key {
      * Method for {@see <a href="https://m2x.att.com/developer/documentation/v2/keys#Delete-Key">Delete Key</a>} endpoint
      * @param context The application Context.
      * @param keyId as String, ID of the key
-     * @param listener Http responseListener {@link ResponseListener}
+     * @param listener {@link ResponseListener}
      */
     public static final void delete(Context context,String keyId, ResponseListener listener){
         JsonRequest.makeDeleteRequest(

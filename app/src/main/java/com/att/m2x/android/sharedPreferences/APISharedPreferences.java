@@ -54,7 +54,7 @@ public class APISharedPreferences {
     }
 
     /**
-     * Method to save the Key
+     * Method to save the last ApiV2Response response
      *
      * @param context The application Context.
      */
@@ -68,7 +68,7 @@ public class APISharedPreferences {
     }
 
     /**
-     * Method to get the Key from shared preferences
+     * Method to get the last saved ApiV2Response response from shared preferences
      * @param context The application Context.
      * @return HTTP response
      */
