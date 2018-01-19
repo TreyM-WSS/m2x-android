@@ -130,7 +130,7 @@ The client has the following library dependencies, though if you followed the Se
 Initialize using the _Master API Key_ in the onCreate method:
 
 ```Java
-@Override
+    @Override
     public void onCreate() {
         super.onCreate();
         //Initialize communication library
@@ -144,56 +144,76 @@ This provides an interface to your data in M2X
 
 - [Distribution]
   ```Java
-   Distribution.list(DistributionActivity.this, new ResponseListener() {
-      @Override
-      public void onRequestCompleted(ApiV2Response result, int requestCode) {
+    DistributionService.listDistributions(Activity.this, new TypedResponseListener<List<Distribution>>() {
+        @Override
+        public void onRequestCompleted(List<Distribution> result) {
 
-      }
+        }
 
-      @Override
-      public void onRequestError(ApiV2Response error, int requestCode) {
+        @Override
+        public void onRequestError(Response response) {
 
-      }
-  });
+        }
+
+        @Override
+        public void onRequestException(M2XApiException exception) {
+
+        }
+    });
    ```
 
 - [Device]
   ```Java
-    public void searchPublicDevicesCatalog(View view) {
-          HashMap<String,String> params = new HashMap<String, String>();
-          params.put("p","1");
-          Device.searchPublicCatalog(DeviceActivity.this, params,
-            new ResponseListener() {
-                @Override
-                public void onRequestCompleted(ApiV2Response result, int requestCode) {
+    PublicCatalogSearch search = new PublicCatalogSearch();
+    search.setName("device name");
+    search.setSort(PublicCatalogSearch.DeviceSort.CREATED);
+    search.setSortDirection(SortDirection.ASC);
 
-                }
+    DeviceService.searchPublicCatalog(Activity.this, search, new TypedResponseListener<List<Device>>() {
+        @Override
+        public void onRequestCompleted(List<Device> result) {
 
-                @Override
-                public void onRequestError(ApiV2Response error, int requestCode) {
+        }
 
-                }
-            });
-    }
+        @Override
+        public void onRequestError(Response response) {
+
+        }
+
+        @Override
+        public void onRequestException(M2XApiException exception) {
+
+        }
+    });
    ```
 
 - [Keys]
   ```Java
-        Key.list(KeysActivity.this,null,
-         new ResponseListener() {
-              @Override
-              public void onRequestCompleted(ApiV2Response result, int requestCode) {
+    // Optionally, use one of:
+    // options.setCollectionId(String)
+    // options.setDeviceId(String)
+    // options.setDistributionId(String)
+    ListKeyOptions options = new ListKeyOptions();
 
-              }
+    KeyService.listKeys(Activitiy.this, options, new TypedResponseListener<List<Key>>() {
+        @Override
+        public void onRequestCompleted(List<Key> result) {
 
-              @Override
-              public void onRequestError(ApiV2Response error, int requestCode) {
+        }
 
-              }
-          });
+        @Override
+        public void onRequestError(Response response) {
+
+        }
+
+        @Override
+        public void onRequestException(M2XApiException exception) {
+
+        }
+    });
    ```
 
-The SDK will return the response from the API in one of the two methods implemented above. If there is an error the SDK provides a detailed message and status to find out which is the problem that caused the failure.
+The SDK will return the response from the API in one of the two methods implemented above, or an Exception if it was unable to make the request. If there is an error the SDK provides a detailed message and status to find out which is the problem that caused the failure.
 
 The SDK also provides the ability of returning the response for the last call. To access this last response you will need to do the following:
 
@@ -215,27 +235,31 @@ In order to run this example, you will need a `Device ID`. If you don't have any
 This call updates the device location:
 
 ```Java
-    try {
-        String deviceID = "8d24a72339fdefa88492e194b88f2586";
-        JSONObject obj = new JSONObject("{ \"name\": \"Storage Room\",\n" +
-            "  \"latitude\": -37.9788423562422,\n" +
-            "  \"longitude\": -57.5478776916862,\n" +
-            "  \"timestamp\": \"" + DateUtils.dateTimeToString(new Date()) + "\",\n" +
-            "  \"elevation\": 5 }");
-        Device.updateDeviceLocation(getApplicationContext(), obj, deviceID, new ResponseListener() {
-            @Override
-            public void onRequestCompleted(ApiV2Response apiV2Response, int i) {
-                // Handle Success
-            }
+    Device device = new Device("<Device ID>");
+    
+    Location location = new Location();
+    location.setName("Storage Room");
+    location.setElevation(5.0);
+    location.setLatitude(-37.9788423562422);
+    location.setLongitude(-57.5478776916862);
+    location.setTimestamp(new Date());
 
-            @Override
-            public void onRequestError(ApiV2Response apiV2Response, int i) {
-                // Handle Error
-            }
-        });
-    } catch (JSONException e) {
-            e.printStackTrace();
-    }
+    DeviceService.updateDeviceLocation(this, device, location, new TypedResponseListener<Void>() {
+        @Override
+        public void onRequestCompleted(Void result) {
+            // Handle Success
+        }
+
+        @Override
+        public void onRequestError(Response response) {
+            // Handle API Error Response
+        }
+
+        @Override
+        public void onRequestException(M2XApiException exception) {
+            // Handle Exception
+        }
+    });
 ```
 
 ### Search Devices
@@ -244,28 +268,31 @@ The [Search Devices](https://m2x.att.com/developer/documentation/v2/device#Searc
 accepts a variety of search filters, such as `ids` or `tags`, via the URL query string. However,
 some more complex search filters must be requested via a JSON body, such as `streams` and `metadata`.
 
-The following example shows how to perform a Device search by passing search filters via both query
-string parameters and JSON body.
+The SDK provides a typed interface for building search requests:
 
 ```Java
-    try {
-        HashMap<String, String> params = new HashMap<>();
-        params.put("[param-name]", "[query]");
-        JSONObject body = new JSONObject("{ \"[param-object]\": { \"[key]\": \"[value]\" } }");
-        Device.searchDevices(getApplicationContext(), params, body, new ResponseListener() {
-            @Override
-            public void onRequestCompleted(ApiV2Response apiV2Response, int i) {
-                // Handle Success
-            }
+    DeviceSearch search = new DeviceSearch();
+    search.setLimit(20);
+    search.setName("Some Device");
+    search.setTags(Collections.singleton("tag"));
+    search.setMetadata(Collections.singletonMap("meta_key", "meta_value"));
+    
+    DeviceService.searchDevices(this, search, new TypedResponseListener<List<Device>>() {
+        @Override
+        public void onRequestCompleted(List<Device> result) {
+            // Handle Success
+        }
 
-            @Override
-            public void onRequestError(ApiV2Response apiV2Response, int i) {
-                // Handle Error
-            }
-        });
-    } catch (JSONException e) {
-            e.printStackTrace();
-    }
+        @Override
+        public void onRequestError(Response response) {
+            // Handle API Error Response
+        }
+
+        @Override
+        public void onRequestException(M2XApiException exception) {
+            // Handle Exception
+        }
+    });
 ```
 
 ## Versioning

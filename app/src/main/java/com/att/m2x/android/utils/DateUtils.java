@@ -1,6 +1,7 @@
 package com.att.m2x.android.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -23,4 +24,9 @@ public class DateUtils {
         return df.format(dateTime).concat("Z");
     }
 
+    public static Date stringToDateTime(String dateTime) throws ParseException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return df.parse(dateTime);
+    }
 }

@@ -14,10 +14,10 @@ import com.att.m2x.android.network.ApiV2Response;
 public class APISharedPreferences {
 
     private static final String TAG = APISharedPreferences.class.getSimpleName();
-    public final static String M2X_SHARED_PREFERENCES = "M2XSharedPreferences";
+    public static final String M2X_SHARED_PREFERENCES = "M2XSharedPreferences";
 
-    public final static String SHARED_PREFERENCES_API_KEY = "M2XApiKey";
-    public final static String SHARED_PREFERENCES_LAST_RESPONSE = "LastResponse";
+    public static final String SHARED_PREFERENCES_API_KEY = "M2XApiKey";
+    public static final String SHARED_PREFERENCES_LAST_RESPONSE = "LastResponse";
 
     //Singleton
     public static SharedPreferences sharedPreferences = null;
